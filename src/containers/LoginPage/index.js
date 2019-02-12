@@ -27,7 +27,7 @@ class LogInPage extends Component {
 			<div className={classes.root}>
 				<div className={classes.headingContainer}>
 					<Typography
-						variant="display2"
+						variant="h3"
 						color="primary"
 					>
 						Never Stay Hungry

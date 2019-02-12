@@ -9,4 +9,7 @@ export default {
 		},
 		background: '#ccc',
 	},
+	typography: {
+		useNextVariants: true,
+	},
 }

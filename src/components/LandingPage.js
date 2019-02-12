@@ -11,7 +11,7 @@ const LandingPage = (props) => {
 		<div className={classes.root}>
 			<div className={classes.titleContainer}>
 				<Typography
-					variant="display3"
+					variant="h2"
 					color="primary"
 				>
 					RPI Eats
