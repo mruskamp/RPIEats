@@ -1,8 +1,20 @@
+
 const tempRestaurantData = {
 	restaurants: [
-		{ name: "Hallal Shack", hours: { monday: "11-9", tuesday: "11-9", } },
-		{ name: "Panera", hours: { monday: "10-7", tuesday: "10-7" } },
-		{ name: "Custato's", hours: { monday: "11-11", tuesday: "11-11" } },
+		{
+			"name":"Thunder Mountain Curry",
+			"location":"Rensselaer Union",
+			"status" : "Open Now",
+			"restaurantId":32132,
+			"imgUrl":"http://blahblah"
+		},
+		{
+			"name":"Cusato's Pizzeria & Deli",
+			"location":"Rensselaer Union",
+			"status" : "Closing Soon",
+			"restaurantId":32132323,
+			"imgUrl":"http://blahblah"
+		},
 	],
 	isFetchingRestaurants: false,
 }

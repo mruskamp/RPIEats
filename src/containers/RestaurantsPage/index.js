@@ -24,11 +24,9 @@ class RestaurantsPage extends Component {
 								<ListItem>
 									<ListItemText
 										primary={restaurant.name}
-										secondary={Object.keys(restaurant.hours).map((day) => (
-												<span key={`${restaurant.name}#${day}`}>
-													{day}: {restaurant.hours[day]} <br/>
-												</span>
-											))}
+									/>
+									<ListItemText
+										primary={restaurant.status}
 									/>
 								</ListItem>
 							</Fragment>
@@ -58,7 +56,7 @@ const styles = {
 		alignItems: 'center',
 	},
 	listContainer: {
-		width: '70%',
+		// width: '70%',
 		margin: 'auto',
 	},
 	restaurantList: {
