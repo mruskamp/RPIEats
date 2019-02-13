@@ -11,9 +11,9 @@ class App extends Component {
 	    <Router>
 	      	<div>
 	        	<Switch>
-		        	<Route path="/login" component={LoginPage} />
-		        	<Route path="/restaurants" component={RestaurantsPage} />
-		        	<Route exact path="/" component={LandingPage} />
+		        	<Route path="/login" component={() => <LoginPage/>} />
+		        	<Route path="/restaurants" component={() => <RestaurantsPage/>} />
+		        	<Route exact path="/" component={() => <LandingPage/>} />
 	        	</Switch>
 	        </div>
 	    </Router>

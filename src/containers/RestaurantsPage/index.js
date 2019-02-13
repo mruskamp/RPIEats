@@ -10,12 +10,6 @@ class RestaurantsPage extends Component {
 
 	constructor(props){
 		super(props);
-		this.state = { showHours: {} };
-	}
-
-	handleRestaurantSelect = (name) => {
-		let newHours = Object.assign(this.state.showHours, { name: this.state.showHours.name ? !this.state.showHours.name : true });
-		this.setState(Object.assign(this.state, { showHours: newHours }));
 	}
 
 	render() {
@@ -27,9 +21,7 @@ class RestaurantsPage extends Component {
 					<List className={classes.restaurantList} >
 						{restaurants.map((restaurant) => (
 							<Fragment key={`${restaurant.name}`} >
-								<ListItem
-									onClick={() => this.handleRestaurantSelect(restaurant)}
-								>
+								<ListItem>
 									<ListItemText
 										primary={restaurant.name}
 										secondary={Object.keys(restaurant.hours).map((day) => (
