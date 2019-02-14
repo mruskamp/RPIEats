@@ -5,6 +5,10 @@ public class test {
 
         port(8080);
 
+        /*
+        * Enable CORS (Cross Origin Resource Sharing). Allows foreign domains to request necessary
+        * resources, or in our case, allows the React to have access to my response returned by get.
+        */
         options("/*",
                 (request, response) -> {
 
@@ -25,6 +29,9 @@ public class test {
                     return "OK";
                 });
 
+        /*
+         * Enable CORS prior to any routes being created.
+         */
         before((request, response) -> response.header("Access-Control-Allow-Origin", "*"));
 
 
