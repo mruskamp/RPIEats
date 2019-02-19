@@ -58,9 +58,7 @@ public class test {
         });
 
         get("/restaurants", (request, response) -> {
-            //String name = request.params(":name");
-            //response.type("application/json");
-            response.body("Hello RPIEats");
+
             MongoClient mongoClient = MongoClients.create("mongodb://dev-team:<PASSWORD>@cluster0-shard-00-00-s62mb.mongodb.net:27017,cluster0-shard-00-01-s62mb.mongodb.net:27017,cluster0-shard-00-02-s62mb.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true");
             MongoDatabase database = mongoClient.getDatabase("rpieats");
             MongoCollection<Document> collection = database.getCollection("restaurants");
