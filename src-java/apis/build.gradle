@@ -1,0 +1,18 @@
+plugins {
+    id 'java'
+}
+
+group 'apis'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile 'com.sparkjava:spark-core:2.7.2'
+    compile 'org.mongodb:mongodb-driver-sync:3.9.0'
+}
