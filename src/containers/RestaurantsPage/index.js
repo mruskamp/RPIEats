@@ -1,10 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 
-import { List, ListItem, ListItemText, Paper } from '@material-ui/core';
+import { List, ListItem, ListItemText, Paper, Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
 
 import { isFetchingRestaurants, getRestaurants } from './selectors';
+import { fetchRestaurants } from './actions';
 
 class RestaurantsPage extends Component {
 
@@ -33,6 +34,9 @@ class RestaurantsPage extends Component {
 							))}
 					</List>
 				</Paper>
+				<Button onClick={this.props.hitServer}>
+					Fetch Restaurants
+				</Button>
 				</div>
 			</div>
 		);
@@ -45,6 +49,12 @@ function mapStateToProps(state) {
 		restaurants: getRestaurants(state),
 		loadingRestaurants: isFetchingRestaurants(state),
 	};
+}
+
+function mapDispatchToProps(dispatch) {
+	return {
+		hitServer: () => dispatch(fetchRestaurants()),
+	}
 }
 
 const styles = {
@@ -65,5 +75,5 @@ const styles = {
 };
 
 export default withStyles(styles)(
-	connect(mapStateToProps)(RestaurantsPage)
+	connect(mapStateToProps, mapDispatchToProps)(RestaurantsPage)
 );

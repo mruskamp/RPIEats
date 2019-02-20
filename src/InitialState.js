@@ -17,6 +17,7 @@ const tempRestaurantData = {
 		},
 	],
 	isFetchingRestaurants: false,
+	errorFetchingRestaurants: false,
 }
 
 export default {

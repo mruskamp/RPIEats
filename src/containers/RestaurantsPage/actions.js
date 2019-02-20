@@ -22,9 +22,11 @@ export function fetchRestaurants() {
 		// let redux know we're starting to fetch the restaurants
 		dispatch(isFetchingRestaruants(true));
 
-		fetch().then((response) => {	// actually fetching the restaurant data from the api
+		fetch("http://129.161.142.188:8080/RPIEats").then((response) => {	// actually fetching the restaurant data from the api
+			console.log(response);
 			return response.json();
 		}).then((response) => {			// if the api call is a success
+			console.log(response);
 			dispatch(successFetchingRestaurants(response));
 			dispatch(isFetchingRestaruants(false));
 		}).catch(() => {				// cathes if the api call errors
