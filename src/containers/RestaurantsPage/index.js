@@ -23,18 +23,25 @@ class RestaurantsPage extends Component {
 						{restaurants.map((restaurant) => (
 							<Fragment key={`${restaurant.name}`} >
 								<ListItem>
+									<img src={restaurant.imgURL} alt={""} height={40} width={40} />
 									<ListItemText
+										disableTypography
 										primary={restaurant.name}
-									/>
-									<ListItemText
-										primary={restaurant.status}
+										secondary={
+											<div className={classes.subtextContainer}>
+												<p>{restaurant.location}</p>
+												<p style={{ color: restaurant.status === "Open Now" ? 'green' : 'red' }}>
+													{restaurant.status}
+												</p>
+											</div>
+										}
 									/>
 								</ListItem>
 							</Fragment>
 							))}
 					</List>
 				</Paper>
-				<Button onClick={this.props.hitServer}>
+				<Button onClick={this.props.fetchRestaurants}>
 					Fetch Restaurants
 				</Button>
 				</div>
@@ -53,7 +60,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
 	return {
-		hitServer: () => dispatch(fetchRestaurants()),
+		fetchRestaurants: () => dispatch(fetchRestaurants()),
 	}
 }
 
@@ -71,6 +78,12 @@ const styles = {
 	},
 	restaurantList: {
 		backgroundColor: '#fff',
+	},
+	subtextContainer: {
+		display: 'flex',
+		justifyContent: 'space-between',
+		fontSize: '15px',
+		color: 'grey',
 	}
 };
 

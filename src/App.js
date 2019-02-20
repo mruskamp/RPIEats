@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import LoginPage from './containers/LoginPage';
 import LandingPage from './components/LandingPage';
 import RestaurantsPage from './containers/RestaurantsPage';
 
+import { fetchRestaurants } from './containers/RestaurantsPage/actions';
+
 class App extends Component {
+
+	componentDidMount = () => {
+		this.props.fetchRestaurants();
+	}
+
   render() {
     return (
 	    <Router>
@@ -21,4 +29,14 @@ class App extends Component {
   }
 }
 
-export default App;
+function mapStateToProps(state) {
+	return {};
+}
+
+function mapDispatchToProps(dispatch) {
+	return {
+		fetchRestaurants: () => dispatch(fetchRestaurants()),
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

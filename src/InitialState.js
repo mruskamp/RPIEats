@@ -1,21 +1,23 @@
+const tempRestaurants = [
+	{
+		"name":"Thunder Mountain Curry",
+		"location":"Rensselaer Union",
+		"status" : "Open Now",
+		"restaurantId":32132,
+		"imgUrl":"http://blahblah"
+	},
+	{
+		"name":"Cusato's Pizzeria & Deli",
+		"location":"Rensselaer Union",
+		"status" : "Closing Soon",
+		"restaurantId":32132323,
+		"imgUrl":"http://blahblah"
+	},
+]
+
 
 const tempRestaurantData = {
-	restaurants: [
-		{
-			"name":"Thunder Mountain Curry",
-			"location":"Rensselaer Union",
-			"status" : "Open Now",
-			"restaurantId":32132,
-			"imgUrl":"http://blahblah"
-		},
-		{
-			"name":"Cusato's Pizzeria & Deli",
-			"location":"Rensselaer Union",
-			"status" : "Closing Soon",
-			"restaurantId":32132323,
-			"imgUrl":"http://blahblah"
-		},
-	],
+	restaurants: [],
 	isFetchingRestaurants: false,
 	errorFetchingRestaurants: false,
 }
