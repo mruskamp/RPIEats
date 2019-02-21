@@ -73,7 +73,6 @@ const styles = {
 		alignItems: 'center',
 	},
 	listContainer: {
-		// width: '70%',
 		margin: 'auto',
 	},
 	restaurantList: {
