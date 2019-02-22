@@ -9,9 +9,9 @@ import { fetchRestaurants } from './actions';
 
 class RestaurantsPage extends Component {
 
-	constructor(props){
-		super(props);
-	}
+	// constructor(props){
+	// 	super(props);
+	// }
 
 	render() {
 		let { classes, restaurants } = this.props;
