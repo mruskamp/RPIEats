@@ -5,8 +5,10 @@ import { connect } from 'react-redux';
 import LoginPage from './containers/LoginPage';
 import LandingPage from './components/LandingPage';
 import RestaurantsPage from './containers/RestaurantsPage';
+import MenuPage from './containers/MenuPage'
 import { Header, Footer } from './components/layouts'
 import { fetchRestaurants } from './containers/RestaurantsPage/actions';
+import { getRestaurantNames } from './containers/RestaurantsPage/selectors';
 
 class App extends Component {
 
@@ -16,25 +18,28 @@ class App extends Component {
 
   render() {
     return (
-			<Fragment>
+			<div>
 				<Header/>
 				<Router>
-						<div>
+						<div style={{ flex: 1 }}>
 							<Switch>
 								<Route path="/login" component={() => <LoginPage/>} />
+								<Route path={`/restaurant/:restaurantName`} component={() => <MenuPage />} />
 								<Route path="/restaurants" component={() => <RestaurantsPage/>} />
 								<Route exact path="/" component={() => <LandingPage/>} />
 							</Switch>
 						</div>
 				</Router>
 				<Footer/>
-			</Fragment>
+			</div>
     );
   }
 }
 
 function mapStateToProps(state) {
-	return {};
+	return {
+		restaurantNames: getRestaurantNames(state),
+	};
 }
 
 function mapDispatchToProps(dispatch) {

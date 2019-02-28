@@ -1,16 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
+import { AppBar, Toolbar, IconButton, MenuItem, Menu } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import RestaurantIcon from '@material-ui/icons/Restaurant';
 import MenuIcon from '@material-ui/icons/Menu';
 
 class PrimarySearchAppBar extends React.Component {
+
   state = {
     anchorEl: null,
     mobileMoreAnchorEl: null,
@@ -37,8 +34,8 @@ class PrimarySearchAppBar extends React.Component {
         open={isMenuOpen}
         onClose={this.handleMenuClose}
       >
-        <MenuItem color="white" onClick={this.handleMenuClose}>Profile</MenuItem>
-        <MenuItem color="white" onClick={this.handleMenuClose}>My account</MenuItem>
+        <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
+        <MenuItem onClick={this.handleMenuClose}>My account</MenuItem>
       </Menu>
     );
 
@@ -61,10 +58,10 @@ class PrimarySearchAppBar extends React.Component {
               >
                 <AccountCircle />
               </IconButton>
+              {renderMenu}
             </div>
           </Toolbar>
         </AppBar>
-        {renderMenu}
       </div>
     );
   }
@@ -81,7 +78,7 @@ const styles = theme => ({
   toolbar: {
     display: 'flex',
     justifyContent: 'center'
-  }
+  },
 });
 
 export default withStyles(styles)(PrimarySearchAppBar);
