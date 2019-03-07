@@ -5,3 +5,7 @@ export const isFetchingRestaurants = (state) => state.restaurantData.isFetchingR
 export const getRestaurants = (state) => {
 	return state.restaurantData.restaurants;
 }
+
+export const getRestaurantNames = (state) => {
+	return [state.restaurantData.restaurants.map((restaurant) => restaurant.name)];
+}
