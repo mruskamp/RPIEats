@@ -29,6 +29,10 @@ public class test {
 
         port(8080);
 
+        MongoClient mongoClient = MongoClients.create("mongodb://dev-team:RPIEATS@cluster0-shard-00-00-s62mb.mongodb.net:27017,cluster0-shard-00-01-s62mb.mongodb.net:27017,cluster0-shard-00-02-s62mb.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true");
+        MongoDatabase database = mongoClient.getDatabase("rpieats");
+        List<Document> restaurantInfo = new ArrayList<>();
+
         /*
         * Enable CORS (Cross Origin Resource Sharing). Allows foreign domains to request necessary
         * resources, or in our case, allows the React to have access to my response returned by get.
@@ -76,17 +80,16 @@ public class test {
 
         get("/restaurants", (request, response) -> {
 
-            MongoClient mongoClient = MongoClients.create("mongodb://dev-team:RPIEATS@cluster0-shard-00-00-s62mb.mongodb.net:27017,cluster0-shard-00-01-s62mb.mongodb.net:27017,cluster0-shard-00-02-s62mb.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true");
-            MongoDatabase database = mongoClient.getDatabase("rpieats");
             MongoCollection<Document> collection = database.getCollection("restaurants");
-            List<String> items = new ArrayList<>();
             MongoCursor<Document> cursor = collection.find().iterator();
+            List<String> items = new ArrayList<>();
 
             try{
                 while (cursor.hasNext()){
                     Document nextRestaurant = cursor.next();
                     nextRestaurant.put("status", getRestaurantStatus(nextRestaurant));
                     items.add(nextRestaurant.toJson());
+                    restaurantInfo.add(nextRestaurant);
                 }
             }finally {
                 cursor.close();
@@ -95,6 +98,25 @@ public class test {
             response.header("Content-Type","application/json");
 
             return items;
+        });
+
+
+        get("/restaurants/:name", (request, response) -> {
+
+            boolean restaurantExists = false;
+            String name = request.params(":name");
+
+            for(Document restaurant: restaurantInfo) {
+                if(restaurant.get("name").toString().equals(name)) {
+                    restaurantExists = true;
+                };
+            }
+
+            if(!restaurantExists) {
+                String ret = "Could not find restaurant " + name;
+                return ret;
+            }
+            return "found restaurant";
         });
     }
 }

@@ -8,7 +8,7 @@ public class Menu {
      * Constructor(s)
      */
     public Menu() {
-        
+
     }
 
     /*
