@@ -78,6 +78,7 @@ public class test {
             return response;
         });
 
+        //Restaurants landing page
         get("/restaurants", (request, response) -> {
 
             MongoCollection<Document> collection = database.getCollection("restaurants");
@@ -100,7 +101,7 @@ public class test {
             return items;
         });
 
-
+        //Create a page for each restaurant where the menu etc will appear
         get("/restaurants/:name", (request, response) -> {
 
             boolean restaurantExists = false;
@@ -116,7 +117,7 @@ public class test {
                 String ret = "Could not find restaurant " + name;
                 return ret;
             }
-            return "found restaurant";
+            return "Found restaurant " + name;
         });
     }
 }
