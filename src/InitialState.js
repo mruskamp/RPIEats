@@ -1,10 +1,27 @@
+const tempRestaurants = [
+	{
+		"name":"Thunder Mountain Curry",
+		"location":"Rensselaer Union",
+		"status" : "Open",
+		"restaurantId":32132,
+		"imgUrl":"http://blahblah",
+		"menu":[{"name":"Chicken Pad Thai","price":"8.50"},{"name":"Mango Lassi","price":"3.50"}],
+	},
+	{
+		"name":"Cusato's Pizzeria & Deli",
+		"location":"Rensselaer Union",
+		"status" : "Closing Soon",
+		"restaurantId":32132323,
+		"imgUrl":"http://blahblah",
+		menu: [],
+	},
+]
+
+
 const tempRestaurantData = {
-	restaurants: [
-		{ name: "Hallal Shack", hours: { monday: "11-9", tuesday: "11-9", } },
-		{ name: "Panera", hours: { monday: "10-7", tuesday: "10-7" } },
-		{ name: "Custato's", hours: { monday: "11-11", tuesday: "11-11" } },
-	],
+	restaurants: tempRestaurants,
 	isFetchingRestaurants: false,
+	errorFetchingRestaurants: false,
 }
 
 export default {
@@ -18,8 +35,10 @@ export default {
 /*
 export default {
 	restaurantData: {
-		isUpdating: false,
+		isFetchingRestaurants: false,
+		errorFetchingRestaurants: false,
 		restaurants: [],
-	}
+	},
+	cart: {},
 }
 */
