@@ -101,23 +101,20 @@ public class test {
             return items;
         });
 
-        //Create a page for each restaurant where the menu etc will appear
+
+        /*
+        * Return info for a page for each restaurant where the menu etc can be found
+        * after the user has chosen one
+        */
         get("/restaurants/:name", (request, response) -> {
 
-            boolean restaurantExists = false;
             String name = request.params(":name");
-
             for(Document restaurant: restaurantInfo) {
                 if(restaurant.get("name").toString().equals(name)) {
-                    restaurantExists = true;
+                    return restaurant;
                 };
             }
-
-            if(!restaurantExists) {
-                String ret = "Could not find restaurant " + name;
-                return ret;
-            }
-            return "Found restaurant " + name;
+            return "Could not find restaurant: " + name;
         });
     }
 }
