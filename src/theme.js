@@ -12,4 +12,9 @@ export default {
 	typography: {
 		useNextVariants: true,
 	},
+	spacing: {
+		headerHeight: '15%',
+		footerHeight: '15%',
+		contentHeight: '70%',
+	}
 }
