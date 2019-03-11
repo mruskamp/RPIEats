@@ -26,6 +26,10 @@ const tempRestaurantData = {
 
 export default {
 	restaurantData: tempRestaurantData,
+	cart: {
+		items: [{"name":"Chicken Pad Thai","price":"8.50"}],
+		restaurant: '',
+	}
 }
 
 
@@ -39,6 +43,9 @@ export default {
 		errorFetchingRestaurants: false,
 		restaurants: [],
 	},
-	cart: {},
+	cart: {
+		items: [],
+		restaurant: '',
+	},
 }
 */

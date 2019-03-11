@@ -5,14 +5,15 @@ import { Link } from 'react-router-dom';
 import { List, ListItem, ListItemText, Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
 
+import { getItems } from './selectors';
 
 class CartPage extends Component {
 
 	render() {
-		let { classes } = this.props;
+		let { classes, items } = this.props;
 		return (
 			<div className={classes.root}>
-
+				
 			</div>
 		);
 	}
@@ -21,6 +22,7 @@ class CartPage extends Component {
 
 function mapStateToProps(state) {
 	return {
+		items: getItems(state) || [],
 	};
 }
 
