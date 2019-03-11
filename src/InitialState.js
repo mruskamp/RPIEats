@@ -5,7 +5,7 @@ const tempRestaurants = [
 		"status" : "Open",
 		"restaurantId":32132,
 		"imgUrl":"http://blahblah",
-		"menu":[{"name":"Chicken Pad Thai","price":"8.50"},{"name":"Mango Lassi","price":"3.50"}],
+		"menu":[{"name":"Chicken Pad Thai",id: "cpt","price":"8.50"},{"name":"Mango Lassi",id: "ml","price":"3.50"}],
 	},
 	{
 		"name":"Cusato's Pizzeria & Deli",
@@ -27,7 +27,10 @@ const tempRestaurantData = {
 export default {
 	restaurantData: tempRestaurantData,
 	cart: {
-		items: [{"name":"Chicken Pad Thai","price":"8.50"}],
+		items: [
+			{"name":"Chicken Pad Thai",id: "cpt","price":"8.50",count: 2},
+			{"name":"Mango Lassi",id: "ml","price":"3.50",count: 1}
+		],
 		restaurant: '',
 	}
 }

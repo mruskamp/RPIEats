@@ -9,10 +9,23 @@ function restaurant(state='', action) {
 	return state;
 }
 
+function addItem(cart, item) {
+	let newCart = [];
+	let dup = false;
+	newCart = cart.map((cartItem) => {
+		if (cartItem.id == item.id) {
+			dup = true;
+			return Object.assign({}, cartItem, { count: cartItem.count + 1 });
+		} else	return cartItem;
+	});
+	if (!dup)	newCart.push(Object.assign({}, item, { count: 1 }));
+	return newCart;
+}
+
 function items(state=[], action) {
 	switch(action.type) {
 		case ADD_ITEM:
-			return state.concat([action.payload]);
+			return addItem(state, action.payload);
 		default:
 			return state;
 	}

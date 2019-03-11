@@ -7,6 +7,7 @@ import { withStyles } from '@material-ui/styles';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 import { getMenu, getImage } from './selectors';
+import { addItem } from '../CartPage/actions';
 
 
 class MenuPage extends Component {
@@ -26,7 +27,7 @@ class MenuPage extends Component {
 								primary={item.name}
 								secondary={`$${item.price}`}
 							/>
-							<IconButton>
+							<IconButton onClick={() => this.props.addItem(item)}>
 								<AddCircleIcon /> 
 							</IconButton>
 						</ListItem>
@@ -49,7 +50,7 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
 	return {
-
+		addItem: (item) => dispatch(addItem(item)),
 	}
 }
 
