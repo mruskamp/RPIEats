@@ -35,7 +35,7 @@ const LandingPage = (props) => {
 const styles = {
 	root: {
 		textAlign: 'center',
-		height: '100vh',
+		height: '100%',
 		backgroundColor: '#ccc',
 	},
 	titleContainer: {

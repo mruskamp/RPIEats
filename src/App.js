@@ -10,6 +10,8 @@ import { Header, Footer } from './components/layouts'
 import { fetchRestaurants } from './containers/RestaurantsPage/actions';
 import { getRestaurantNames } from './containers/RestaurantsPage/selectors';
 
+import theme from './theme';
+
 class App extends Component {
 
 	componentDidMount = () => {
@@ -18,10 +20,10 @@ class App extends Component {
 
   render() {
     return (
-			<div>
+			<div style={{ height: '100vh' }} >
 				<Header/>
 				<Router>
-						<div style={{ flex: 1 }}>
+						<div style={{ height: theme.spacing.contentHeight }}>
 							<Switch>
 								<Route path="/login" component={() => <LoginPage/>} />
 								<Route path={`/restaurant/:restaurantName`} component={() => <MenuPage />} />

@@ -6,6 +6,8 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import RestaurantIcon from '@material-ui/icons/Restaurant';
 import MenuIcon from '@material-ui/icons/Menu';
 
+import theme from '../../theme';
+
 class PrimarySearchAppBar extends React.Component {
 
   state = {
@@ -41,7 +43,7 @@ class PrimarySearchAppBar extends React.Component {
 
     return (
       <div className={classes.root}>
-        <AppBar position="static">
+        <AppBar position="static" className={classes.appBar}>
           <Toolbar className={classes.toolbar}>
             <div>
               <IconButton color="inherit">
@@ -74,10 +76,15 @@ PrimarySearchAppBar.propTypes = {
 const styles = theme => ({
   root: {
     width: '100%',
+    height: theme.spacing.footerHeight,
+  },
+  appBar: {
+    height: '100%',
+    justifyContent: 'center',
   },
   toolbar: {
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
 });
 

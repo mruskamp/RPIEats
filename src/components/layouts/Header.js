@@ -1,8 +1,15 @@
 import React from 'react';
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
+import theme from '../../theme';
 
 export default props =>
-  <AppBar position="static">
+  <AppBar
+    position="static"
+    style={{
+        height: theme.spacing.headerHeight,
+        justifyContent: 'center',
+      }}
+  >
     <Toolbar
       style={{
         display: 'flex',
