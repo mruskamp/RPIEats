@@ -5,26 +5,21 @@ import { Link } from 'react-router-dom';
 import { List, ListItem, ListItemText, Paper, Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
 
-import { isFetchingRestaurants, getRestaurants } from './selectors';
-import { fetchRestaurants } from './actions';
+import { getRestaurants } from './selectors';
 
 class RestaurantsPage extends Component {
-
-	// constructor(props){
-	// 	super(props);
-	// }
 
 	render() {
 		let { classes, restaurants } = this.props;
 		return (
 			<div className={classes.root}>
-				<div style={{ paddingTop: 70 }}>
-				<Paper className={classes.listContainer} >
+				<div>
+				<div>
 					<List className={classes.restaurantList} >
-						{restaurants.map((restaurant) => (
+						{restaurants.map((restaurant, index) => (
 							<Fragment key={`${restaurant.name}`} >
-								<Link to={`restaurant/${restaurant.name}`}>
-									<ListItem>
+								<Link to={`restaurant/${restaurant.name}`} className={classes.restaurantText}>
+									<ListItem divider={index != restaurants.length-1} >
 										<img src={restaurant.imgURL} alt={""} height={40} width={40} />
 										<ListItemText
 											disableTypography
@@ -43,10 +38,7 @@ class RestaurantsPage extends Component {
 							</Fragment>
 							))}
 					</List>
-				</Paper>
-				<Button onClick={this.props.fetchRestaurants}>
-					Fetch Restaurants
-				</Button>
+				</div>
 				</div>
 			</div>
 		);
@@ -57,28 +49,20 @@ class RestaurantsPage extends Component {
 function mapStateToProps(state) {
 	return {
 		restaurants: getRestaurants(state),
-		loadingRestaurants: isFetchingRestaurants(state),
 	};
-}
-
-function mapDispatchToProps(dispatch) {
-	return {
-		fetchRestaurants: () => dispatch(fetchRestaurants()),
-	}
 }
 
 const styles = {
 	root: {
 		backgroundColor: '#ccc',
-		flex: 1,
 		flexDirection: 'column',
-		alignItems: 'center',
-	},
-	listContainer: {
-		margin: 'auto',
+		height: '100%',
 	},
 	restaurantList: {
 		backgroundColor: '#fff',
+	},
+	restaurantText: {
+		textDecorationLine: 'none',
 	},
 	subtextContainer: {
 		display: 'flex',
@@ -89,5 +73,5 @@ const styles = {
 };
 
 export default withStyles(styles)(
-	connect(mapStateToProps, mapDispatchToProps)(RestaurantsPage)
+	connect(mapStateToProps)(RestaurantsPage)
 );
