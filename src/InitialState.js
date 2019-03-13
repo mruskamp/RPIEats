@@ -28,10 +28,10 @@ export default {
 	restaurantData: tempRestaurantData,
 	cart: {
 		items: [
-			{"name":"Chicken Pad Thai",id: "cpt","price":"8.50",count: 2},
-			{"name":"Mango Lassi",id: "ml","price":"3.50",count: 1}
+			{name: "Chicken Pad Thai", id: "cpt", price:"8.50", count: 2},
+			{name: "Mango Lassi", id: "ml", price:"3.50", count: 1}
 		],
-		restaurant: '',
+		restaurant: 'Thunder Mountain Curry',
 	}
 }
 

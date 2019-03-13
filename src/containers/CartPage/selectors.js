@@ -9,3 +9,6 @@ export function getCartCost(state) {
 	return sum;
 }
 
+export function getOrder(state) {
+	return state.cart;
+}
