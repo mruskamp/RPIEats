@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { AppBar, Toolbar, IconButton, MenuItem, Menu } from '@material-ui/core';
+
+import { AppBar, Toolbar, IconButton } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import RestaurantIcon from '@material-ui/icons/Restaurant';
@@ -24,22 +25,7 @@ class PrimarySearchAppBar extends React.Component {
   };
 
   render() {
-    const { anchorEl} = this.state;
     const { classes } = this.props;
-    const isMenuOpen = Boolean(anchorEl);
-
-    const renderMenu = (
-      <Menu
-        anchorEl={anchorEl}
-        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-        open={isMenuOpen}
-        onClose={this.handleMenuClose}
-      >
-        <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
-        <MenuItem onClick={this.handleMenuClose}>My account</MenuItem>
-      </Menu>
-    );
 
     return (
       <div className={classes.root}>
@@ -47,20 +33,20 @@ class PrimarySearchAppBar extends React.Component {
           <Toolbar className={classes.toolbar}>
             <div>
               <IconButton color="inherit">
+                <a href="/restaurants" className={classes.linkUnstyled}>
                   <RestaurantIcon />
+                </a>
               </IconButton>
               <IconButton color="inherit">
+                <a href="/orders" className={classes.linkUnstyled}>
                   <MenuIcon />
+				        </a>
               </IconButton>
-              <IconButton
-                aria-owns={isMenuOpen ? 'material-appbar' : undefined}
-                aria-haspopup="true"
-                onClick={this.handleProfileMenuOpen}
-                color="inherit"
-              >
-                <AccountCircle />
+              <IconButton>
+                <a href="/profile" className={classes.linkUnstyled}>              
+                  <AccountCircle />
+                </a>
               </IconButton>
-              {renderMenu}
             </div>
           </Toolbar>
         </AppBar>
@@ -85,6 +71,9 @@ const styles = theme => ({
   toolbar: {
     display: 'flex',
     justifyContent: 'center',
+  },
+  linkUnstyled: {
+    color: '#ffffff',
   },
 });
 

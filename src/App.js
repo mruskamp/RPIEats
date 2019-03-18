@@ -1,11 +1,12 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import LandingPage from './components/LandingPage';
 import LoginPage from './containers/LoginPage';
-import MenuPage from './containers/MenuPage'
+import MenuPage from './containers/MenuPage';
 import RestaurantsPage from './containers/RestaurantsPage';
+import OrdersPage from './containers/OrdersPage';
 import StatusPage from './containers/StatusPage';
 import { Header, Footer } from './components/layouts'
 import { fetchRestaurants } from './containers/RestaurantsPage/actions';
@@ -29,7 +30,8 @@ class App extends Component {
 								<Route path="/login" component={() => <LoginPage/>} />
 								<Route path={`/restaurant/:restaurantName`} component={() => <MenuPage />} />
 								<Route path="/restaurants" component={() => <RestaurantsPage/>} />
-								<Route path="/status" component={() => <StatusPage/>} />
+								<Route path="/orders" component={() => <OrdersPage/>} />
+								<Route path="/order/status" component={() => <StatusPage/>} />
 								<Route exact path="/" component={() => <LandingPage/>} />
 							</Switch>
 						</div>

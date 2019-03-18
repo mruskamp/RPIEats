@@ -4,7 +4,7 @@ const tempRestaurants = [
 		"location":"Rensselaer Union",
 		"status" : "Open",
 		"restaurantId":32132,
-		"imgUrl":"http://blahblah",
+		"imgUrl":"http://alloveralbany.com/images/thunder_mountain_curry_logo.png",
 		"menu":[{"name":"Chicken Pad Thai","price":"8.50"},{"name":"Mango Lassi","price":"3.50"}],
 	},
 	{
@@ -12,7 +12,7 @@ const tempRestaurants = [
 		"location":"Rensselaer Union",
 		"status" : "Closing Soon",
 		"restaurantId":32132323,
-		"imgUrl":"http://blahblah",
+		"imgUrl":"https://9bf6ddc20002c5f1a946-ef07da46c7e506e973e0d9fa57c693df.ssl.cf1.rackcdn.com/636632980697214042+48198.png",
 		menu: [],
 	},
 ]

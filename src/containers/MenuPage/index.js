@@ -15,8 +15,10 @@ class MenuPage extends Component {
 		let { classes, name, menu, imgUrl } = this.props;
 		return (
 			<div className={classes.root}>
+				<div className={classes.imageContainer}>
+					<img src={imgUrl} alt={""} height={100} width={100} />
+				</div>
 				<div className={classes.titleContainer}>
-					<img src={imgUrl} alt={""} height={40} width={40} />
 					<h3>{name}</h3>
 				</div>
 				<List className={classes.menuContainer}>
@@ -58,6 +60,11 @@ const styles = {
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'center',
+	},
+	imageContainer: {
+		paddingTop: 10,
+		justifyContent: 'center',
+		alignItem: 'center',
 	},
 	titleContainer: {
 

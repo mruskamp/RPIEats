@@ -2,10 +2,10 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { List, ListItem, ListItemText} from '@material-ui/core';
+import { List, ListItem, ListItemText } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
 
-import { getRestaurants } from './selectors';
+import { getRestaurants } from '../RestaurantsPage/selectors';
 
 class RestaurantsPage extends Component {
 
@@ -18,7 +18,7 @@ class RestaurantsPage extends Component {
 					<List className={classes.restaurantList} >
 						{restaurants.map((restaurant, index) => (
 							<Fragment key={`${restaurant.name}`} >
-								<Link to={`restaurant/${restaurant.name}`} className={classes.restaurantText}>
+								<Link to="order/status" className={classes.restaurantText}>
 									<ListItem divider={index !== restaurants.length-1} >
 										<img src={restaurant.imgUrl} alt={""} height={40} width={40} />
 										<ListItemText
