@@ -2,10 +2,11 @@ import React, { Component, Fragment } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import LoginPage from './containers/LoginPage';
 import LandingPage from './components/LandingPage';
-import RestaurantsPage from './containers/RestaurantsPage';
+import LoginPage from './containers/LoginPage';
 import MenuPage from './containers/MenuPage'
+import RestaurantsPage from './containers/RestaurantsPage';
+import StatusPage from './containers/StatusPage';
 import { Header, Footer } from './components/layouts'
 import { fetchRestaurants } from './containers/RestaurantsPage/actions';
 import { getRestaurantNames } from './containers/RestaurantsPage/selectors';
@@ -28,6 +29,7 @@ class App extends Component {
 								<Route path="/login" component={() => <LoginPage/>} />
 								<Route path={`/restaurant/:restaurantName`} component={() => <MenuPage />} />
 								<Route path="/restaurants" component={() => <RestaurantsPage/>} />
+								<Route path="/status" component={() => <StatusPage/>} />
 								<Route exact path="/" component={() => <LandingPage/>} />
 							</Switch>
 						</div>
