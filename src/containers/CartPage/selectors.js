@@ -1,7 +1,7 @@
 
 export const getItems = (state) => state.cart.items;
 
-export const getRestaurant = (state) => state.cart.restaaurant;
+export const getRestaurant = (state) => state.cart.restaurant;
 
 export function getCartCost(state) {
 	let sum = 0;

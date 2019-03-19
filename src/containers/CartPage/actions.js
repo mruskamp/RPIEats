@@ -11,9 +11,9 @@ export function addItem(item, restaurant) {
 
 export function placeOrder(order) {
 	return (dispatch) => {
-		// console.log(order);
+		console.log(JSON.stringify(order));
 		
-		fetch("http://129.161.143.181:8080/CreateOrder", {
+		fetch("http://129.161.142.118:8080/CreateOrder", {
 			method: "POST",
 			mode: "cors",
 			headers: {
@@ -21,10 +21,10 @@ export function placeOrder(order) {
 			},
 			body: JSON.stringify(order),
 		}).then((response) => {
-			console.log(response);
+			console.log(response)
 			return response.json();
 		}).then((response) => {
-			console.log(response);
+			console.log("Response: ", response);
 		}).catch((e) => {
 			console.log(e)
 			console.log("ERROR PLACING ORDER");

@@ -11,7 +11,7 @@ const tempRestaurants = [
 		"name":"Cusato's Pizzeria & Deli",
 		"location":"Rensselaer Union",
 		"status" : "Closing Soon",
-		"restaurantId":32132323,
+		"restaurantId": 32132323,
 		"imgUrl":"http://blahblah",
 		menu: [],
 	},
@@ -19,7 +19,7 @@ const tempRestaurants = [
 
 
 const tempRestaurantData = {
-	restaurants: tempRestaurants,
+	restaurants: [],
 	isFetchingRestaurants: false,
 	errorFetchingRestaurants: false,
 }
@@ -29,7 +29,12 @@ export default {
 	cart: {
 		items: [
 			{name: "Chicken Pad Thai", id: "cpt", price:"8.50", count: 2},
-			{name: "Mango Lassi", id: "ml", price:"3.50", count: 1}
+			{name: "Mango Lassi", id: "ml", price:"3.50", count: 1},
+			{name: "Mango Lassi", id: "mf", price:"3.50", count: 1},
+			{name: "Mango Lassi", id: "mh", price:"3.50", count: 1},
+			{name: "Mango Lassi", id: "mj", price:"3.50", count: 1},
+			{name: "Mango Lassi", id: "mg", price:"3.50", count: 1},
+			{name: "Mango Lassi", id: "mk", price:"3.50", count: 1},
 		],
 		restaurant: 'Thunder Mountain Curry',
 	}

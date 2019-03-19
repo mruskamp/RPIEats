@@ -6,7 +6,7 @@ import { List, ListItem, ListItemText, IconButton } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 
-import { getMenu, getImage } from './selectors';
+import { getMenu, getImage, getRestaurant } from './selectors';
 import { addItem } from '../CartPage/actions';
 
 
@@ -14,6 +14,7 @@ class MenuPage extends Component {
 
 	render() {
 		let { classes, name, menu, imgUrl } = this.props;
+		console.log(imgUrl);
 		return (
 			<div className={classes.root}>
 				<div className={classes.titleContainer}>

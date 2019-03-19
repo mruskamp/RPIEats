@@ -25,7 +25,7 @@ class App extends Component {
 				<Router>
 					<Fragment>
 						<Header/>
-							<div style={{ height: theme.spacing.contentHeight }}>
+							<div style={{ minHeight: theme.spacing.contentHeight }}>
 								<Switch>
 									<Route path="/login" component={() => <LoginPage/>} />
 									<Route path={`/restaurant/:restaurantName`} component={() => <MenuPage />} />
