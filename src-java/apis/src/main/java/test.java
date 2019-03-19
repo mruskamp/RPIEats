@@ -1,3 +1,4 @@
+import com.mongodb.BasicDBObject;
 import com.mongodb.client.*;
 import org.bson.Document;
 
@@ -32,6 +33,7 @@ public class test {
         MongoClient mongoClient = MongoClients.create("mongodb://dev-team:RPIEATS@cluster0-shard-00-00-s62mb.mongodb.net:27017,cluster0-shard-00-01-s62mb.mongodb.net:27017,cluster0-shard-00-02-s62mb.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true");
         MongoDatabase database = mongoClient.getDatabase("rpieats");
         List<Document> restaurantInfo = new ArrayList<>();
+        List<Document> orderInfo = new ArrayList<>();
 
         /*
         * Enable CORS (Cross Origin Resource Sharing). Allows foreign domains to request necessary
@@ -101,7 +103,6 @@ public class test {
             return items;
         });
 
-
         /*
         * Return info for a page for each restaurant where the menu etc can be found
         * after the user has chosen one
@@ -116,5 +117,28 @@ public class test {
             }
             return "Could not find restaurant: " + name;
         });
+
+        get("/orders/active",((request, response) -> {
+
+            MongoCollection<Document> collection = database.getCollection("orders");
+            BasicDBObject query = new BasicDBObject();
+            query.put("status", "ACTIVE");
+            MongoCursor<Document> cursor = collection.find(query).iterator();
+            List<String> items = new ArrayList<>();
+
+            try{
+                while (cursor.hasNext()){
+                    Document nextOrder = cursor.next();
+                    items.add(nextOrder.toJson());
+                    orderInfo.add(nextOrder);
+                }
+            }finally {
+                cursor.close();
+            }
+
+            response.header("Content-Type","application/json");
+
+            return items;
+        }));
     }
 }
