@@ -144,6 +144,7 @@ public class test {
             String orderId = new ObjectId().toHexString();
             order.put("_id",orderId);
             order.put("orderId",orderId);
+            order.put("status","ACTIVE");
             order.put("restaurantId",createRequest.getRestaurantId());
             order.put("user",createRequest.getUser());
 
