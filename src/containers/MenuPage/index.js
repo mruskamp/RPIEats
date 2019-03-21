@@ -6,13 +6,15 @@ import { List, ListItem, ListItemText, IconButton } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 
-import { getMenu, getImage } from './selectors';
+import { getMenu, getImage, getRestaurant, getRestaurantId } from './selectors';
+import { addItem } from '../CartPage/actions';
 
 
 class MenuPage extends Component {
 
 	render() {
-		let { classes, name, menu, imgUrl } = this.props;
+		let { classes, name, menu, imgUrl, restaurantId } = this.props;
+		console.log(imgUrl);
 		return (
 			<div className={classes.root}>
 				<div className={classes.titleContainer}>
@@ -26,7 +28,7 @@ class MenuPage extends Component {
 								primary={item.name}
 								secondary={`$${item.price}`}
 							/>
-							<IconButton>
+							<IconButton onClick={() => this.props.addItem(item, restaurantId)}>
 								<AddCircleIcon /> 
 							</IconButton>
 						</ListItem>
@@ -42,6 +44,7 @@ function mapStateToProps(state, ownProps) {
 	let name = ownProps.match.params.restaurantName;
 	return {
 		name,
+		restaurantId: getRestaurantId(state, name),
 		menu: getMenu(state, name),
 		imgUrl: getImage(state, name),
 	};
@@ -49,7 +52,7 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
 	return {
-
+		addItem: (item) => dispatch(addItem(item)),
 	}
 }
 

@@ -5,8 +5,9 @@ import { connect } from 'react-redux';
 import LoginPage from './containers/LoginPage';
 import LandingPage from './components/LandingPage';
 import RestaurantsPage from './containers/RestaurantsPage';
-import MenuPage from './containers/MenuPage'
-import { Header, Footer } from './components/layouts'
+import MenuPage from './containers/MenuPage';
+import CartPage from './containers/CartPage';
+import { Header, Footer } from './components/layouts';
 import { fetchRestaurants } from './containers/RestaurantsPage/actions';
 import { getRestaurantNames } from './containers/RestaurantsPage/selectors';
 
@@ -21,18 +22,21 @@ class App extends Component {
   render() {
     return (
 			<div style={{ height: '100vh' }} >
-				<Header/>
 				<Router>
-						<div style={{ height: theme.spacing.contentHeight }}>
-							<Switch>
-								<Route path="/login" component={() => <LoginPage/>} />
-								<Route path={`/restaurant/:restaurantName`} component={() => <MenuPage />} />
-								<Route path="/restaurants" component={() => <RestaurantsPage/>} />
-								<Route exact path="/" component={() => <LandingPage/>} />
-							</Switch>
-						</div>
+					<Fragment>
+						<Header/>
+							<div style={{ minHeight: theme.spacing.contentHeight }}>
+								<Switch>
+									<Route path="/login" component={() => <LoginPage/>} />
+									<Route path={`/restaurant/:restaurantName`} component={() => <MenuPage />} />
+									<Route path="/restaurants" component={() => <RestaurantsPage/>} />
+									<Route path="/cart" component={() => <CartPage />} />
+									<Route exact path="/" component={() => <LandingPage/>} />
+								</Switch>
+							</div>
+						<Footer/>
+					</Fragment>
 				</Router>
-				<Footer/>
 			</div>
     );
   }
