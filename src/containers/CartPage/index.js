@@ -3,17 +3,56 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import { List, ListItem, ListItemText, IconButton, Typography, Divider, Button } from '@material-ui/core';
+import { List, ListItem, ListItemText, IconButton, Typography, Divider, Button, TextField } from '@material-ui/core';
 import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import { withStyles } from '@material-ui/styles';
 
-import { getItems, getCartCost, getOrder } from './selectors';
+import { getItems, getCartCost, getOrder, getRestaurant } from './selectors';
 import { placeOrder } from './actions';
 
 class CartPage extends Component {
 
+	constructor(props) {
+		super(props);
+		this.state = { deliverTo: '' }
+	}
+
+	handleDeliverToInput = (event) => this.setState({ deliverTo: event.target.value })
+
 	getTax = () =>	0.5;
+
+	placeOrder = () => {
+		let { restaurant } = this.props;
+		let order = {
+			orderId: '123',
+			restaurantId: restaurant.restaurantId,
+			user: 'jvparin',
+			deliveryDetails: {
+				deliverTo: this.state.deliverTo,
+				name: 'John',
+				phone: '555-555-555'
+			},
+			orderSummary: {
+				restaurant: restaurant.name,
+				location: restaurant.location,
+				itemDetails:
+					this.props.items.map(({ id, name, price, count }) => {
+						return {
+							id: id,
+							name: name,
+							unitPrice: price,
+							qty: count,
+							totalPrice: price * count,
+						}
+					}),
+				subtotal: this.props.cartCost,
+				tax: this.getTax(),
+				orderTotal: this.props.cartCost + this.getTax(),
+			},
+		}
+		this.props.placeOrder(order);
+	}
 
 	render() {
 		let { classes, items, cartCost } = this.props;
@@ -54,9 +93,20 @@ class CartPage extends Component {
 						/>
 					</ListItem>
 				</List>
+				<TextField
+					id="standard-multiline-flexible"
+					label="Deliver To"
+					multiline
+					rowsMax="2"
+					value={this.state.deliverTo}
+					onChange={this.handleDeliverToInput}
+					className={classes.deliverToInput}
+					margin="normal"
+		        />
 				<div className={classes.placeOrderButtonContainer}>
 					<Button
 						variant="contained"
+						disabled={this.state.deliverTo == ''}
 						className={classes.placeOrderButton}
 						onClick={() => this.props.placeOrder(this.props.order)}
 					>
@@ -78,6 +128,7 @@ function mapStateToProps(state) {
 		items: getItems(state) || [],
 		cartCost: getCartCost(state),
 		order: getOrder(state),
+		restaurant: getRestaurant(state),
 	};
 }
 
@@ -120,6 +171,9 @@ const styles = {
 	placeOrderButtonContainer: {
 		display: 'flex',
 		alignItems: 'center',
+	},
+	deliverToInput: {
+		margin: 'auto',
 	},
 	placeOrderButton: {
 		backgroundColor: 'green',

@@ -5,7 +5,7 @@ import {
 } from './actions';
 
 
-function restaurant(state='', action) {
+function restaurantId(state='', action) {
 	switch(action.type) {
 		case ADD_ITEM:
 			if (state = '')	return action.payload.restaurant;
@@ -15,8 +15,8 @@ function restaurant(state='', action) {
 	}
 }
 
-function addItem(cart, { item, restaurant }) {
-	if (cart.length > 0 && cart[0].restaurant != restaurant)	// ensures the item is in the restaurant your order is at
+function addItem(cart, { item, restaurantId }) {
+	if (cart.length > 0 && cart[0].restaurantId != restaurantId)	// ensures the item is in the restaurant your order is at
 		return cart;
 	let newCart = [];
 	let dup = false;
@@ -41,5 +41,5 @@ function items(state=[], action) {
 
 export default combineReducers({
 	items,
-	restaurant,
+	restaurantId,
 });

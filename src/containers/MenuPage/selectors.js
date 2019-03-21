@@ -17,3 +17,7 @@ export function getImage(state, restaurantName) {
 		return restaurant.imgURL;
 	} else	return null
 }
+
+export function getRestaurantId(state, restaurantName) {
+	return getRestaurant(state, restaurantName).restaurantId;
+}

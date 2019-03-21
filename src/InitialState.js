@@ -19,7 +19,7 @@ const tempRestaurants = [
 
 
 const tempRestaurantData = {
-	restaurants: [],
+	restaurants: tempRestaurants,
 	isFetchingRestaurants: false,
 	errorFetchingRestaurants: false,
 }
@@ -30,13 +30,8 @@ export default {
 		items: [
 			{name: "Chicken Pad Thai", id: "cpt", price:"8.50", count: 2},
 			{name: "Mango Lassi", id: "ml", price:"3.50", count: 1},
-			{name: "Mango Lassi", id: "mf", price:"3.50", count: 1},
-			{name: "Mango Lassi", id: "mh", price:"3.50", count: 1},
-			{name: "Mango Lassi", id: "mj", price:"3.50", count: 1},
-			{name: "Mango Lassi", id: "mg", price:"3.50", count: 1},
-			{name: "Mango Lassi", id: "mk", price:"3.50", count: 1},
 		],
-		restaurant: 'Thunder Mountain Curry',
+		restaurantId: 'Thunder Mountain Curry',
 	}
 }
 

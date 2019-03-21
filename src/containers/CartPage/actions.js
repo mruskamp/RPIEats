@@ -5,8 +5,8 @@ export const PLACE_ORDER = "PLACE_ORDER";
 export const PLACE_ORDER_SUCCESS = "PLACE_ORDER_SUCCESS";
 export const PLACE_ORDER_ERROR = "PLACE_ORDER_ERROR";
 
-export function addItem(item, restaurant) {
-	return { type: ADD_ITEM, payload: { item, restaurant } };
+export function addItem(item, restaurantId) {
+	return { type: ADD_ITEM, payload: { item, restaurantId } };
 }
 
 export function placeOrder(order) {
