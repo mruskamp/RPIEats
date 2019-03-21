@@ -1,5 +1,6 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, Toolbar, Typography, Button } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 import theme from '../../theme';
 
 export default props =>
@@ -21,5 +22,10 @@ export default props =>
         >
         RPI Eats
       </Typography>
+      <Link to="/cart">
+        <Typography>
+          Cart
+        </Typography>
+      </Link>
     </Toolbar>
   </AppBar>

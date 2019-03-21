@@ -26,6 +26,13 @@ const tempRestaurantData = {
 
 export default {
 	restaurantData: tempRestaurantData,
+	cart: {
+		items: [
+			{name: "Chicken Pad Thai", id: "cpt", price:"8.50", count: 2},
+			{name: "Mango Lassi", id: "ml", price:"3.50", count: 1},
+		],
+		restaurantId: 'Thunder Mountain Curry',
+	}
 }
 
 
@@ -39,6 +46,9 @@ export default {
 		errorFetchingRestaurants: false,
 		restaurants: [],
 	},
-	cart: {},
+	cart: {
+		items: [],
+		restaurant: '',
+	},
 }
 */
