@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom';
 import { List, ListItem, ListItemText } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
 
-import { getRestaurants } from '../RestaurantsPage/selectors';
+import { getRestaurants } from './selectors';
 
-class RestaurantsPage extends Component {
+class OrdersPage extends Component {
 
 	render() {
 		let { classes, restaurants } = this.props;
@@ -73,5 +73,5 @@ const styles = {
 };
 
 export default withStyles(styles)(
-	connect(mapStateToProps)(RestaurantsPage)
+	connect(mapStateToProps)(OrdersPage)
 );

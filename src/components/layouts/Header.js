@@ -5,7 +5,6 @@ import { AppBar, Toolbar, Typography} from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import ShoppingCart from '@material-ui/icons/ShoppingCart';
-import theme from '../../theme';
 
 class PrimarySearchAppBar extends React.Component {
   render() {

@@ -7,10 +7,10 @@ import { withStyles } from '@material-ui/styles';
 import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 
-import { getMenu, getImage } from '../MenuPage/selectors';
+import { getMenu, getImage } from './selectors';
 
 
-class MenuPage extends Component {
+class StatusPage extends Component {
 
 	render() {
 		let { classes, name, menu, imgUrl } = this.props;
@@ -79,5 +79,5 @@ const styles = {
 };
 
 export default withRouter(withStyles(styles)(
-	connect(mapStateToProps, mapDispatchToProps)(MenuPage))
+	connect(mapStateToProps, mapDispatchToProps)(StatusPage))
 );
