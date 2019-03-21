@@ -7,8 +7,6 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import RestaurantIcon from '@material-ui/icons/Restaurant';
 import MenuIcon from '@material-ui/icons/Menu';
 
-import theme from '../../theme';
-
 class PrimarySearchAppBar extends React.Component {
 
   state = {

@@ -16,12 +16,12 @@ function restaurantId(state='', action) {
 }
 
 function addItem(cart, { item, restaurantId }) {
-	if (cart.length > 0 && cart[0].restaurantId != restaurantId)	// ensures the item is in the restaurant your order is at
+	if (cart.length > 0 && cart[0].restaurantId !== restaurantId)	// ensures the item is in the restaurant your order is at
 		return cart;
 	let newCart = [];
 	let dup = false;
 	newCart = cart.map((cartItem) => {
-		if (cartItem.id == item.id) {
+		if (cartItem.id === item.id) {
 			dup = true;
 			return Object.assign({}, cartItem, { count: cartItem.count + 1 });
 		} else	return cartItem;

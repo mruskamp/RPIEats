@@ -1,6 +1,5 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import { List, ListItem, ListItemText, IconButton, Typography, Divider, Button, TextField } from '@material-ui/core';
@@ -20,6 +19,7 @@ class CartPage extends Component {
 
 	handleDeliverToInput = (event) => this.setState({ deliverTo: event.target.value })
 
+	getDeliveryFee = () => 2.00;
 	getTax = () =>	0.5;
 
 	placeOrder = () => {
@@ -47,8 +47,9 @@ class CartPage extends Component {
 						}
 					}),
 				subtotal: this.props.cartCost,
+				deliveryFee: this.getDeliveryFee(),
 				tax: this.getTax(),
-				orderTotal: this.props.cartCost + this.getTax(),
+				orderTotal: this.props.cartCost + this.getDeliveryFee() + this.getTax(),
 			},
 		}
 		this.props.placeOrder(order);
@@ -77,6 +78,13 @@ class CartPage extends Component {
 					<ListItem>
 						<ListItemText
 							variant="h6"
+							primary="DeliveryFee"
+							secondary={this.getDeliveryFee()}
+						/>
+					</ListItem>
+					<ListItem>
+						<ListItemText
+							variant="h6"
 							primary="Tax"
 							secondary={this.getTax()}
 						/>
@@ -87,7 +95,7 @@ class CartPage extends Component {
 							primary={
 								<div className={classes.totalCostContainer}>
 									<Typography variant="h6">Order Total</Typography>
-									<Typography variant="h6">{`$${cartCost + this.getTax()}`}</Typography>
+									<Typography variant="h6">{`$${cartCost + this.getDeliveryFee() + this.getTax()}`}</Typography>
 								</div>
 							}
 						/>
@@ -106,7 +114,7 @@ class CartPage extends Component {
 				<div className={classes.placeOrderButtonContainer}>
 					<Button
 						variant="contained"
-						disabled={this.state.deliverTo == ''}
+						disabled={this.state.deliverTo === ''}
 						className={classes.placeOrderButton}
 						onClick={() => this.props.placeOrder(this.props.order)}
 					>

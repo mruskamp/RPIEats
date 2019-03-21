@@ -1,16 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import LandingPage from './components/LandingPage';
 import LoginPage from './containers/LoginPage';
 import MenuPage from './containers/MenuPage';
+import CartPage from './containers/CartPage';
 import RestaurantsPage from './containers/RestaurantsPage';
 import OrdersPage from './containers/OrdersPage';
 import StatusPage from './containers/StatusPage';
-import { Header, Footer } from './components/layouts'
-import MenuPage from './containers/MenuPage';
-import CartPage from './containers/CartPage';
+import { Header, Footer } from './components/layouts';
 import { fetchRestaurants } from './containers/RestaurantsPage/actions';
 import { getRestaurantNames } from './containers/RestaurantsPage/selectors';
 

@@ -1,31 +1,49 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography, Button } from '@material-ui/core';
+import PropTypes from 'prop-types';
+
+import { AppBar, Toolbar, Typography} from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
+import ShoppingCart from '@material-ui/icons/ShoppingCart';
 import theme from '../../theme';
 
-export default props =>
-  <AppBar
-    position="static"
-    style={{
-        height: theme.spacing.headerHeight,
-        justifyContent: 'center',
-      }}
-  >
-    <Toolbar
-      style={{
-        display: 'flex',
-        justifyContent: 'center'
-      }}>
-      <Typography 
-        variant="h2" 
-        color="inherit"
-        >
-        RPI Eats
-      </Typography>
-      <Link to="/cart">
-        <Typography>
-          Cart
-        </Typography>
-      </Link>
-    </Toolbar>
-  </AppBar>
+class PrimarySearchAppBar extends React.Component {
+  render() {
+    const { classes } = this.props;
+
+    return (
+      <AppBar position="static" className={classes.root}>
+        <Toolbar className={classes.toolbar}>
+          <Typography variant="h2" color="inherit">
+            RPI Eats
+          </Typography>
+          <Link to="/cart" className={classes.linkUnstyled}>
+            <ShoppingCart />
+          </Link>
+        </Toolbar>
+      </AppBar>
+    );
+  }
+}
+
+PrimarySearchAppBar.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+const styles = theme => ({
+  root: {
+    width: '100%',
+    height: theme.spacing.headerHeight,
+    justifyContent: 'center',
+  },
+  toolbar: {
+    display: 'flex',
+    justifyContent: 'center',
+  },
+  linkUnstyled: {
+    color: '#ffffff',
+    marginLeft: '20px',
+  },
+});
+
+export default withStyles(styles)(PrimarySearchAppBar);

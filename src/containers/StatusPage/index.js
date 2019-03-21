@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 
 import { List, ListItem, ListItemText, IconButton } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
+import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 import { getMenu, getImage } from '../MenuPage/selectors';
@@ -28,6 +29,9 @@ class MenuPage extends Component {
 								primary={item.name}
 								secondary={`$${item.price}`}
 							/>
+							<IconButton>
+								<RemoveCircleIcon /> 
+							</IconButton>
 							<IconButton>
 								<AddCircleIcon /> 
 							</IconButton>

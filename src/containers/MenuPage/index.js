@@ -4,9 +4,10 @@ import { withRouter } from 'react-router-dom';
 
 import { List, ListItem, ListItemText, IconButton } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
+import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 
-import { getMenu, getImage, getRestaurant, getRestaurantId } from './selectors';
+import { getMenu, getImage, getRestaurantId } from './selectors';
 import { addItem } from '../CartPage/actions';
 
 
@@ -30,6 +31,9 @@ class MenuPage extends Component {
 								primary={item.name}
 								secondary={`$${item.price}`}
 							/>
+							<IconButton>
+								<RemoveCircleIcon /> 
+							</IconButton>
 							<IconButton onClick={() => this.props.addItem(item, restaurantId)}>
 								<AddCircleIcon /> 
 							</IconButton>
