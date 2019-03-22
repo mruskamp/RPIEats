@@ -32,7 +32,7 @@ const styles = {
 	root: {
 		textAlign: 'center',
 		height: '100%',
-		backgroundColor: '#ccc',
+		// backgroundColor: '#ccc',
 	},
 	titleContainer: {
 		margin: 'auto',

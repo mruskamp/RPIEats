@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { List, ListItem, ListItemText, ListItemAvatar, Avatar } from '@material-ui/core';
+import { List, ListItem, ListItemText } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
 
 import { getOrders } from './selectors';
@@ -19,11 +19,7 @@ class OrdersPage extends Component {
 							<Fragment key={`${order.orderId}`} >
 								<Link to={`/order/status/${order.orderId}`} className={classes.orderText}>
 									<ListItem divider={index !== orders.length-1} >
-										<ListItemAvatar>
-                      <Avatar>
-                        #{index+1}
-                      </Avatar>
-                    </ListItemAvatar>
+										<img src={order.imgUrl} alt={""} height={50} width={50} />
 										<ListItemText
 											disableTypography
 											primary={order.orderSummary.vendor}
@@ -31,7 +27,7 @@ class OrdersPage extends Component {
 												<div className={classes.subtextContainer}>
 													<p>{order.orderSummary.location}</p>
 													<p style={{ color: order.status === "CANCELLED" ? 'red' : 'green' }}>
-														{order.status}
+														Status: {order.status}
 													</p>
 												</div>
 											}

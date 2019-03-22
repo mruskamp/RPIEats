@@ -13,12 +13,12 @@ export function getOrderSummary(state, orderId) {
 	return getOrder(state,orderId).orderSummary;
 }
 
-// export function getImage(state, restaurantName) {
-// 	let order = getOrder(state, restaurantName);
-// 	if (order) {
-// 		return order.imgUrl;
-// 	} else	return null
-// }
+export function getImage(state, restaurantName) {
+	let order = getOrder(state, restaurantName);
+	if (order) {
+		return order.imgUrl;
+	} else	return null
+}
 
 export function getOrderId(state, orderId) {
 	return getOrder(state, orderId).orderId;

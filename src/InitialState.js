@@ -23,6 +23,7 @@ const tempOrders = [
 		"orderId": "5c9417c4c6c41604e7d9d4e5",
 		"status": "ACTIVE",
 		"restaurantId": 3232,
+		"imgUrl": "http://alloveralbany.com/images/thunder_mountain_curry_logo.png",
 		"user": "jvparin",
 		"deliveryDetails": {
 			"deliverTo": "Sage Building",
