@@ -1,12 +1,16 @@
 import { getOrders } from '../OrdersPage/selectors';
 
 export const getOrder = (state, orderId) => getOrders(state).find((order) => orderId === order.orderId);
-// export const getOrderImage = (state, orderId) => get
+
 export function getItems(state, orderId) {
 	let order = getOrder(state, orderId);
 	if (order) {
-		return order.orderSummary;
+		return order.orderSummary.itemDetails;
 	} else	return []
+}
+
+export function getOrderSummary(state, orderId) {
+	return getOrder(state,orderId).orderSummary;
 }
 
 // export function getImage(state, restaurantName) {
@@ -16,6 +20,6 @@ export function getItems(state, orderId) {
 // 	} else	return null
 // }
 
-export function getRestaurantId(state, orderId) {
+export function getOrderId(state, orderId) {
 	return getOrder(state, orderId).orderId;
 }
