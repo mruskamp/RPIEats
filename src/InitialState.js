@@ -75,7 +75,7 @@ export default {
 			{name: "Chicken Pad Thai", id: "cpt", price:"8.50", count: 2},
 			{name: "Mango Lassi", id: "ml", price:"3.50", count: 1},
 		],
-		restaurantId: 'Thunder Mountain Curry',
+		restaurantId: 32132,
 	},
 	orderData: tempOrderData,
 }

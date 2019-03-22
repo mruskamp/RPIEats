@@ -5,6 +5,7 @@ export const PLACE_ORDER = "PLACE_ORDER";
 // export const PLACING_ORDER = "PLACING_ORDER";
 export const PLACE_ORDER_SUCCESS = "PLACE_ORDER_SUCCESS";
 export const PLACE_ORDER_ERROR = "PLACE_ORDER_ERROR";
+export const CLEAR_CART = "CLEAR_CART";
 
 export function addItem(item, restaurantId="same") {
 	return { type: ADD_ITEM, payload: { item, restaurantId } };
@@ -12,6 +13,10 @@ export function addItem(item, restaurantId="same") {
 
 export function removeItem(item) {
 	return { type: REMOVE_ITEM, payload: { item } };
+}
+
+export function clearCart() {
+	return { type: CLEAR_CART, payload: {} }
 }
 
 export function placeOrder(order) {

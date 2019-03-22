@@ -3,13 +3,14 @@ import { combineReducers } from 'redux';
 import {
 	ADD_ITEM,
 	REMOVE_ITEM,
+	CLEAR_CART,
 } from './actions';
 
 
 function restaurantId(state='', action) {
 	switch(action.type) {
 		case ADD_ITEM:
-			if (state = '')	return action.payload.restaurant;
+			if (state == '')	return action.payload.restaurant;
 			return state;
 		default:
 			return state;
@@ -51,6 +52,8 @@ function items(state=[], action) {
 			return addItem(state, action.payload);
 		case REMOVE_ITEM:
 			return removeItem(state, action.payload);
+		case CLEAR_CART:
+			return [];
 		default:
 			return state;
 	}
