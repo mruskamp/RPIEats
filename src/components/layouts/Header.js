@@ -6,6 +6,8 @@ import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import ShoppingCart from '@material-ui/icons/ShoppingCart';
 
+import mainTheme from '../../theme';
+
 class PrimarySearchAppBar extends React.Component {
   render() {
     const { classes } = this.props;
@@ -32,7 +34,7 @@ PrimarySearchAppBar.propTypes = {
 const styles = theme => ({
   root: {
     width: '100%',
-    height: theme.spacing.headerHeight,
+    height: mainTheme.spacing.headerHeight,
     justifyContent: 'center',
   },
   toolbar: {
@@ -41,7 +43,7 @@ const styles = theme => ({
   },
   linkUnstyled: {
     color: '#ffffff',
-    marginLeft: '20px',
+    marginLeft: '2vw',
   },
 });
 

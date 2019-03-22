@@ -1,34 +1,34 @@
-export const IS_FETCHING_RESTAURANTS = "IS_FETCHING_RESTAURANTS";
-export const SUCCESS_FETCHING_RESTAURANTS = "SUCCESS_FETCHING_RESTAURANTS";
-export const ERROR_FETCHING_RESTAURANTS = "ERROR_FETCHING_RESTAURANTS";
+export const IS_FETCHING_ORDERS = "IS_FETCHING_ORDERS";
+export const SUCCESS_FETCHING_ORDERS = "SUCCESS_FETCHING_ORDERS";
+export const ERROR_FETCHING_ORDERS = "ERROR_FETCHING_ORDERS";
 
 
 
-export function successFetchingRestaurants(restaurants) {
-	return { type: SUCCESS_FETCHING_RESTAURANTS, payload: restaurants };
+export function successFetchingOrders(orders) {
+	return { type: SUCCESS_FETCHING_ORDERS, payload: orders };
 }
 
-export function errorFetchingRestaurants() {
-	return { type: ERROR_FETCHING_RESTAURANTS };
+export function errorFetchingOrders() {
+	return { type: ERROR_FETCHING_ORDERS };
 }
 
-export function isFetchingRestaruants(fetching) {
-	return { type: IS_FETCHING_RESTAURANTS, payload: fetching };
+export function isFetchingOrders(fetching) {
+	return { type: IS_FETCHING_ORDERS, payload: fetching };
 }
 
-export function fetchRestaurants() {
+export function fetchOrders() {
 	return (dispatch) => {
-		// let redux know we're starting to fetch the restaurants
-		dispatch(isFetchingRestaruants(true));
+		// let redux know we're starting to fetch the orders
+		dispatch(isFetchingOrders(true));
 
-		fetch("http://129.161.139.153:8080/restaurants").then((response) => {	// actually fetching the restaurant data from the api
+		fetch("http://129.161.139.153:8080/orders").then((response) => {	// actually fetching the order data from the api
 			return response.json();
 		}).then((response) => {			// if the api call is a success
-			dispatch(successFetchingRestaurants(response));
-			dispatch(isFetchingRestaruants(false));
+			dispatch(successFetchingOrders(response));
+			dispatch(isFetchingOrders(false));
 		}).catch(() => {				// catches if the api call errors
-			dispatch(isFetchingRestaruants(false));
-			dispatch(errorFetchingRestaurants());
+			dispatch(isFetchingOrders(false));
+			dispatch(errorFetchingOrders());
 		});
 	}
 }

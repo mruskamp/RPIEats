@@ -13,7 +13,7 @@ import { Header, Footer } from './components/layouts';
 import { fetchRestaurants } from './containers/RestaurantsPage/actions';
 import { getRestaurantNames } from './containers/RestaurantsPage/selectors';
 
-import theme from './theme';
+import mainTheme from './theme';
 
 class App extends Component {
 
@@ -27,7 +27,11 @@ class App extends Component {
 				<Router>
 					<Fragment>
 						<Header/>
-							<div style={{ minHeight: theme.spacing.contentHeight }}>
+							<div style={{ 
+								minHeight: mainTheme.spacing.contentHeight,
+								maxHeight: mainTheme.spacing.contentHeight,
+								overflow: 'auto', 
+							}}>
 								<Switch>
 									<Route path="/login" component={() => <LoginPage/>} />
 									<Route path={`/restaurant/:restaurantName`} component={() => <MenuPage />} />

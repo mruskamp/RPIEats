@@ -7,6 +7,8 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import RestaurantIcon from '@material-ui/icons/Restaurant';
 import MenuIcon from '@material-ui/icons/Menu';
 
+import mainTheme from '../../theme';
+
 class PrimarySearchAppBar extends React.Component {
 
   state = {
@@ -60,7 +62,7 @@ PrimarySearchAppBar.propTypes = {
 const styles = theme => ({
   root: {
     width: '100%',
-    height: theme.spacing.footerHeight,
+    height: mainTheme.spacing.footerHeight,
   },
   appBar: {
     height: '100%',

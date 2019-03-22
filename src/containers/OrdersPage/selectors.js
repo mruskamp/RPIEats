@@ -1,11 +1,11 @@
 // selectors for parsing store data suitable for the components
 
-export const isFetchingRestaurants = (state) => state.restaurantData.isFetchingRestaurants;
+export const isFetchingOrders = (state) => state.orderData.isFetchingOrders;
 
-export const getRestaurants = (state) => {
-	return state.restaurantData.restaurants;
+export const getOrders = (state) => {
+	return state.orderData.orders;
 }
 
-export const getRestaurantNames = (state) => {
-	return [state.restaurantData.restaurants.map((restaurant) => restaurant.name)];
+export const getOrderNames = (state) => {
+	return [state.orderData.orders.map((order) => order.name)];
 }

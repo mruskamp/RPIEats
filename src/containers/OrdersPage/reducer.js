@@ -1,34 +1,34 @@
 import { combineReducers } from 'redux';
 
 import {
-	IS_FETCHING_RESTAURANTS,
-	SUCCESS_FETCHING_RESTAURANTS,
-	ERROR_FETCHING_RESTAURANTS
+	IS_FETCHING_ORDERS,
+	SUCCESS_FETCHING_ORDERS,
+	ERROR_FETCHING_ORDERS
 } from './actions';
 
 
 
-function isFetchingRestaurants(state=false, action) {
+function isFetchingOrders(state=false, action) {
 	switch(action.type) {
-		case IS_FETCHING_RESTAURANTS:
+		case IS_FETCHING_ORDERS:
 			return action.payload;
 		default:
 			return state; 
 	}
 }
 
-function errorFetchingRestaurants(state=false, action) {
+function errorFetchingOrders(state=false, action) {
 	switch(action.type) {
-		case ERROR_FETCHING_RESTAURANTS:
+		case ERROR_FETCHING_ORDERS:
 			return true;
 		default:
 			return false;
 	}
 }
 
-function restaurants(state=[], action) {
+function orders(state=[], action) {
 	switch(action.type) {
-		case SUCCESS_FETCHING_RESTAURANTS:
+		case SUCCESS_FETCHING_ORDERS:
 			return action.payload;
 		default:
 			return state;
@@ -36,7 +36,7 @@ function restaurants(state=[], action) {
 }
 
 export default combineReducers({
-	restaurants,
-	errorFetchingRestaurants,
-	isFetchingRestaurants
+	orders,
+	errorFetchingOrders,
+	isFetchingOrders
 });

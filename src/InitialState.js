@@ -17,11 +17,55 @@ const tempRestaurants = [
 	},
 ]
 
+const tempOrders = [
+	{
+		"_id": "5c9417c4c6c41604e7d9d4e5",
+		"orderId": "5c9417c4c6c41604e7d9d4e5",
+		"status": "ACTIVE",
+		"restaurantId": 3232,
+		"user": "jvparin",
+		"deliveryDetails": {
+			"deliverTo": "Sage Building",
+			"name": "John",
+			"phone": "518-596-0607"
+		},
+		"orderSummary": {
+			"vendor": "Thunder Mountain Curry",
+			"location": "Rensselaer Union",
+			"subTotal": 20,
+			"tax": 10,
+			"deliveryFee": 0,
+			"total": 30,
+			"itemDetails": [
+				{
+					"id": 1,
+					"name": "Pad Thai",
+					"unitPrice": 2,
+					"qty": 2,
+					"totalPrice": 16
+				},
+				{
+					"id": 2,
+					"name": "Mango Lassi",
+					"unitPrice": 1,
+					"qty": 1,
+					"totalPrice": 4
+				}
+			]
+		}
+	}
+]
 
 const tempRestaurantData = {
 	restaurants: tempRestaurants,
 	isFetchingRestaurants: false,
 	errorFetchingRestaurants: false,
+}
+
+const tempOrderData = {
+	orders: tempOrders,
+	isFetchingOrders: false,
+	errorFetchingOrders: false,
 }
 
 export default {
@@ -32,7 +76,8 @@ export default {
 			{name: "Mango Lassi", id: "ml", price:"3.50", count: 1},
 		],
 		restaurantId: 'Thunder Mountain Curry',
-	}
+	},
+	orderData: tempOrderData,
 }
 
 

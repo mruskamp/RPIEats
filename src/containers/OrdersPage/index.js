@@ -5,30 +5,30 @@ import { Link } from 'react-router-dom';
 import { List, ListItem, ListItemText } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
 
-import { getRestaurants } from './selectors';
+import { getOrders } from './selectors';
 
 class OrdersPage extends Component {
 
 	render() {
-		let { classes, restaurants } = this.props;
+		let { classes, orders } = this.props;
 		return (
 			<div className={classes.root}>
 				<div>
 				<div>
-					<List className={classes.restaurantList} >
-						{restaurants.map((restaurant, index) => (
-							<Fragment key={`${restaurant.name}`} >
-								<Link to="order/status" className={classes.restaurantText}>
-									<ListItem divider={index !== restaurants.length-1} >
-										<img src={restaurant.imgUrl} alt={""} height={40} width={40} />
+					<List className={classes.orderList} >
+						{orders.map((order, index) => (
+							<Fragment key={`${order.name}`} >
+								<Link to="order/status" className={classes.orderText}>
+									<ListItem divider={index !== orders.length-1} >
+										<img src={order.imgUrl} alt={""} height={40} width={40} />
 										<ListItemText
 											disableTypography
-											primary={restaurant.name}
+											primary={order.name}
 											secondary={
 												<div className={classes.subtextContainer}>
-													<p>{restaurant.location}</p>
-													<p style={{ color: restaurant.status === "Open" ? 'green' : 'red' }}>
-														{restaurant.status}
+													<p>{order.location}</p>
+													<p style={{ color: order.status === "Open" ? 'green' : 'red' }}>
+														{order.status}
 													</p>
 												</div>
 											}
@@ -48,7 +48,7 @@ class OrdersPage extends Component {
 
 function mapStateToProps(state) {
 	return {
-		restaurants: getRestaurants(state),
+		orders: getOrders(state),
 	};
 }
 
@@ -58,10 +58,10 @@ const styles = {
 		flexDirection: 'column',
 		height: '100%',
 	},
-	restaurantList: {
+	orderList: {
 		backgroundColor: '#fff',
 	},
-	restaurantText: {
+	orderText: {
 		textDecorationLine: 'none',
 	},
 	subtextContainer: {
