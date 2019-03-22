@@ -1,3 +1,5 @@
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.mongodb.BasicDBObject;
 import com.mongodb.client.*;
 import org.bson.Document;
@@ -7,6 +9,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static Orders.CreateOrder.createOrderInstance;
+import static Orders.GetActiveOrders.getActiveOrdersInstance;
+import static Orders.GetOrderById.getOrderByIdInstance;
+import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
+import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 import static spark.Spark.*;
 
 public class test {
@@ -34,6 +41,7 @@ public class test {
         MongoDatabase database = mongoClient.getDatabase("rpieats");
         List<Document> restaurantInfo = new ArrayList<>();
         List<Document> orderInfo = new ArrayList<>();
+        Gson gson = new Gson();
 
         /*
         * Enable CORS (Cross Origin Resource Sharing). Allows foreign domains to request necessary
@@ -63,8 +71,6 @@ public class test {
          * Enable CORS prior to any routes being created.
          */
         before((request, response) -> response.header("Access-Control-Allow-Origin", "*"));
-
-        get("/hello", (req, res) -> "Hello World from Spark!!!");
 
         // matches "GET /hello/foo" and "GET /hello/bar"
         // request.params(":name") is 'foo' or 'bar'
@@ -118,27 +124,10 @@ public class test {
             return "Could not find restaurant: " + name;
         });
 
-        get("/orders/active",((request, response) -> {
+        post("/order/create",(request,response) -> createOrderInstance().handle(request,response));
 
-            MongoCollection<Document> collection = database.getCollection("orders");
-            BasicDBObject query = new BasicDBObject();
-            query.put("status", "ACTIVE");
-            MongoCursor<Document> cursor = collection.find(query).iterator();
-            List<String> items = new ArrayList<>();
+        get("/orders/active",(request,response) -> getActiveOrdersInstance().handle(request,response));
 
-            try{
-                while (cursor.hasNext()){
-                    Document nextOrder = cursor.next();
-                    items.add(nextOrder.toJson());
-                    orderInfo.add(nextOrder);
-                }
-            }finally {
-                cursor.close();
-            }
-
-            response.header("Content-Type","application/json");
-
-            return items;
-        }));
+        get("/orders/:id",(request,response) -> getOrderByIdInstance().handle(request,response));
     }
 }
