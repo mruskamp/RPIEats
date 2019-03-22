@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 
 import {
 	ADD_ITEM,
+	REMOVE_ITEM,
 } from './actions';
 
 
@@ -16,7 +17,8 @@ function restaurantId(state='', action) {
 }
 
 function addItem(cart, { item, restaurantId }) {
-	if (cart.length > 0 && cart[0].restaurantId !== restaurantId)	// ensures the item is in the restaurant your order is at
+	// ensures the item is in the restaurant your order is at
+	if (cart.length > 0 && cart[0].restaurantId !== restaurantId && restaurantId != 'same')
 		return cart;
 	let newCart = [];
 	let dup = false;
@@ -30,10 +32,25 @@ function addItem(cart, { item, restaurantId }) {
 	return newCart;
 }
 
+function removeItem(cart, { item }) {
+	let newCart = [];
+	for (let i=0; i<cart.length; i++) {
+		let cartItem = cart[i];
+		if (cartItem.id === item.id) {
+			if (cartItem.count != 1) {
+				newCart.push(Object.assign({}, cartItem, { count: cartItem.count - 1 }));
+			}
+		} else	newCart.push(cartItem);
+	}
+	return newCart;
+}
+
 function items(state=[], action) {
 	switch(action.type) {
 		case ADD_ITEM:
 			return addItem(state, action.payload);
+		case REMOVE_ITEM:
+			return removeItem(state, action.payload);
 		default:
 			return state;
 	}

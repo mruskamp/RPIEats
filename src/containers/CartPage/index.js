@@ -8,7 +8,7 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import { withStyles } from '@material-ui/styles';
 
 import { getItems, getCartCost, getOrder, getRestaurant } from './selectors';
-import { placeOrder } from './actions';
+import { placeOrder, addItem, removeItem } from './actions';
 
 class CartPage extends Component {
 
@@ -66,10 +66,10 @@ class CartPage extends Component {
 								primary={item.name}
 								secondary={`$${item.price} x ${item.count} = $${parseFloat(item.price)*parseFloat(item.count)}`}
 							/>
-							<IconButton>
+							<IconButton onClick={() => this.props.removeItem(item)}>
 								<RemoveCircleIcon /> 
 							</IconButton>
-							<IconButton>
+							<IconButton onClick={() => this.props.addItem(item)}>
 								<AddCircleIcon /> 
 							</IconButton>
 						</ListItem>
@@ -143,12 +143,13 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
 	return {
 		placeOrder: (order) => dispatch(placeOrder(order)),
+		addItem: (item) => dispatch(addItem(item)),
+		removeItem: (item) => dispatch(removeItem(item)),
 	};
 }
 
 const styles = {
 	root: {
-		backgroundColor: '#ccc',
 		height: '100%',
 		width: '100%',
 	},

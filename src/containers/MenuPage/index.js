@@ -31,9 +31,6 @@ class MenuPage extends Component {
 								primary={item.name}
 								secondary={`$${item.price}`}
 							/>
-							<IconButton>
-								<RemoveCircleIcon /> 
-							</IconButton>
 							<IconButton onClick={() => this.props.addItem(item, restaurantId)}>
 								<AddCircleIcon /> 
 							</IconButton>
