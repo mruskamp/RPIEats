@@ -5,7 +5,7 @@ const tempRestaurants = [
 		"status" : "Open",
 		"restaurantId":32132,
 		"imgUrl":"http://alloveralbany.com/images/thunder_mountain_curry_logo.png",
-		"menu":[{"name":"Chicken Pad Thai","price":"8.50"},{"name":"Mango Lassi","price":"3.50"}],
+		"menu":[{"name":"Chicken Pad Thai","price":"8.50", "id": "cpt"},{"name":"Mango Lassi","price":"3.50", "id": "ml"}],
 	},
 	{
 		"name":"Cusato's Pizzeria & Deli",
