@@ -11,14 +11,18 @@ import OrdersPage from './containers/OrdersPage';
 import StatusPage from './containers/StatusPage';
 import { Header, Footer } from './components/layouts';
 import { fetchRestaurants } from './containers/RestaurantsPage/actions';
+import { fetchOrders } from './containers/OrdersPage/actions';
 import { getRestaurantNames } from './containers/RestaurantsPage/selectors';
+import { getOrderIds } from './containers/OrdersPage/selectors';
 
 import mainTheme from './theme';
+
 
 class App extends Component {
 
 	componentDidMount = () => {
 		this.props.fetchRestaurants();
+		this.props.fetchOrders();
 	}
 
   render() {
@@ -38,7 +42,7 @@ class App extends Component {
 									<Route path="/restaurants" component={() => <RestaurantsPage/>} />
 									<Route path="/cart" component={() => <CartPage />} />
 									<Route path="/orders" component={() => <OrdersPage/>} />
-									<Route path="/order/status" component={() => <StatusPage/>} />
+									<Route path={`/order/status/:orderId`} component={() => <StatusPage/>} />
 									<Route exact path="/" component={() => <LandingPage/>} />
 								</Switch>
 							</div>
@@ -53,12 +57,14 @@ class App extends Component {
 function mapStateToProps(state) {
 	return {
 		restaurantNames: getRestaurantNames(state),
+		orderIds: getOrderIds(state),
 	};
 }
 
 function mapDispatchToProps(dispatch) {
 	return {
 		fetchRestaurants: () => dispatch(fetchRestaurants()),
+		fetchOrders: () => dispatch(fetchOrders()),
 	}
 }
 

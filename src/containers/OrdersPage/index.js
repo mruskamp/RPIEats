@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { List, ListItem, ListItemText } from '@material-ui/core';
+import { List, ListItem, ListItemText, ListItemAvatar, Avatar } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
 
 import { getOrders } from './selectors';
@@ -14,20 +14,23 @@ class OrdersPage extends Component {
 		return (
 			<div className={classes.root}>
 				<div>
-				<div>
 					<List className={classes.orderList} >
 						{orders.map((order, index) => (
-							<Fragment key={`${order.name}`} >
-								<Link to="order/status" className={classes.orderText}>
+							<Fragment key={`${order.orderId}`} >
+								<Link to={`/order/status/${order.orderId}`} className={classes.orderText}>
 									<ListItem divider={index !== orders.length-1} >
-										<img src={order.imgUrl} alt={""} height={40} width={40} />
+										<ListItemAvatar>
+                      <Avatar>
+                        #{index+1}
+                      </Avatar>
+                    </ListItemAvatar>
 										<ListItemText
 											disableTypography
-											primary={order.name}
+											primary={order.orderSummary.vendor}
 											secondary={
 												<div className={classes.subtextContainer}>
-													<p>{order.location}</p>
-													<p style={{ color: order.status === "Open" ? 'green' : 'red' }}>
+													<p>{order.orderSummary.location}</p>
+													<p style={{ color: order.status === "CANCELLED" ? 'red' : 'green' }}>
 														{order.status}
 													</p>
 												</div>
@@ -38,7 +41,6 @@ class OrdersPage extends Component {
 							</Fragment>
 							))}
 					</List>
-				</div>
 				</div>
 			</div>
 		);

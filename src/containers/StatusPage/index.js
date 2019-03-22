@@ -2,39 +2,31 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import { List, ListItem, ListItemText, IconButton } from '@material-ui/core';
+import { List, ListItem, ListItemText } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
-import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
 
-import { getMenu, getImage } from './selectors';
-
+// import { getItems, getImage } from './selectors';
+import { getItems } from './selectors';
 
 class StatusPage extends Component {
 
 	render() {
-		let { classes, name, menu, imgUrl } = this.props;
+		let { classes, items, orderId, imgUrl } = this.props;
 		return (
 			<div className={classes.root}>
-				<div className={classes.imageContainer}>
+				{/* <div className={classes.imageContainer}>
 					<img src={imgUrl} alt={""} height={100} width={100} />
-				</div>
+				</div> */}
 				<div className={classes.titleContainer}>
-					<h3>{name}</h3>
+					<h3>Order Details</h3>
 				</div>
-				<List className={classes.menuContainer}>
-					{menu.map((item) => (
-						<ListItem key={item.name}>
+				<List className={classes.itemsContainer}>
+					{items.map((item) => (
+						<ListItem key={item.vendor}>
 							<ListItemText
-								primary={item.name}
+								primary={item.itemDetails}
 								secondary={`$${item.price}`}
 							/>
-							<IconButton>
-								<RemoveCircleIcon /> 
-							</IconButton>
-							<IconButton>
-								<AddCircleIcon /> 
-							</IconButton>
 						</ListItem>
 						))}
 				</List>
@@ -45,11 +37,11 @@ class StatusPage extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-	let name = ownProps.match.params.restaurantName;
+	let orderId = ownProps.match.params.orderId;
 	return {
-		name,
-		menu: getMenu(state, name),
-		imgUrl: getImage(state, name),
+		orderId,
+		items: getItems(state, orderId),
+		// imgUrl: getImage(state, name),
 	};
 }
 
@@ -73,7 +65,7 @@ const styles = {
 	titleContainer: {
 
 	},
-	menuContainer: {
+	itemContainer: {
 
 	},
 };

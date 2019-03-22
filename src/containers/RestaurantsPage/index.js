@@ -20,7 +20,7 @@ class RestaurantsPage extends Component {
 							<Fragment key={`${restaurant.name}`} >
 								<Link to={`restaurant/${restaurant.name}`} className={classes.restaurantText}>
 									<ListItem divider={index !== restaurants.length-1} >
-										<img src={restaurant.imgUrl} alt={""} height={40} width={40} />
+										<img src={restaurant.imgUrl} alt={""} height={50} width={50} />
 										<ListItemText
 											disableTypography
 											primary={restaurant.name}

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { AppBar, Toolbar, Typography} from '@material-ui/core';
+import { AppBar, Toolbar, Typography, Grid} from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import ShoppingCart from '@material-ui/icons/ShoppingCart';
@@ -15,9 +15,11 @@ class PrimarySearchAppBar extends React.Component {
     return (
       <AppBar position="static" className={classes.root}>
         <Toolbar className={classes.toolbar}>
-          <Typography variant="h2" color="inherit">
-            RPI Eats
-          </Typography>
+          <Grid item xs={8} className={classes.toolbar}>
+            <Typography color="inherit" className={classes.title}>
+              RPI Eats
+            </Typography>
+          </Grid>
           <Link to="/cart" className={classes.linkUnstyled}>
             <ShoppingCart />
           </Link>
@@ -36,6 +38,17 @@ const styles = theme => ({
     width: '100%',
     height: mainTheme.spacing.headerHeight,
     justifyContent: 'center',
+  },
+  title: {
+    [theme.breakpoints.down('xs')]: {
+      fontSize: '3rem',
+    },
+    [theme.breakpoints.up('sm')]: {
+      fontSize: '4rem',
+    },
+    [theme.breakpoints.up('md')]: {
+      fontSize: '5rem',
+    },
   },
   toolbar: {
     display: 'flex',

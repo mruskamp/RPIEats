@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { AppBar, Toolbar, IconButton } from '@material-ui/core';
+import { AppBar, Toolbar, Grid } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import RestaurantIcon from '@material-ui/icons/Restaurant';
@@ -31,23 +31,21 @@ class PrimarySearchAppBar extends React.Component {
       <div className={classes.root}>
         <AppBar position="static" className={classes.appBar}>
           <Toolbar className={classes.toolbar}>
-            <div>
-              <IconButton color="inherit">
-                <a href="/restaurants" className={classes.linkUnstyled}>
-                  <RestaurantIcon />
-                </a>
-              </IconButton>
-              <IconButton color="inherit">
-                <a href="/orders" className={classes.linkUnstyled}>
-                  <MenuIcon />
-				        </a>
-              </IconButton>
-              <IconButton>
-                <a href="/profile" className={classes.linkUnstyled}>              
-                  <AccountCircle />
-                </a>
-              </IconButton>
-            </div>
+            <Grid item xs={4} className={classes.toolbar}>
+              <a href="/restaurants" className={classes.linkUnstyled}>
+                <RestaurantIcon />
+              </a>
+            </Grid>
+            <Grid item xs={4} className={classes.toolbar}>
+              <a href="/orders" className={classes.linkUnstyled}>
+                <MenuIcon />
+              </a>
+            </Grid>
+            <Grid item xs={4} className={classes.toolbar}>
+              <a href="/profile" className={classes.linkUnstyled}>              
+                <AccountCircle />
+              </a>
+            </Grid>
           </Toolbar>
         </AppBar>
       </div>
