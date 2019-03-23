@@ -21,7 +21,7 @@ const tempOrders = [
 	{
 		"_id": "5c9417c4c6c41604e7d9d4e5",
 		"orderId": "5c9417c4c6c41604e7d9d4e5",
-		"status": "ACTIVE",
+		"status": "active",
 		"restaurantId": 3232,
 		"imgUrl": "http://alloveralbany.com/images/thunder_mountain_curry_logo.png",
 		"user": "jvparin",

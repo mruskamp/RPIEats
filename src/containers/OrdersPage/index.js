@@ -26,7 +26,7 @@ class OrdersPage extends Component {
 											secondary={
 												<div className={classes.subtextContainer}>
 													<p>{order.orderSummary.location}</p>
-													<p style={{ color: order.status === "CANCELLED" ? 'red' : 'green' }}>
+													<p style={{ color: order.status === "Cancelled" ? 'red' : 'green' }} className={classes.orderStatus}>
 														Status: {order.status}
 													</p>
 												</div>
@@ -61,6 +61,9 @@ const styles = {
 	},
 	orderText: {
 		textDecorationLine: 'none',
+	},
+	orderStatus: {
+		textTransform: 'capitalize',
 	},
 	subtextContainer: {
 		display: 'flex',
