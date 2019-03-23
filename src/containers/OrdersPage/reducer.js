@@ -6,6 +6,7 @@ import {
 	ERROR_FETCHING_ORDERS
 } from './actions';
 
+import { CHANGE_ORDER_STATUS } from '../StatusPage/actions';
 
 
 function isFetchingOrders(state=false, action) {
@@ -26,10 +27,22 @@ function errorFetchingOrders(state=false, action) {
 	}
 }
 
+function changeOrderStatus(orders=[], { orderId, status }) {
+	return orders.map((order) => {
+		if (order.orderId == orderId) {
+			return Object.assign({}, order, { status });
+		} else {
+			return order;
+		}
+	})
+}
+
 function orders(state=[], action) {
 	switch(action.type) {
 		case SUCCESS_FETCHING_ORDERS:
 			return action.payload;
+		case CHANGE_ORDER_STATUS:
+			return changeOrderStatus(state, action.payload);
 		default:
 			return state;
 	}

@@ -2,12 +2,17 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import { List, ListItem, ListItemText } from '@material-ui/core';
+import { List, ListItem, ListItemText, Select, MenuItem, FormControl } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
 
 import { getItems, getImage, getOrder, getOrderSummary } from './selectors';
+import { updateOrderStatus } from './actions';
 
 class StatusPage extends Component {
+
+	handleStatusChange = (event) => {
+		this.props.updateOrderStatus(event.target.value)
+	}
 
 	render() {
 		let { classes, items, imgUrl, order, orderSummary } = this.props;
@@ -21,6 +26,21 @@ class StatusPage extends Component {
 					<h3>Order Details</h3>
 					<h5>Deliver To: {order.deliveryDetails.deliverTo}</h5>
 					<h5>Status: {order.status}</h5>
+					<FormControl
+					>
+						<Select
+							value={order.status}
+							onChange={this.handleStatusChange}
+						>
+							<MenuItem className={classes.statusMenuItem} value={'accepted'}>Accepted</MenuItem>
+							<MenuItem className={classes.statusMenuItem} value={'ordered'}>Ordered</MenuItem>
+							<MenuItem className={classes.statusMenuItem} value={'awaiting order'}>Awaiting Order</MenuItem>
+							<MenuItem className={classes.statusMenuItem} value={'in transit'}>In Transit</MenuItem>
+							<MenuItem className={classes.statusMenuItem} value={'delivered'}>Delivered</MenuItem>
+							<MenuItem className={classes.statusMenuItem} value={'no show'}>No Show</MenuItem>
+							<MenuItem className={classes.statusMenuItem} value={'cancelled'}>Cancelled</MenuItem>
+						</Select>
+					</FormControl>
 				</div>
 				<List className={classes.itemsContainer}>
 					{items.map((item) => (
@@ -39,7 +59,7 @@ class StatusPage extends Component {
 						</ListItem>
 						<ListItem>
 							<ListItemText
-								primary={`Order Total: ${orderSummary.total}`}>
+								primary={`Order Total: $${orderSummary.total}`}>
 							</ListItemText>
 						</ListItem>
 				</List>
@@ -60,9 +80,10 @@ function mapStateToProps(state, ownProps) {
 	};
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch, ownProps) {
+	let orderId = ownProps.match.params.orderId;
 	return {
-
+		updateOrderStatus: (status) => dispatch(updateOrderStatus(orderId, status)),
 	}
 }
 
@@ -82,6 +103,10 @@ const styles = {
 	},
 	itemsContainer: {
 		marginRight: '6rem',
+	},
+	statusMenuItem: {
+		backgroundColor: '#fff',
+		'&:hover': { backgroundColor: '#ccc' }
 	},
 };
 
