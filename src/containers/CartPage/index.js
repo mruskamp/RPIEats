@@ -1,7 +1,7 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import { List, ListItem, ListItemText, IconButton, Typography, Divider, Button, TextField } from '@material-ui/core';
 import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
@@ -9,7 +9,7 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import { withStyles } from '@material-ui/styles';
 
 import { getItems, getCartCost, getOrder, getRestaurant } from './selectors';
-import { placeOrder } from './actions';
+import { placeOrder, addItem, removeItem, clearCart } from './actions';
 
 class CartPage extends Component {
 
@@ -20,12 +20,13 @@ class CartPage extends Component {
 
 	handleDeliverToInput = (event) => this.setState({ deliverTo: event.target.value })
 
+	getDeliveryFee = () => 2.00;
 	getTax = () =>	0.5;
 
 	placeOrder = () => {
 		let { restaurant } = this.props;
 		let order = {
-			orderId: '123',
+			// orderId: '123',
 			restaurantId: restaurant.restaurantId,
 			user: 'jvparin',
 			deliveryDetails: {
@@ -47,11 +48,13 @@ class CartPage extends Component {
 						}
 					}),
 				subtotal: this.props.cartCost,
+				deliveryFee: this.getDeliveryFee(),
 				tax: this.getTax(),
-				orderTotal: this.props.cartCost + this.getTax(),
+				orderTotal: this.props.cartCost + this.getDeliveryFee() + this.getTax(),
 			},
 		}
 		this.props.placeOrder(order);
+		this.props.clearCart();
 	}
 
 	render() {
@@ -65,15 +68,22 @@ class CartPage extends Component {
 								primary={item.name}
 								secondary={`$${item.price} x ${item.count} = $${parseFloat(item.price)*parseFloat(item.count)}`}
 							/>
-							<IconButton>
+							<IconButton onClick={() => this.props.removeItem(item)}>
 								<RemoveCircleIcon /> 
 							</IconButton>
-							<IconButton>
+							<IconButton onClick={() => this.props.addItem(item)}>
 								<AddCircleIcon /> 
 							</IconButton>
 						</ListItem>
 						))}
 					<Divider />
+					<ListItem>
+						<ListItemText
+							variant="h6"
+							primary="DeliveryFee"
+							secondary={this.getDeliveryFee()}
+						/>
+					</ListItem>
 					<ListItem>
 						<ListItemText
 							variant="h6"
@@ -87,7 +97,7 @@ class CartPage extends Component {
 							primary={
 								<div className={classes.totalCostContainer}>
 									<Typography variant="h6">Order Total</Typography>
-									<Typography variant="h6">{`$${cartCost + this.getTax()}`}</Typography>
+									<Typography variant="h6">{`$${cartCost + this.getDeliveryFee() + this.getTax()}`}</Typography>
 								</div>
 							}
 						/>
@@ -103,16 +113,24 @@ class CartPage extends Component {
 					className={classes.deliverToInput}
 					margin="normal"
 		        />
-				<div className={classes.placeOrderButtonContainer}>
-					<Button
-						variant="contained"
-						disabled={this.state.deliverTo == ''}
-						className={classes.placeOrderButton}
-						onClick={() => this.props.placeOrder(this.props.order)}
-					>
-						Place Order
-					</Button>
-				</div>
+				<Link
+					to="/orders"
+					onClick={(e) => {
+						if (this.state.deliverTo == '')
+							e.preventDefault();
+					}}
+				>
+					<div className={classes.placeOrderButtonContainer}>
+							<Button
+								variant="contained"
+								disabled={this.state.deliverTo === ''}
+								className={classes.placeOrderButton}
+								onClick={() => this.placeOrder(this.props.order)}
+							>
+								Place Order
+							</Button>
+					</div>
+				</Link>
 			</div>
 		);
 	}
@@ -135,12 +153,14 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
 	return {
 		placeOrder: (order) => dispatch(placeOrder(order)),
+		addItem: (item) => dispatch(addItem(item)),
+		removeItem: (item) => dispatch(removeItem(item)),
+		clearCart: () => dispatch(clearCart()),
 	};
 }
 
 const styles = {
 	root: {
-		backgroundColor: '#ccc',
 		height: '100%',
 		width: '100%',
 	},

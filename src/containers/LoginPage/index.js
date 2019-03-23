@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 import { Paper, Input, Button, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
@@ -51,13 +52,15 @@ class LogInPage extends Component {
 			            />
 		        	</div>
 			          	<div className={classes.loginButtonContainer}>
-					        <Button
-					          	color="primary"
-					        	variant="contained"
-					        	onClick={this.handleLoginSubmit}
-					        >
-					        	Login
-					        </Button>
+										<Link to="/restaurants" className={classes.buttonLink}>
+											<Button
+													color="primary"
+												variant="contained"
+												onClick={this.handleLoginSubmit}
+											>
+												Login
+											</Button>
+										</Link>
 			          	</div>
 		        </Paper>
 			</div>
@@ -91,6 +94,9 @@ const styles = {
 	},
 	loginButtonContainer: {
 		marginTop: 40,
+	},
+	buttonLink: {
+		textDecoration: 'none',
 	},
 };
 
