@@ -78,7 +78,7 @@ const styles = {
 		alignItem: 'center',
 	},
 	titleContainer: {
-
+		textTransform: 'capitalize',
 	},
 	itemsContainer: {
 		marginRight: '6rem',
