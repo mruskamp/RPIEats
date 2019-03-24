@@ -21,7 +21,7 @@ class CartPage extends Component {
 	handleDeliverToInput = (event) => this.setState({ deliverTo: event.target.value })
 
 	getDeliveryFee = () => 2.00;
-	getTax = () =>	0.5;
+	getTax = () =>	0.50;
 
 	placeOrder = () => {
 		let { restaurant } = this.props;
@@ -81,14 +81,14 @@ class CartPage extends Component {
 						<ListItemText
 							variant="h6"
 							primary="DeliveryFee"
-							secondary={this.getDeliveryFee()}
+							secondary={`$${this.getDeliveryFee()}`}
 						/>
 					</ListItem>
 					<ListItem>
 						<ListItemText
 							variant="h6"
 							primary="Tax"
-							secondary={this.getTax()}
+							secondary={`$${this.getTax()}`}
 						/>
 					</ListItem>
 					<ListItem>
