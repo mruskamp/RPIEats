@@ -2,33 +2,32 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { List, ListItem, ListItemText} from '@material-ui/core';
+import { List, ListItem, ListItemText } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
 
-import { getRestaurants } from './selectors';
+import { getOrders } from './selectors';
 
-class RestaurantsPage extends Component {
+class OrdersPage extends Component {
 
 	render() {
-		let { classes, restaurants } = this.props;
+		let { classes, orders } = this.props;
 		return (
 			<div className={classes.root}>
 				<div>
-				<div>
-					<List className={classes.restaurantList} >
-						{restaurants.map((restaurant, index) => (
-							<Fragment key={`${restaurant.name}`} >
-								<Link to={`restaurant/${restaurant.name}`} className={classes.restaurantText}>
-									<ListItem divider={index !== restaurants.length-1} >
-										<img src={restaurant.imgUrl} alt={""} height={50} width={50} />
+					<List className={classes.orderList} >
+						{orders.map((order, index) => (
+							<Fragment key={`${order.orderId}`} >
+								<Link to={`/order/status/${order.orderId}`} className={classes.orderText}>
+									<ListItem divider={index !== orders.length-1} >
+										<img src={order.imgUrl} alt={""} height={50} width={50} />
 										<ListItemText
 											disableTypography
-											primary={restaurant.name}
+											primary={order.orderSummary.vendor}
 											secondary={
 												<div className={classes.subtextContainer}>
-													<p>{restaurant.location}</p>
-													<p style={{ color: restaurant.status === "Open" ? 'green' : 'red' }}>
-														{restaurant.status}
+													<p>{order.orderSummary.location}</p>
+													<p style={{ color: order.status === "Cancelled" ? 'red' : 'green' }} className={classes.orderStatus}>
+														Status: {order.status}
 													</p>
 												</div>
 											}
@@ -39,7 +38,6 @@ class RestaurantsPage extends Component {
 							))}
 					</List>
 				</div>
-				</div>
 			</div>
 		);
 	}
@@ -48,7 +46,7 @@ class RestaurantsPage extends Component {
 
 function mapStateToProps(state) {
 	return {
-		restaurants: getRestaurants(state),
+		orders: getOrders(state),
 	};
 }
 
@@ -58,11 +56,14 @@ const styles = {
 		flexDirection: 'column',
 		height: '100%',
 	},
-	restaurantList: {
+	orderList: {
 		backgroundColor: '#fff',
 	},
-	restaurantText: {
+	orderText: {
 		textDecorationLine: 'none',
+	},
+	orderStatus: {
+		textTransform: 'capitalize',
 	},
 	subtextContainer: {
 		display: 'flex',
@@ -73,5 +74,5 @@ const styles = {
 };
 
 export default withStyles(styles)(
-	connect(mapStateToProps)(RestaurantsPage)
+	connect(mapStateToProps)(OrdersPage)
 );

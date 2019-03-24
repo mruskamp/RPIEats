@@ -4,9 +4,10 @@ import { withRouter } from 'react-router-dom';
 
 import { List, ListItem, ListItemText, IconButton } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
+import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 
-import { getMenu, getImage, getRestaurant, getRestaurantId } from './selectors';
+import { getMenu, getImage, getRestaurantId } from './selectors';
 import { addItem } from '../CartPage/actions';
 
 
@@ -17,8 +18,10 @@ class MenuPage extends Component {
 		console.log(imgUrl);
 		return (
 			<div className={classes.root}>
+				<div className={classes.imageContainer}>
+					<img src={imgUrl} alt={""} height={100} width={100} />
+				</div>
 				<div className={classes.titleContainer}>
-					<img src={imgUrl} alt={""} height={40} width={40} />
 					<h3>{name}</h3>
 				</div>
 				<List className={classes.menuContainer}>
@@ -61,6 +64,11 @@ const styles = {
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'center',
+	},
+	imageContainer: {
+		paddingTop: 10,
+		justifyContent: 'center',
+		alignItem: 'center',
 	},
 	titleContainer: {
 

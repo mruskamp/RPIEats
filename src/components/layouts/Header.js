@@ -1,31 +1,63 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography, Button } from '@material-ui/core';
-import { Link } from 'react-router-dom';
-import theme from '../../theme';
+import PropTypes from 'prop-types';
 
-export default props =>
-  <AppBar
-    position="static"
-    style={{
-        height: theme.spacing.headerHeight,
-        justifyContent: 'center',
-      }}
-  >
-    <Toolbar
-      style={{
-        display: 'flex',
-        justifyContent: 'center'
-      }}>
-      <Typography 
-        variant="h2" 
-        color="inherit"
-        >
-        RPI Eats
-      </Typography>
-      <Link to="/cart">
-        <Typography>
-          Cart
-        </Typography>
-      </Link>
-    </Toolbar>
-  </AppBar>
+import { AppBar, Toolbar, Typography, Grid} from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
+import ShoppingCart from '@material-ui/icons/ShoppingCart';
+
+import mainTheme from '../../theme';
+
+class PrimarySearchAppBar extends React.Component {
+  render() {
+    const { classes } = this.props;
+
+    return (
+      <AppBar position="static" className={classes.root}>
+        <Toolbar className={classes.toolbar}>
+          <Grid item xs={8} className={classes.toolbar}>
+            <Typography color="inherit" className={classes.title}>
+              RPI Eats
+            </Typography>
+          </Grid>
+          <Link to="/cart" className={classes.linkUnstyled}>
+            <ShoppingCart />
+          </Link>
+        </Toolbar>
+      </AppBar>
+    );
+  }
+}
+
+PrimarySearchAppBar.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+const styles = theme => ({
+  root: {
+    width: '100%',
+    height: mainTheme.spacing.headerHeight,
+    justifyContent: 'center',
+  },
+  title: {
+    [theme.breakpoints.down('xs')]: {
+      fontSize: '3rem',
+    },
+    [theme.breakpoints.up('sm')]: {
+      fontSize: '4rem',
+    },
+    [theme.breakpoints.up('md')]: {
+      fontSize: '5rem',
+    },
+  },
+  toolbar: {
+    display: 'flex',
+    justifyContent: 'center',
+  },
+  linkUnstyled: {
+    color: '#ffffff',
+    marginLeft: '2vw',
+  },
+});
+
+export default withStyles(styles)(PrimarySearchAppBar);
