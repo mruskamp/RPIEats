@@ -40,8 +40,6 @@ public class test {
         MongoClient mongoClient = MongoClients.create("mongodb://dev-team:RPIEATS@cluster0-shard-00-00-s62mb.mongodb.net:27017,cluster0-shard-00-01-s62mb.mongodb.net:27017,cluster0-shard-00-02-s62mb.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true");
         MongoDatabase database = mongoClient.getDatabase("rpieats");
         List<Document> restaurantInfo = new ArrayList<>();
-        List<Document> orderInfo = new ArrayList<>();
-        Gson gson = new Gson();
 
         /*
         * Enable CORS (Cross Origin Resource Sharing). Allows foreign domains to request necessary
