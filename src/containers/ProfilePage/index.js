@@ -3,23 +3,19 @@ import { Link } from 'react-router-dom';
 
 import { Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
-import logo from '../RPIEats_Logo.png';
 
-const LandingPage = (props) => {
+const ProfilePage = (props) => {
 
 	let { classes } = props;
 	return (
 		<div className={classes.root}>
-			<div className={classes.titleContainer}>
-				<img src={logo} alt={""} height={190} width={300} />
-			</div>
-			<div className={classes.loginButtonContainer}>
+			<div className={classes.logoutButtonContainer}>
 				<Link to="/login" className={classes.buttonLink}>
 					<Button
 						variant="contained"
 						color="primary"
 					>
-						Login
+						Logout
 					</Button>
 				</Link>
 			</div>
@@ -35,21 +31,12 @@ const styles = {
 		width: '100%',
 		backgroundColor: '#ccc',
 	},
-	titleContainer: {
-		margin: 'auto',
-		paddingTop: 100,
-		width: 350,
-		borderBottom: 'solid black',
-	},
-	subtitleContainer: {
-		marginTop: 20,
-	},
-	loginButtonContainer: {
-		marginTop: 30,
+	logoutButtonContainer: {
+		paddingTop: 30,
 	},
 	buttonLink: {
 		textDecoration: 'none',
 	},
 }
 
-export default withStyles(styles, { withTheme: true })(LandingPage);
+export default withStyles(styles, { withTheme: true })(ProfilePage);

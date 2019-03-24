@@ -29,7 +29,7 @@ function errorFetchingOrders(state=false, action) {
 
 function changeOrderStatus(orders=[], { orderId, status }) {
 	return orders.map((order) => {
-		if (order.orderId == orderId) {
+		if (order.orderId === orderId) {
 			return Object.assign({}, order, { status });
 		} else {
 			return order;

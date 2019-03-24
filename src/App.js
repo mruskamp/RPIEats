@@ -9,6 +9,7 @@ import CartPage from './containers/CartPage';
 import RestaurantsPage from './containers/RestaurantsPage';
 import OrdersPage from './containers/OrdersPage';
 import StatusPage from './containers/StatusPage';
+import ProfilePage from './containers/ProfilePage';
 import { Header, Footer } from './components/layouts';
 import { fetchRestaurants } from './containers/RestaurantsPage/actions';
 import { fetchOrders } from './containers/OrdersPage/actions';
@@ -43,6 +44,7 @@ class App extends Component {
 									<Route path="/cart" component={() => <CartPage />} />
 									<Route path="/orders" component={() => <OrdersPage/>} />
 									<Route path={`/order/status/:orderId`} component={() => <StatusPage/>} />
+									<Route path="/profile" component={() => <ProfilePage/>} />
 									<Route exact path="/" component={() => <LandingPage/>} />
 								</Switch>
 							</div>

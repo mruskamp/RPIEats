@@ -4,7 +4,6 @@ import { withRouter } from 'react-router-dom';
 
 import { List, ListItem, ListItemText, IconButton } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
-import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 import { getMenu, getImage, getRestaurantId } from './selectors';
