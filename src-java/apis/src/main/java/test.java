@@ -12,6 +12,7 @@ import java.util.List;
 import static Orders.CreateOrder.createOrderInstance;
 import static Orders.GetActiveOrders.getActiveOrdersInstance;
 import static Orders.GetOrderById.getOrderByIdInstance;
+import static Orders.GetOrdersByCustomer.getOrdersByCustomerInstance;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 import static spark.Spark.*;
@@ -114,6 +115,8 @@ public class test {
         get("/orders/active",(request,response) -> getActiveOrdersInstance().handle(request,response));
 
         get("/orders/:id",(request,response) -> getOrderByIdInstance().handle(request,response));
+
+        get("/orders/customer/:customerId",(request,response) -> getOrdersByCustomerInstance().handle(request,response));
 
 
         
