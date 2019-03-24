@@ -72,19 +72,6 @@ public class test {
          */
         before((request, response) -> response.header("Access-Control-Allow-Origin", "*"));
 
-        // matches "GET /hello/foo" and "GET /hello/bar"
-        // request.params(":name") is 'foo' or 'bar'
-        get("/hello/:name", (request, response) -> {
-            String name = request.params(":name");
-            return "Hello: " + name + "!";
-        });
-
-        get("/RPIEats", (request, response) -> {
-            //String name = request.params(":name");
-            //response.type("application/json");
-            response.body("Hello RPIEats");
-            return response;
-        });
 
         //Restaurants landing page
         get("/restaurants", (request, response) -> {
