@@ -116,9 +116,10 @@ class CartPage extends Component {
 				<Link
 					to="/orders"
 					onClick={(e) => {
-						if (this.state.deliverTo == '')
+						if (this.state.deliverTo === '')
 							e.preventDefault();
 					}}
+					className={classes.placeOrderButtonLink}
 				>
 					<div className={classes.placeOrderButtonContainer}>
 							<Button
@@ -188,9 +189,13 @@ const styles = {
 		justifyContent: 'space-between',
 		alignItems: 'center',
 	},
+	placeOrderButtonLink: {
+		textDecorationLine: 'none',
+	},
 	placeOrderButtonContainer: {
 		display: 'flex',
 		alignItems: 'center',
+		paddingTop: '2rem',
 	},
 	deliverToInput: {
 		margin: 'auto',

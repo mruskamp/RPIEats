@@ -10,7 +10,7 @@ import {
 function restaurantId(state='', action) {
 	switch(action.type) {
 		case ADD_ITEM:
-			if (state == '')	return action.payload.restaurant;
+			if (state === '')	return action.payload.restaurant;
 			return state;
 		default:
 			return state;
@@ -19,7 +19,7 @@ function restaurantId(state='', action) {
 
 function addItem(cart, { item, restaurantId }) {
 	// ensures the item is in the restaurant your order is at
-	if (cart.length > 0 && cart[0].restaurantId !== restaurantId && restaurantId != 'same')
+	if (cart.length > 0 && cart[0].restaurantId !== restaurantId && restaurantId !== 'same')
 		return cart;
 	let newCart = [];
 	let dup = false;
@@ -38,7 +38,7 @@ function removeItem(cart, { item }) {
 	for (let i=0; i<cart.length; i++) {
 		let cartItem = cart[i];
 		if (cartItem.id === item.id) {
-			if (cartItem.count != 1) {
+			if (cartItem.count !== 1) {
 				newCart.push(Object.assign({}, cartItem, { count: cartItem.count - 1 }));
 			}
 		} else	newCart.push(cartItem);
