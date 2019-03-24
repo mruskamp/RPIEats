@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { Typography, Button } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
+import logo from '../RPIEats_Logo.png';
 
 const LandingPage = (props) => {
 
@@ -10,12 +11,7 @@ const LandingPage = (props) => {
 	return (
 		<div className={classes.root}>
 			<div className={classes.titleContainer}>
-				<Typography
-					variant="h2"
-					color="primary"
-				>
-					RPI Eats
-				</Typography>
+				<img src={logo} alt={""} height={190} width={300} />
 			</div>
 			<div className={classes.loginButtonContainer}>
 				<Link to="/login" className={classes.buttonLink}>
@@ -35,8 +31,8 @@ const LandingPage = (props) => {
 const styles = {
 	root: {
 		textAlign: 'center',
-		height: '100vh',
-		backgroundColor: '#ccc',
+		height: '100%',
+		// backgroundColor: '#ccc',
 	},
 	titleContainer: {
 		margin: 'auto',

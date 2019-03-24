@@ -1,48 +1,44 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
-import { List, ListItem, ListItemText, Paper } from '@material-ui/core';
+import { List, ListItem, ListItemText} from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
 
-import { isFetchingRestaurants, getRestaurants } from './selectors';
+import { getRestaurants } from './selectors';
 
 class RestaurantsPage extends Component {
-
-	constructor(props){
-		super(props);
-		this.state = { showHours: {} };
-	}
-
-	handleRestaurantSelect = (name) => {
-		let newHours = Object.assign(this.state.showHours, { name: this.state.showHours.name ? !this.state.showHours.name : true });
-		this.setState(Object.assign(this.state, { showHours: newHours }));
-	}
 
 	render() {
 		let { classes, restaurants } = this.props;
 		return (
 			<div className={classes.root}>
-				<div style={{ paddingTop: 70 }}>
-				<Paper className={classes.listContainer} >
+				<div>
+				<div>
 					<List className={classes.restaurantList} >
-						{restaurants.map((restaurant) => (
+						{restaurants.map((restaurant, index) => (
 							<Fragment key={`${restaurant.name}`} >
-								<ListItem
-									onClick={() => this.handleRestaurantSelect(restaurant)}
-								>
-									<ListItemText
-										primary={restaurant.name}
-										secondary={Object.keys(restaurant.hours).map((day) => (
-												<span key={`${restaurant.name}#${day}`}>
-													{day}: {restaurant.hours[day]} <br/>
-												</span>
-											))}
-									/>
-								</ListItem>
+								<Link to={`restaurant/${restaurant.name}`} className={classes.restaurantText}>
+									<ListItem divider={index !== restaurants.length-1} >
+										<img src={restaurant.imgUrl} alt={""} height={50} width={50} />
+										<ListItemText
+											disableTypography
+											primary={restaurant.name}
+											secondary={
+												<div className={classes.subtextContainer}>
+													<p>{restaurant.location}</p>
+													<p style={{ color: restaurant.status === "Open" ? 'green' : 'red' }}>
+														{restaurant.status}
+													</p>
+												</div>
+											}
+										/>
+									</ListItem>
+								</Link>
 							</Fragment>
 							))}
 					</List>
-				</Paper>
+				</div>
 				</div>
 			</div>
 		);
@@ -53,24 +49,26 @@ class RestaurantsPage extends Component {
 function mapStateToProps(state) {
 	return {
 		restaurants: getRestaurants(state),
-		loadingRestaurants: isFetchingRestaurants(state),
 	};
 }
 
 const styles = {
 	root: {
 		backgroundColor: '#ccc',
-		height: '100vh',
-		flexGrow: 1,
 		flexDirection: 'column',
-		alignItems: 'center',
-	},
-	listContainer: {
-		width: '70%',
-		margin: 'auto',
+		height: '100%',
 	},
 	restaurantList: {
 		backgroundColor: '#fff',
+	},
+	restaurantText: {
+		textDecorationLine: 'none',
+	},
+	subtextContainer: {
+		display: 'flex',
+		justifyContent: 'space-between',
+		fontSize: '15px',
+		color: 'grey',
 	}
 };
 

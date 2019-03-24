@@ -14,7 +14,7 @@ function isFetchingRestaurants(state=false, action) {
 			return action.payload;
 		default:
 			return state; 
-	};
+	}
 }
 
 function errorFetchingRestaurants(state=false, action) {
@@ -23,7 +23,7 @@ function errorFetchingRestaurants(state=false, action) {
 			return true;
 		default:
 			return false;
-	};
+	}
 }
 
 function restaurants(state=[], action) {
@@ -32,7 +32,7 @@ function restaurants(state=[], action) {
 			return action.payload;
 		default:
 			return state;
-	};
+	}
 }
 
 export default combineReducers({

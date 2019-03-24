@@ -1,4 +1,3 @@
-
 export const IS_FETCHING_RESTAURANTS = "IS_FETCHING_RESTAURANTS";
 export const SUCCESS_FETCHING_RESTAURANTS = "SUCCESS_FETCHING_RESTAURANTS";
 export const ERROR_FETCHING_RESTAURANTS = "ERROR_FETCHING_RESTAURANTS";
@@ -22,12 +21,12 @@ export function fetchRestaurants() {
 		// let redux know we're starting to fetch the restaurants
 		dispatch(isFetchingRestaruants(true));
 
-		fetch().then((response) => {	// actually fetching the restaurant data from the api
+		fetch("http://129.161.139.153:8080/restaurants").then((response) => {	// actually fetching the restaurant data from the api
 			return response.json();
 		}).then((response) => {			// if the api call is a success
 			dispatch(successFetchingRestaurants(response));
 			dispatch(isFetchingRestaruants(false));
-		}).catch(() => {				// cathes if the api call errors
+		}).catch(() => {				// catches if the api call errors
 			dispatch(isFetchingRestaruants(false));
 			dispatch(errorFetchingRestaurants());
 		});

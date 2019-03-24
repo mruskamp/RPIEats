@@ -1,13 +1,19 @@
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.mongodb.BasicDBObject;
 import com.mongodb.client.*;
 import org.bson.Document;
 
 import java.sql.Time;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import static Orders.CreateOrder.createOrderInstance;
+import static Orders.GetActiveOrders.getActiveOrdersInstance;
+import static Orders.GetOrderById.getOrderByIdInstance;
+import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
+import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 import static spark.Spark.*;
 
 public class test {
@@ -30,6 +36,12 @@ public class test {
     public static void main(String[] args){
 
         port(8080);
+
+        MongoClient mongoClient = MongoClients.create("mongodb://dev-team:RPIEATS@cluster0-shard-00-00-s62mb.mongodb.net:27017,cluster0-shard-00-01-s62mb.mongodb.net:27017,cluster0-shard-00-02-s62mb.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true");
+        MongoDatabase database = mongoClient.getDatabase("rpieats");
+        List<Document> restaurantInfo = new ArrayList<>();
+        List<Document> orderInfo = new ArrayList<>();
+        Gson gson = new Gson();
 
         /*
         * Enable CORS (Cross Origin Resource Sharing). Allows foreign domains to request necessary
@@ -60,8 +72,6 @@ public class test {
          */
         before((request, response) -> response.header("Access-Control-Allow-Origin", "*"));
 
-        get("/hello", (req, res) -> "Hello World from Spark!!!");
-
         // matches "GET /hello/foo" and "GET /hello/bar"
         // request.params(":name") is 'foo' or 'bar'
         get("/hello/:name", (request, response) -> {
@@ -76,19 +86,19 @@ public class test {
             return response;
         });
 
+        //Restaurants landing page
         get("/restaurants", (request, response) -> {
 
-            MongoClient mongoClient = MongoClients.create("mongodb://dev-team:RPIEATS@cluster0-shard-00-00-s62mb.mongodb.net:27017,cluster0-shard-00-01-s62mb.mongodb.net:27017,cluster0-shard-00-02-s62mb.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true");
-            MongoDatabase database = mongoClient.getDatabase("rpieats");
             MongoCollection<Document> collection = database.getCollection("restaurants");
-            List<String> items = new ArrayList<>();
             MongoCursor<Document> cursor = collection.find().iterator();
+            List<String> items = new ArrayList<>();
 
             try{
                 while (cursor.hasNext()){
                     Document nextRestaurant = cursor.next();
                     nextRestaurant.put("status", getRestaurantStatus(nextRestaurant));
                     items.add(nextRestaurant.toJson());
+                    restaurantInfo.add(nextRestaurant);
                 }
             }finally {
                 cursor.close();
@@ -98,5 +108,26 @@ public class test {
 
             return items;
         });
+
+        /*
+        * Return info for a page for each restaurant where the menu etc can be found
+        * after the user has chosen one
+        */
+        get("/restaurants/:name", (request, response) -> {
+
+            String name = request.params(":name");
+            for(Document restaurant: restaurantInfo) {
+                if(restaurant.get("name").toString().equals(name)) {
+                    return restaurant;
+                };
+            }
+            return "Could not find restaurant: " + name;
+        });
+
+        post("/order/create",(request,response) -> createOrderInstance().handle(request,response));
+
+        get("/orders/active",(request,response) -> getActiveOrdersInstance().handle(request,response));
+
+        get("/orders/:id",(request,response) -> getOrderByIdInstance().handle(request,response));
     }
 }

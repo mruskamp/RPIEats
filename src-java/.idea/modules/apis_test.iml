@@ -3,12 +3,16 @@
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
     <output-test url="file://$MODULE_DIR$/../../apis/out/test/classes" />
     <exclude-output />
-    <content url="file://$MODULE_DIR$/../../apis/src/test" />
+    <content url="file://$MODULE_DIR$/../../apis/src/test">
+      <sourceFolder url="file://$MODULE_DIR$/../../apis/src/test/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../apis/src/test/resources" type="java-test-resource" />
+    </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="apis_main" />
     <orderEntry type="library" name="Gradle: com.sparkjava:spark-core:2.7.2" level="project" />
     <orderEntry type="library" name="Gradle: org.mongodb:mongodb-driver-sync:3.9.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.code.gson:gson:2.8.5" level="project" />
     <orderEntry type="library" name="Gradle: junit:junit:4.12" level="project" />
     <orderEntry type="library" name="Gradle: org.slf4j:slf4j-api:1.7.13" level="project" />
     <orderEntry type="library" name="Gradle: org.eclipse.jetty:jetty-webapp:9.4.8.v20171121" level="project" />
