@@ -1,3 +1,4 @@
+import Orders.EditOrderStatus;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.mongodb.BasicDBObject;
@@ -10,6 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 import static Orders.CreateOrder.createOrderInstance;
+import static Orders.EditOrderStatus.getEditOrderInstance;
 import static Orders.GetActiveOrders.getActiveOrdersInstance;
 import static Orders.GetOrderById.getOrderByIdInstance;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
@@ -129,6 +131,14 @@ public class test {
         get("/orders/active",(request,response) -> getActiveOrdersInstance().handle(request,response));
 
         get("/orders/:id",(request,response) -> getOrderByIdInstance().handle(request,response));
+
+        System.out.println("Test");
+        get("/order/edit/:id/:status", (request, response) -> getEditOrderInstance().handle(request,response));
+
+        //edit order status in the order just change the status field to whatever is in the parameter of the function
+        //cancel order
+        //view order/
+        //edit order status
 
 
         
