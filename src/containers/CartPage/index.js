@@ -25,9 +25,10 @@ class CartPage extends Component {
 
 	placeOrder = () => {
 		let { restaurant } = this.props;
+		console.log("Restaurant data", restaurant);
 		let order = {
 			restaurantId: restaurant.restaurantId,
-			imgUrl: restaurant.imgUrl,
+			imgURL: restaurant.imgURL,
 			user: 'jvparin',
 			deliveryDetails: {
 				deliverTo: this.state.deliverTo,

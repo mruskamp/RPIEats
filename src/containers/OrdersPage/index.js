@@ -19,7 +19,7 @@ class OrdersPage extends Component {
 							<Fragment key={`${order.orderId}`} >
 								<Link to={`/order/status/${order.orderId}`} className={classes.orderText}>
 									<ListItem divider={index !== orders.length-1} >
-										<img src={order.imgUrl} alt={""} height={50} width={50} />
+										<img src={order.imgURL} alt={""} height={50} width={50} />
 										<ListItemText
 											disableTypography
 											primary={order.orderSummary.vendor}

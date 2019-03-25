@@ -4,7 +4,7 @@ const tempRestaurants = [
 		"location":"Rensselaer Union",
 		"status" : "Open",
 		"restaurantId":32132,
-		"imgUrl":"http://alloveralbany.com/images/thunder_mountain_curry_logo.png",
+		"imgURL":"http://alloveralbany.com/images/thunder_mountain_curry_logo.png",
 		"menu":[{"name":"Chicken Pad Thai","price":"8.50", "id": "cpt"},{"name":"Mango Lassi","price":"3.50", "id": "ml"}],
 	},
 	{
@@ -12,7 +12,7 @@ const tempRestaurants = [
 		"location":"Rensselaer Union",
 		"status" : "Closing Soon",
 		"restaurantId":32132323,
-		"imgUrl":"https://9bf6ddc20002c5f1a946-ef07da46c7e506e973e0d9fa57c693df.ssl.cf1.rackcdn.com/636632980697214042+48198.png",
+		"imgURL":"https://9bf6ddc20002c5f1a946-ef07da46c7e506e973e0d9fa57c693df.ssl.cf1.rackcdn.com/636632980697214042+48198.png",
 		menu: [],
 	},
 ]
@@ -23,7 +23,7 @@ const tempOrders = [
 		"orderId": "5c9417c4c6c41604e7d9d4e5",
 		"status": "active",
 		"restaurantId": 3232,
-		"imgUrl": "http://alloveralbany.com/images/thunder_mountain_curry_logo.png",
+		"imgURL": "http://alloveralbany.com/images/thunder_mountain_curry_logo.png",
 		"user": "jvparin",
 		"deliveryDetails": {
 			"deliverTo": "Sage Building",
@@ -34,8 +34,8 @@ const tempOrders = [
 			"vendor": "Thunder Mountain Curry",
 			"location": "Rensselaer Union",
 			"subTotal": 20,
-			"tax": 10,
-			"deliveryFee": 0,
+			"tax": 0.5,
+			"deliveryFee": 2,
 			"total": 30,
 			"itemDetails": [
 				{
@@ -73,8 +73,8 @@ export default {
 	restaurantData: tempRestaurantData,
 	cart: {
 		items: [
-			{name: "Chicken Pad Thai", id: "cpt", price:"8.50", count: 2},
-			{name: "Mango Lassi", id: "ml", price:"3.50", count: 1},
+			// {name: "Chicken Pad Thai", id: "cpt", price:"8.50", count: 2},
+			// {name: "Mango Lassi", id: "ml", price:"3.50", count: 1},
 		],
 		restaurantId: 32132,
 	},
@@ -85,21 +85,20 @@ export default {
 
 /************ This is the actual initial state ***********/
 /************ commented out to use temp data instead ************/
-/*
-export default {
-	restaurantData: {
-		isFetchingRestaurants: false,
-		errorFetchingRestaurants: false,
-		restaurants: [],
-	},
-	cart: {
-		items: [],
-		restaurant: '',
-	},
-	orderData: {
-		isFetchingOrders: false,
-		errorFetchingRestaurants: false,
-		orders: []
-	},
-}
-*/
+
+// export default {
+// 	restaurantData: {
+// 		isFetchingRestaurants: false,
+// 		errorFetchingRestaurants: false,
+// 		restaurants: [],
+// 	},
+// 	cart: {
+// 		items: [],
+// 		restaurantId: 0,
+// 	},
+// 	orderData: {
+// 		isFetchingOrders: false,
+// 		errorFetchingRestaurants: false,
+// 		orders: []
+// 	},
+// }

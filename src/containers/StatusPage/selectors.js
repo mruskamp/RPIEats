@@ -16,7 +16,7 @@ export function getOrderSummary(state, orderId) {
 export function getImage(state, restaurantName) {
 	let order = getOrder(state, restaurantName);
 	if (order) {
-		return order.imgUrl;
+		return order.imgURL;
 	} else	return null
 }
 

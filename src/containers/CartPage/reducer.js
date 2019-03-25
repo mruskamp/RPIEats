@@ -18,6 +18,7 @@ function restaurantId(state='', action) {
 }
 
 function addItem(cart, { item, restaurantId }) {
+	// console.log(restaurantId);
 	// ensures the item is in the restaurant your order is at
 	if (cart.length > 0 && cart[0].restaurantId !== restaurantId && restaurantId !== 'same')
 		return cart;
@@ -30,6 +31,7 @@ function addItem(cart, { item, restaurantId }) {
 		} else	return cartItem;
 	});
 	if (!dup)	newCart.push(Object.assign({}, item, { count: 1 }));
+	console.log("restaurant id", cart);
 	return newCart;
 }
 

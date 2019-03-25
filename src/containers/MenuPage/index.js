@@ -13,12 +13,11 @@ import { addItem } from '../CartPage/actions';
 class MenuPage extends Component {
 
 	render() {
-		let { classes, name, menu, imgUrl, restaurantId } = this.props;
-		console.log(imgUrl);
+		let { classes, name, menu, imgURL, restaurantId } = this.props;
 		return (
 			<div className={classes.root}>
 				<div className={classes.imageContainer}>
-					<img src={imgUrl} alt={""} height={100} width={100} />
+					<img src={imgURL} alt={""} height={100} width={100} />
 				</div>
 				<div className={classes.titleContainer}>
 					<h3>{name}</h3>
@@ -48,7 +47,7 @@ function mapStateToProps(state, ownProps) {
 		name,
 		restaurantId: getRestaurantId(state, name),
 		menu: getMenu(state, name),
-		imgUrl: getImage(state, name),
+		imgURL: getImage(state, name),
 	};
 }
 

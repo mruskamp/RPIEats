@@ -15,11 +15,11 @@ class StatusPage extends Component {
 	}
 
 	render() {
-		let { classes, items, imgUrl, order, orderSummary } = this.props;
+		let { classes, items, imgURL, order, orderSummary } = this.props;
 		return (
 			<div className={classes.root}>
 				<div className={classes.imageContainer}>
-					<img src={imgUrl} alt={""} height={100} width={100} />
+					<img src={imgURL} alt={""} height={100} width={100} />
 				</div>
 				<div className={classes.titleContainer}>
 					<h2>{orderSummary.vendor}</h2>
@@ -76,7 +76,7 @@ function mapStateToProps(state, ownProps) {
 		order: getOrder(state, orderId),
 		orderSummary: getOrderSummary(state, orderId),
 		items: getItems(state, orderId),
-		imgUrl: getImage(state, orderId),
+		imgURL: getImage(state, orderId),
 	};
 }
 

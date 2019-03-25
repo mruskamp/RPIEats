@@ -12,16 +12,17 @@ export function errorFetchingOrders() {
 	return { type: ERROR_FETCHING_ORDERS };
 }
 
-export function isFetchingOrders(fetching) {
-	return { type: IS_FETCHING_ORDERS, payload: fetching };
+export function isFetchingOrders(userType, userId, fetching) {
+	return { type: IS_FETCHING_ORDERS, payload: { userType, userId, fetching } };
 }
 
 export function fetchOrders() {
 	return (dispatch) => {
 		// let redux know we're starting to fetch the orders
-		dispatch(isFetchingOrders(true));
+		let fetchingOrders = isFetchingOrders("customer", "jvparin", true);
+		dispatch(fetchingOrders);
 
-		fetch("http://129.161.139.153:8080/orders").then((response) => {	// actually fetching the order data from the api
+		fetch("http://129.161.138.37:8080/orders/" + fetchingOrders.payload.userType + "/" + fetchingOrders.payload.userId).then((response) => {	// actually fetching the order data from the api
 			return response.json();
 		}).then((response) => {			// if the api call is a success
 			dispatch(successFetchingOrders(response));

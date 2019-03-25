@@ -12,7 +12,7 @@ export function getMenu(state, restaurantName) {
 export function getImage(state, restaurantName) {
 	let restaurant = getRestaurant(state, restaurantName);
 	if (restaurant) {
-		return restaurant.imgUrl;
+		return restaurant.imgURL;
 	} else	return null
 }
 
