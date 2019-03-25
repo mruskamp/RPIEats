@@ -125,6 +125,7 @@ public class test {
         //view order/
         //edit order status
         get("/orders/customer/:customerId",(request,response) -> getOrdersByCustomerInstance().handle(request,response));
+        get("/orders/customer/:userId",(request,response) -> getOrdersByCustomerInstance().handle(request,response));
 
 
         
