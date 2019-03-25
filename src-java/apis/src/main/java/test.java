@@ -14,6 +14,7 @@ import static Orders.CreateOrder.createOrderInstance;
 import static Orders.EditOrderStatus.getEditOrderInstance;
 import static Orders.GetActiveOrders.getActiveOrdersInstance;
 import static Orders.GetOrderById.getOrderByIdInstance;
+import static Orders.GetOrdersByCustomer.getOrdersByCustomerInstance;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 import static spark.Spark.*;
@@ -42,8 +43,6 @@ public class test {
         MongoClient mongoClient = MongoClients.create("mongodb://dev-team:RPIEATS@cluster0-shard-00-00-s62mb.mongodb.net:27017,cluster0-shard-00-01-s62mb.mongodb.net:27017,cluster0-shard-00-02-s62mb.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true");
         MongoDatabase database = mongoClient.getDatabase("rpieats");
         List<Document> restaurantInfo = new ArrayList<>();
-        List<Document> orderInfo = new ArrayList<>();
-        Gson gson = new Gson();
 
         /*
         * Enable CORS (Cross Origin Resource Sharing). Allows foreign domains to request necessary
@@ -74,19 +73,6 @@ public class test {
          */
         before((request, response) -> response.header("Access-Control-Allow-Origin", "*"));
 
-        // matches "GET /hello/foo" and "GET /hello/bar"
-        // request.params(":name") is 'foo' or 'bar'
-        get("/hello/:name", (request, response) -> {
-            String name = request.params(":name");
-            return "Hello: " + name + "!";
-        });
-
-        get("/RPIEats", (request, response) -> {
-            //String name = request.params(":name");
-            //response.type("application/json");
-            response.body("Hello RPIEats");
-            return response;
-        });
 
         //Restaurants landing page
         get("/restaurants", (request, response) -> {
@@ -138,6 +124,7 @@ public class test {
         //cancel order
         //view order/
         //edit order status
+        get("/orders/customer/:customerId",(request,response) -> getOrdersByCustomerInstance().handle(request,response));
 
 
         

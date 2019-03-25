@@ -14,6 +14,7 @@ import pojos.Order;
 import spark.Request;
 import spark.Response;
 import spark.Route;
+import utils.GsonSingleton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,9 +36,8 @@ public class CreateOrder implements Route {
         JsonParser parser = new JsonParser();
         JsonObject requestObj = parser.parse(request.body()).getAsJsonObject();
 
-        Gson gson = new Gson();
 
-        Order createRequest = gson.fromJson(request.body(), Order.class);
+        Order createRequest = GsonSingleton.getInstance().fromJson(request.body(), Order.class);
 
         MongoCollection collection = database.getCollection("orders");
 

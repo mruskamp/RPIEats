@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Paper, Input, Button, Typography } from '@material-ui/core';
+import TagFacesIcon from '@material-ui/icons/TagFaces';
 import { withStyles } from '@material-ui/styles';
 
 class LogInPage extends Component {
@@ -31,7 +32,7 @@ class LogInPage extends Component {
 						variant="h3"
 						color="primary"
 					>
-						Never Stay Hungry
+						<TagFacesIcon /> Never Stay Hungry <TagFacesIcon />
 					</Typography>
 				</div>
 		        <Paper className={classes.loginPaper}>
@@ -74,6 +75,7 @@ const styles = {
 		backgroundColor: '#ccc',
 		textAlign: 'center',
 		height: '100vh',
+		width: '100%',
 		padding: 15,
 	},
 	headingContainer: {

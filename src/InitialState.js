@@ -96,5 +96,10 @@ export default {
 		items: [],
 		restaurant: '',
 	},
+	orderData: {
+		isFetchingOrders: false,
+		errorFetchingRestaurants: false,
+		orders: []
+	},
 }
 */
