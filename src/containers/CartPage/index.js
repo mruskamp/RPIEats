@@ -21,11 +21,10 @@ class CartPage extends Component {
 	handleDeliverToInput = (event) => this.setState({ deliverTo: event.target.value })
 
 	getDeliveryFee = () => 2.00;
-	getTax = () =>	0.50;
+	getTax = (subtotal) =>	subtotal > 0 ? subtotal * 0.08 : 0;
 
 	placeOrder = () => {
 		let { restaurant } = this.props;
-		console.log("Restaurant data", restaurant);
 		let order = {
 			restaurantId: restaurant.restaurantId,
 			imgURL: restaurant.imgURL,
@@ -50,8 +49,8 @@ class CartPage extends Component {
 					}),
 				subtotal: this.props.cartCost,
 				deliveryFee: this.getDeliveryFee(),
-				tax: this.getTax(),
-				orderTotal: this.props.cartCost + this.getDeliveryFee() + this.getTax(),
+				tax: this.getTax(this.props.cartCost),
+				orderTotal: this.props.cartCost + this.getDeliveryFee() + this.getTax(this.props.cartCost),
 			},
 		}
 		this.props.placeOrder(order);
@@ -63,25 +62,33 @@ class CartPage extends Component {
 		return (
 			<div className={classes.root}>
 				<List className={classes.restaurantList}>
-					{items.map((item, index) => (
-						<ListItem key={`${item.name}#${index}`} className={classes.listItem}>
-							<ListItemText
-								primary={item.name}
-								secondary={`$${item.price} x ${item.count} = $${parseFloat(item.price)*parseFloat(item.count)}`}
-							/>
-							<IconButton onClick={() => this.props.removeItem(item)}>
-								<RemoveCircleIcon /> 
-							</IconButton>
-							<IconButton onClick={() => this.props.addItem(item)}>
-								<AddCircleIcon /> 
-							</IconButton>
-						</ListItem>
+				{items.length > 0 ? (
+					<div>
+						{items.map((item, index) => (
+							<ListItem key={`${item.name}#${index}`}>
+								<ListItemText
+									primary={item.name}
+									secondary={`$${item.price} x ${item.count} = $${parseFloat(item.price)*parseFloat(item.count)}`}
+								/>
+								<IconButton onClick={() => this.props.removeItem(item)}>
+									<RemoveCircleIcon /> 
+								</IconButton>
+								<IconButton onClick={() => this.props.addItem(item)}>
+									<AddCircleIcon /> 
+								</IconButton>
+							</ListItem>
 						))}
+					</div>
+					) : (
+					<ListItem>
+						Your cart is empty! <br /> Start adding items to your cart from a restaurant.
+					</ListItem>
+				)}
 					<Divider />
 					<ListItem>
 						<ListItemText
 							variant="h6"
-							primary="DeliveryFee"
+							primary="Delivery Fee"
 							secondary={`$${this.getDeliveryFee()}`}
 						/>
 					</ListItem>
@@ -89,7 +96,7 @@ class CartPage extends Component {
 						<ListItemText
 							variant="h6"
 							primary="Tax"
-							secondary={`$${this.getTax()}`}
+							secondary={`$${this.getTax(cartCost)}`}
 						/>
 					</ListItem>
 					<ListItem>
@@ -98,7 +105,7 @@ class CartPage extends Component {
 							primary={
 								<div className={classes.totalCostContainer}>
 									<Typography variant="h6">Order Total</Typography>
-									<Typography variant="h6">{`$${cartCost + this.getDeliveryFee() + this.getTax()}`}</Typography>
+									<Typography variant="h6">{`$${cartCost + this.getDeliveryFee() + this.getTax(cartCost)}`}</Typography>
 								</div>
 							}
 						/>
@@ -165,8 +172,6 @@ const styles = {
 	root: {
 		height: '100%',
 		width: '100%',
-	},
-	listItem: {
 	},
 	itemTextContainer: {
 		display: 'flex',

@@ -13,7 +13,7 @@ const tempRestaurants = [
 		"status" : "Closing Soon",
 		"restaurantId":32132323,
 		"imgURL":"https://9bf6ddc20002c5f1a946-ef07da46c7e506e973e0d9fa57c693df.ssl.cf1.rackcdn.com/636632980697214042+48198.png",
-		menu: [],
+		menu: [{"name":"Pepperoni Pizza","price":"2.50", "id": "pp"},{"name":"Cheese Pizza","price":"2.00", "id": "cp"}],
 	},
 ]
 
@@ -76,7 +76,7 @@ export default {
 			// {name: "Chicken Pad Thai", id: "cpt", price:"8.50", count: 2},
 			// {name: "Mango Lassi", id: "ml", price:"3.50", count: 1},
 		],
-		restaurantId: 32132,
+		restaurantId: 'same',
 	},
 	orderData: tempOrderData,
 }
@@ -94,7 +94,7 @@ export default {
 // 	},
 // 	cart: {
 // 		items: [],
-// 		restaurantId: 0,
+// 		restaurantId: "same",
 // 	},
 // 	orderData: {
 // 		isFetchingOrders: false,

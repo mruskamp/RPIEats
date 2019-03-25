@@ -53,7 +53,7 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
 	return {
-		addItem: (item) => dispatch(addItem(item)),
+		addItem: (item, restaurantId) => dispatch(addItem(item, restaurantId)),
 	}
 }
 
