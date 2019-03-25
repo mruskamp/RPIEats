@@ -26,7 +26,7 @@ class OrdersPage extends Component {
 											secondary={
 												<div className={classes.subtextContainer}>
 													<p>{order.orderSummary.location}</p>
-													<p style={{ color: order.status === "Cancelled" ? 'red' : 'green' }} className={classes.orderStatus}>
+													<p style={{ color: order.status === "cancelled" ? 'red' : ( order.status === "no show" ? 'orange' : 'green' )}} className={classes.orderStatus}>
 														Status: {order.status}
 													</p>
 												</div>
