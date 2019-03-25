@@ -25,10 +25,9 @@ public class GetOrdersByCustomer implements Route {
         MongoCollection<Document> collection = database.getCollection("orders");
         BasicDBObject query = new BasicDBObject();
 
-        if(request.params(":customerId") == null)
+        if(request.params(":userId") == null)
             return "No order";
-
-        query.put("user", request.params(":customerId"));
+        query.put("user", request.params(":userId"));
 
         MongoCursor<Document> cursor = collection.find(query).iterator();
         List<String> items = new ArrayList<>();
