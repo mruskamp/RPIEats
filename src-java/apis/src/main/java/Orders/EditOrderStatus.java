@@ -55,7 +55,7 @@ public class EditOrderStatus  implements Route {
         if(request.params(":id") == null)
             return "No order";
 
-        collection.updateOne(eq("_id", request.params(":id")), new Document("$set", new Document("status", request.params(":status"))));          
+        collection.updateOne(eq("_id", request.params(":id")), new Document("$set", new Document("status", request.params(":status"))));
 
         query.put("orderId", request.params(":id"));
         Document cursor = collection.find(query).first();

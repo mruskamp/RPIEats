@@ -132,7 +132,6 @@ public class test {
 
         get("/orders/:id",(request,response) -> getOrderByIdInstance().handle(request,response));
 
-        System.out.println("Test");
         get("/order/edit/:id/:status", (request, response) -> getEditOrderInstance().handle(request,response));
 
         //edit order status in the order just change the status field to whatever is in the parameter of the function
