@@ -58,10 +58,10 @@ class CartPage extends Component {
 	}
 
 	render() {
-		let { classes, items, cartCost } = this.props;
+		let { classes, items, cartCost, restaurant } = this.props;
 		return (
 			<div className={classes.root}>
-				<List className={classes.restaurantList}>
+				<List>
 				{items.length > 0 ? (
 					<div>
 						{items.map((item, index) => (
@@ -70,10 +70,10 @@ class CartPage extends Component {
 									primary={item.name}
 									secondary={`$${item.price} x ${item.count} = $${parseFloat(item.price)*parseFloat(item.count)}`}
 								/>
-								<IconButton onClick={() => this.props.removeItem(item)}>
+								<IconButton onClick={() => this.props.removeItem(item, restaurant.restaurantId)}>
 									<RemoveCircleIcon /> 
 								</IconButton>
-								<IconButton onClick={() => this.props.addItem(item)}>
+								<IconButton onClick={() => this.props.addItem(item, restaurant.restaurantId)}>
 									<AddCircleIcon /> 
 								</IconButton>
 							</ListItem>
@@ -162,8 +162,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
 	return {
 		placeOrder: (order) => dispatch(placeOrder(order)),
-		addItem: (item) => dispatch(addItem(item)),
-		removeItem: (item) => dispatch(removeItem(item)),
+		addItem: (item, restaurantId) => dispatch(addItem(item, restaurantId)),
+		removeItem: (item, restaurantId) => dispatch(removeItem(item, restaurantId)),
 		clearCart: () => dispatch(clearCart()),
 	};
 }
@@ -204,7 +204,7 @@ const styles = {
 		paddingTop: '2rem',
 	},
 	deliverToInput: {
-		margin: 'auto',
+		marginLeft: '1rem',
 	},
 	placeOrderButton: {
 		backgroundColor: 'green',

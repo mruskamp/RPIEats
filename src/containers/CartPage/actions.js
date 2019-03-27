@@ -6,12 +6,12 @@ export const PLACE_ORDER_SUCCESS = "PLACE_ORDER_SUCCESS";
 export const PLACE_ORDER_ERROR = "PLACE_ORDER_ERROR";
 export const CLEAR_CART = "CLEAR_CART";
 
-export function addItem(item, restaurantId="same") {
+export function addItem(item, restaurantId) {
 	return { type: ADD_ITEM, payload: { item, restaurantId } };
 }
 
-export function removeItem(item) {
-	return { type: REMOVE_ITEM, payload: { item } };
+export function removeItem(item, restaurantId) {
+	return { type: REMOVE_ITEM, payload: { item, restaurantId } };
 }
 
 export function clearCart() {
@@ -22,7 +22,7 @@ export function placeOrder(order) {
 	return (dispatch) => {
 		console.log(JSON.stringify(order));
 		
-		fetch("http://129.161.138.37:8080/order/create", {
+		fetch("http://129.161.137.71:8080/order/create", {
 			method: "POST",
 			mode: "cors",
 			headers: {
@@ -36,7 +36,7 @@ export function placeOrder(order) {
 			console.log("Response: ", response);
 		}).catch((e) => {
 			console.log(e)
-			console.log("ERROR PLACING ORDER");
+			// console.log("ERROR PLACING ORDER");
 		})
 
 	}

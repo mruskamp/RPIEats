@@ -18,9 +18,9 @@ function restaurantId(state='', action) {
 }
 
 function addItem(cart, { item, restaurantId }) {
-	// ensures the item is in the restaurant your order is at
 	if (!cart.restaurantId)
-		cart.restaurantId = restaurantId
+		cart.restaurantId = restaurantId;
+	// ensures the item is in the restaurant your order is at
 	if (cart.length > 0 && cart.restaurantId !== restaurantId && restaurantId !== 'same')
 		return cart;
 	let newCart = [];
@@ -37,7 +37,13 @@ function addItem(cart, { item, restaurantId }) {
 	return newCart;
 }
 
-function removeItem(cart, { item }) {
+function removeItem(cart, { item, restaurantId }) {
+	console.log("CART", cart);
+	if (!cart.restaurantId)
+		cart.restaurantId = restaurantId;
+	// ensures the item is in the restaurant your order is at
+	if (cart.length > 0 && cart.restaurantId !== restaurantId && restaurantId !== 'same')
+		return cart;
 	let newCart = [];
 	for (let i=0; i<cart.length; i++) {
 		let cartItem = cart[i];
@@ -47,6 +53,8 @@ function removeItem(cart, { item }) {
 			}
 		} else	newCart.push(cartItem);
 	}
+	if (!newCart.restaurantId)
+		newCart.restaurantId = restaurantId;
 	return newCart;
 }
 

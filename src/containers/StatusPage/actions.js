@@ -11,7 +11,7 @@ export function updateOrderStatus(orderId, status) {
 		let orderStatus = changeOrderStatus(orderId, status) 
 		dispatch(orderStatus);
 
-		fetch("http://129.161.138.37:8080/order/edit/" + orderId + "/" + status, {	// let the api know we're changing the status
+		fetch("http://129.161.137.71:8080/order/edit/" + orderId + "/" + status, {	// let the api know we're changing the status
 			method: "POST",
 			mode: "cors",
 			headers: {
@@ -25,7 +25,7 @@ export function updateOrderStatus(orderId, status) {
 			return
 		}).catch((e) => {			// if the call errored
 			console.log(e)
-			alert("ERROR UPDATING ORDER");
+			// alert("ERROR UPDATING ORDER");
 		})
 	}
 }
