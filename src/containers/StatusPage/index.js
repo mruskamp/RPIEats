@@ -26,6 +26,16 @@ class StatusPage extends Component {
 					<h3>Order Details</h3>
 					<h5>Deliver To: {order.deliveryDetails.deliverTo}</h5>
 					<h5>Status: {order.status}</h5>
+					<h5>Estimated Time of Arrival: {
+					 order.status === 'active' ? '40 minutes':
+					(order.status === 'accepted' ? '35 minutes':  
+					(order.status === 'ordered' ? '30 minutes': 
+					(order.status === 'awaiting order' ? '25 minutes':
+					(order.status === 'in transit' ? '10 minutes':  
+					(order.status === 'delivered' ? '0 minutes': 
+					(order.status === 'no show' ? '0 minutes': 
+					(order.status === 'cancelled' ? '0 minutes': 
+					'0 minutes')))))))}</h5>
 					<FormControl
 					>
 						<Select
@@ -41,6 +51,7 @@ class StatusPage extends Component {
 							<MenuItem className={classes.statusMenuItem} value={'cancelled'}>Cancelled</MenuItem>
 						</Select>
 					</FormControl>
+
 				</div>
 				<List className={classes.itemsContainer}>
 					{items.map((item) => (
