@@ -1,6 +1,7 @@
 import Orders.EditOrderStatus;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.mongodb.BasicDBObject;
 import com.mongodb.client.*;
 import org.bson.Document;
@@ -17,6 +18,7 @@ import static Orders.GetOrderById.getOrderByIdInstance;
 import static Orders.GetOrdersByCustomer.getOrdersByCustomerInstance;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
+import static com.mongodb.client.model.Filters.*;
 import static spark.Spark.*;
 
 public class test {
@@ -81,6 +83,7 @@ public class test {
             MongoCursor<Document> cursor = collection.find().iterator();
             List<String> items = new ArrayList<>();
 
+
             try{
                 while (cursor.hasNext()){
                     Document nextRestaurant = cursor.next();
@@ -110,6 +113,18 @@ public class test {
                 };
             }
             return "Could not find restaurant: " + name;
+        });
+
+        post("/login", (request,response) -> {
+            JsonParser parser = new JsonParser();
+            JsonObject requestObj = parser.parse(request.body()).getAsJsonObject();
+            MongoCollection<Document> collection = database.getCollection("users");
+
+            Document userDoc = collection.find(eq("userName", requestObj.get("username").getAsString())).first();
+
+            User userAccount = new User(requestObj.get("username").getAsString(), requestObj.get("password").getAsString(), requestObj.get("userType").getAsString());
+            System.out.println(userAccount.getUsername() + " " +  userAccount.getPassword() + " " + userAccount.getAccountType());
+            return response;
         });
 
         post("/order/create",(request,response) -> createOrderInstance().handle(request,response));

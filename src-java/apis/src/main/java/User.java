@@ -2,12 +2,15 @@ public class User {
 
     private String username;
     private String password;
+    private String accountType;
 
     /*
      * Constructor(s)
      */
-    public User() {
-
+    public User(String username, String password, String accountType) {
+        this.username = username;
+        this.password = password;
+        this.accountType = accountType;
     }
 
     /*
@@ -17,7 +20,11 @@ public class User {
 
     public String getPassword() { return password; }
 
+    public String getAccountType() { return accountType; }
+
     public void setUsername(String username) { this.username = username; }
 
     public void setPassword(String password) { this.password = password; }
+
+    public void setAccountType(String accountType) { this.accountType = accountType; }
 }
