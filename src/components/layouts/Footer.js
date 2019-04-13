@@ -33,17 +33,17 @@ class PrimarySearchAppBar extends React.Component {
           <Toolbar className={classes.toolbar}>
             <Grid item xs={4} className={classes.toolbar}>
               <a href="/restaurants" className={classes.linkUnstyled}>
-                <RestaurantIcon />
+                <RestaurantIcon /> <br /> Restaurants
               </a>
             </Grid>
             <Grid item xs={4} className={classes.toolbar}>
               <a href="/orders" className={classes.linkUnstyled}>
-                <MenuIcon />
+                <MenuIcon /> <br /> Orders
               </a>
             </Grid>
             <Grid item xs={4} className={classes.toolbar}>
               <a href="/profile" className={classes.linkUnstyled}>              
-                <AccountCircle />
+                <AccountCircle /> <br /> Profile
               </a>
             </Grid>
           </Toolbar>
@@ -72,6 +72,7 @@ const styles = theme => ({
   },
   linkUnstyled: {
     color: '#ffffff',
+    textDecoration: 'none',
   },
 });
 

@@ -57,6 +57,7 @@ const styles = theme => ({
   linkUnstyled: {
     color: '#ffffff',
     marginLeft: '2vw',
+    textDecoration: 'none',
   },
 });
 

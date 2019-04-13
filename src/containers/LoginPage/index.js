@@ -1,15 +1,24 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import { Paper, Input, Button, Radio, RadioGroup, FormControl, FormControlLabel, FormLabel, Typography } from '@material-ui/core';
 import TagFacesIcon from '@material-ui/icons/TagFaces';
 import { withStyles } from '@material-ui/styles';
+
+import { login } from './actions';
 
 class LogInPage extends Component {
 
 	constructor(props){
 		super(props);
 		this.state = { username: '', password: '', userType: '' }
+	}
+
+	componentDidMount() {
+		if (this.props.username !== "")
+			this.props.history.push('/restaurants');
 	}
 
 	handleUsernameInput = ({ target }) => this.setState({ username: target.value });
@@ -19,10 +28,7 @@ class LogInPage extends Component {
 	handleUserTypeChange = (event) => this.setState({ userType: event.target.value });
 
 	handleLoginSubmit = (event) => {
-		this.setState({ username: '', password: '' })
-		alert("username: " + this.state.username +
-			"\npassword: " + this.state.password + 
-			"\nuser type: " + this.state.userType);
+		this.props.login(this.state.username, this.state.password, this.state.userType);
 	}
 
 	render() {
@@ -78,30 +84,43 @@ class LogInPage extends Component {
 									</RadioGroup>
 								</FormControl>
 		        	</div>
+		        	{this.props.loginFailed &&
+		        		<Typography>Wrong username or password</Typography>
+		        	}
 							<div className={classes.loginButtonContainer}>
-								<Link to="/restaurants" className={classes.buttonLink}>
-									<Button
-											color="primary"
-										variant="contained"
-										onClick={this.handleLoginSubmit}
-									>
-										Login
-									</Button>
-								</Link>
+								<Button
+										color="primary"
+									variant="contained"
+									onClick={this.handleLoginSubmit}
+								>
+									Login
+								</Button>
 							</div>
 		        </Paper>
 			</div>
 		);
 	}
-
 }
+
+function mapStateToProps(state) {
+	return {
+		username: state.session.username,
+		loginFailed: state.session.loginFailed,
+	};
+}
+
+function mapDispatchToProps(dispatch) {
+	return {
+		login: (username, password, userType) => dispatch(login(username, password, userType)),
+	};
+}
+
 
 const styles = {
 	root: {
 		backgroundColor: '#ccc',
 		textAlign: 'center',
 		height: '100vh',
-		width: '100%',
 		padding: 15,
 	},
 	headingContainer: {
@@ -129,4 +148,7 @@ const styles = {
 	},
 };
 
-export default withStyles(styles)(LogInPage);
+export default compose(
+	withStyles(styles),
+	connect(mapStateToProps, mapDispatchToProps),
+	)(withRouter(LogInPage));
