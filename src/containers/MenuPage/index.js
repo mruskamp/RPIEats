@@ -33,11 +33,13 @@ class MenuPage extends Component {
 								primary={item.name}
 								secondary={`$${item.price}`}
 							/>
-							<Tooltip title="Add an item to cart" aria-label="Add an item to cart" placement="right">
-								<IconButton onClick={() => this.handleClick(item, restaurantId)}>
-									<AddCircleIcon /> 
-								</IconButton>
-							</Tooltip>
+							{this.props.userType === "customer" &&
+								<Tooltip title="Add an item to cart" aria-label="Add an item to cart" placement="right">
+									<IconButton onClick={() => this.handleClick(item, restaurantId)}>
+										<AddCircleIcon /> 
+									</IconButton>
+								</Tooltip>
+							}
 						</ListItem>
 						))}
 				</List>

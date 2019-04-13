@@ -2,6 +2,8 @@ import React, { Component, Fragment } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import AuthenticateComponent from './AuthenticateComponent';
+
 import LandingPage from './components/LandingPage';
 import LoginPage from './containers/LoginPage';
 import MenuPage from './containers/MenuPage';
@@ -19,11 +21,24 @@ import { getOrderIds } from './containers/OrdersPage/selectors';
 import mainTheme from './theme';
 
 
+const AuthenticMenuPage = AuthenticateComponent(MenuPage);
+const AuthenticCartPage = AuthenticateComponent(CartPage);
+const AuthenticStatusPage = AuthenticateComponent(StatusPage);
+const AuthenticProfilePage = AuthenticateComponent(ProfilePage);
+const AuthenticOrdersPage = AuthenticateComponent(OrdersPage);
+
+
+
 class App extends Component {
 
 	componentDidMount = () => {
 		this.props.fetchRestaurants();
-		this.props.fetchOrders();
+		if (this.props.userType !== ""){
+			if (this.props.userType === "customer")
+				this.props.fetchOrders(this.props.username);
+			else
+				this.props.fetchOrders()
+		}
 	}
 
   render() {
@@ -31,24 +46,24 @@ class App extends Component {
 			<div style={{ height: '100vh' }} >
 				<Router>
 					<Fragment>
-						<Header/>
+						<Header userType={this.props.userType} />
 							<div style={{ 
 								minHeight: mainTheme.spacing.contentHeight,
 								maxHeight: mainTheme.spacing.contentHeight,
 								overflow: 'auto', 
 							}}>
 								<Switch>
-									<Route path="/login" component={() => <LoginPage/>} />
-									<Route path={`/restaurant/:restaurantName`} component={() => <MenuPage />} />
-									<Route path="/restaurants" component={() => <RestaurantsPage/>} />
-									<Route path="/cart" component={() => <CartPage />} />
-									<Route path="/orders" component={() => <OrdersPage/>} />
-									<Route path={`/order/status/:orderId`} component={() => <StatusPage/>} />
-									<Route path="/profile" component={() => <ProfilePage/>} />
-									<Route exact path="/" component={() => <LandingPage/>} />
+									<Route path="/login" component={() => <LoginPage />} />
+									<Route path={`/restaurant/:restaurantName`} component={() => <AuthenticMenuPage  />} />
+									<Route path="/restaurants" component={() => <RestaurantsPage />} />
+									<Route path="/cart" component={() => <AuthenticCartPage  />} />
+									<Route path="/orders" component={() => <AuthenticOrdersPage />} />
+									<Route path={`/order/status/:orderId`} component={() => <AuthenticStatusPage />} />
+									<Route path="/profile" component={() => <AuthenticProfilePage />} />
+									<Route exact path="/" component={() => <LandingPage />} />
 								</Switch>
 							</div>
-						<Footer/>
+						<Footer userType={this.props.userType} />
 					</Fragment>
 				</Router>
 			</div>
@@ -60,6 +75,8 @@ function mapStateToProps(state) {
 	return {
 		restaurantNames: getRestaurantNames(state),
 		orderIds: getOrderIds(state),
+		userType: state.session.userType,
+		username: state.session.username,
 	};
 }
 
