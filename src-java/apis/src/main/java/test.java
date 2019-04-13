@@ -146,7 +146,6 @@ public class test {
 
         get("/orders/customer/:customerId",(request,response) -> getOrdersByCustomerInstance().handle(request,response));
 
-        get("/orders/customer/:userId",(request,response) -> getOrdersByCustomerInstance().handle(request,response));
 
 
         
