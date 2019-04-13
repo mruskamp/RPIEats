@@ -78,7 +78,7 @@ export default {
 	orderData: {},
 	session: {
 		username: "jvparin",
-		userType: "customer",
+		userType: "deliverer",
 		loginFailed: false,
 	}
 }
