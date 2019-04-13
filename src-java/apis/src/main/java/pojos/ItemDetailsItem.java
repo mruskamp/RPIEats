@@ -9,11 +9,11 @@ public class ItemDetailsItem{
 
 	//The unit price of the menu item
 	@SerializedName("unitPrice")
-	private int unitPrice;
+	private double unitPrice;
 
 	//The total price of quantity of this menu item that was ordered
 	@SerializedName("totalPrice")
-	private int totalPrice;
+	private double totalPrice;
 
 	//How many of this menu item were ordered
 	@SerializedName("qty")
@@ -32,7 +32,7 @@ public class ItemDetailsItem{
 	 * @ Return: None
 	 * @Throws: None
 	 */
-	public void setUnitPrice(int unitPrice){
+	public void setUnitPrice(double unitPrice){
 		this.unitPrice = unitPrice;
 	}
 
@@ -41,7 +41,7 @@ public class ItemDetailsItem{
 	 * @ Return: int that represents the unit price
 	 * @Throws: None
 	 */
-	public int getUnitPrice(){
+	public double getUnitPrice(){
 		return unitPrice;
 	}
 
@@ -50,7 +50,7 @@ public class ItemDetailsItem{
 	 * @ Return: None
 	 * @Throws: None
 	 */
-	public void setTotalPrice(int totalPrice){
+	public void setTotalPrice(double totalPrice){
 		this.totalPrice = totalPrice;
 	}
 
@@ -59,7 +59,7 @@ public class ItemDetailsItem{
 	 * @ Return: int that represents the total price
 	 * @Throws: None
 	 */
-	public int getTotalPrice(){
+	public double getTotalPrice(){
 		return totalPrice;
 	}
 
