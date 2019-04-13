@@ -3,7 +3,6 @@ package pojos;
 import java.util.List;
 import javax.annotation.Generated;
 import com.google.gson.annotations.SerializedName;
-import pojos.ItemDetailsItem;
 
 //Class that represents a summary of the order
 @Generated("com.robohorse.robopojogenerator")
@@ -23,19 +22,19 @@ public class OrderSummary{
 
 	//The fee of having the order delivered
 	@SerializedName("deliveryFee")
-	private int deliveryFee;
+	private double deliveryFee;
 
 	//The total tax on the order
 	@SerializedName("tax")
-	private int tax;
+	private double tax;
 
 	//The subtotal of the order
 	@SerializedName("subTotal")
-	private int subTotal;
+	private double subTotal;
 
 	//The total cost of the order
 	@SerializedName("orderTotal")
-	private int orderTotal;
+	private double orderTotal;
 
 	/* Method that sets the vendor of the order
 	 * @ Parameters: String that represents the vendor
@@ -96,7 +95,7 @@ public class OrderSummary{
 	 * @ Return: None
 	 * @Throws: None
 	 */
-	public void setTax(int tax){
+	public void setTax(double tax){
 		this.tax = tax;
 	}
 
@@ -105,7 +104,7 @@ public class OrderSummary{
 	 * @ Return: int that represents the tax
 	 * @Throws: None
 	 */
-	public int getTax(){
+	public double getTax(){
 		return tax;
 	}
 
@@ -114,7 +113,7 @@ public class OrderSummary{
 	 * @ Return: None
 	 * @Throws: None
 	 */
-	public void setSubTotal(int subTotal){
+	public void setSubTotal(double subTotal){
 		this.subTotal = subTotal;
 	}
 
@@ -123,7 +122,7 @@ public class OrderSummary{
 	 * @ Return: int that represents the subtotal
 	 * @Throws: None
 	 */
-	public int getSubTotal(){
+	public double getSubTotal(){
 		return subTotal;
 	}
 
@@ -132,7 +131,7 @@ public class OrderSummary{
 	 * @ Return: None
 	 * @Throws: None
 	 */
-	public void setOrderTotal(int orderTotal){
+	public void setOrderTotal(double orderTotal){
 		this.orderTotal = orderTotal;
 	}
 
@@ -141,7 +140,7 @@ public class OrderSummary{
 	 * @ Return: int that represents the total cost of the order
 	 * @Throws: None
 	 */
-	public int getOrderTotal(){
+	public double getOrderTotal(){
 		return orderTotal;
 	}
 
@@ -150,7 +149,7 @@ public class OrderSummary{
 	 * @ Return: None
 	 * @Throws: None
 	 */
-	public void setDeliveryFee(int deliveryFee){
+	public void setDeliveryFee(double deliveryFee){
 		this.deliveryFee = deliveryFee;
 	}
 
@@ -159,7 +158,7 @@ public class OrderSummary{
 	 * @ Return: int that represents the delivery fee
 	 * @Throws: None
 	 */
-	public int getDeliveryFee(){
+	public double getDeliveryFee(){
 		return deliveryFee;
 	}
 
