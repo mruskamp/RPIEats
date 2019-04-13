@@ -79,6 +79,11 @@ export default {
 		restaurantId: 'same',
 	},
 	orderData: tempOrderData,
+	session: {
+		username: "",
+		userType: "",
+		loginFailed: false,
+	}
 }
 
 

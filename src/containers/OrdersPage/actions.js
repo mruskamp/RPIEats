@@ -23,7 +23,7 @@ export function fetchOrders() {
 		dispatch(fetchingOrders);
 
 		// fetch("http://129.161.137.71:8080/orders/" + fetchingOrders.payload.userType + "/" + fetchingOrders.payload.userId).then((response) => {	// actually fetching the order data from the api
-		fetch("http://129.161.138.244:8080/orders/active").then((response) => {	// actually fetching the order data from the api
+		fetch("http://129.161.137.177:8080/orders/active").then((response) => {	// actually fetching the order data from the api
 			return response.json();
 		}).then((response) => {			// if the api call is a success
 			dispatch(successFetchingOrders(response));
