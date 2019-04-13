@@ -2,15 +2,19 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import { List, ListItem, ListItemText, IconButton } from '@material-ui/core';
+import { List, ListItem, ListItemText, IconButton, Tooltip} from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 import { getMenu, getImage, getRestaurantId } from './selectors';
 import { addItem } from '../CartPage/actions';
 
-
 class MenuPage extends Component {
+
+  handleClick = (item, restaurantId) => {
+		alert("An item has been added to your cart! Please go to your cart page.");
+		this.props.addItem(item, restaurantId);
+  };
 
 	render() {
 		let { classes, name, menu, imgURL, restaurantId } = this.props;
@@ -29,9 +33,11 @@ class MenuPage extends Component {
 								primary={item.name}
 								secondary={`$${item.price}`}
 							/>
-							<IconButton onClick={() => this.props.addItem(item, restaurantId)}>
-								<AddCircleIcon /> 
-							</IconButton>
+							<Tooltip title="Add an item to cart" aria-label="Add an item to cart" placement="right">
+								<IconButton onClick={() => this.handleClick(item, restaurantId)}>
+									<AddCircleIcon /> 
+								</IconButton>
+							</Tooltip>
 						</ListItem>
 						))}
 				</List>
