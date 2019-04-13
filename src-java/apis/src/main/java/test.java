@@ -21,8 +21,14 @@ import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 import static com.mongodb.client.model.Filters.*;
 import static spark.Spark.*;
 
+//This class serves as our main class, where RPIEats is ran
 public class test {
 
+    /* Method that gets the status of a given restaurant, meaning if they're open or closed
+     * @ Parameters: Document that represents the restaurant
+     * @ Return: String that represents if the restaurant is open or closed
+     * @Throws: None
+     */
     public static String getRestaurantStatus(Document restaurant) {
         String hours = restaurant.getString("hours");
         String[] openAndClose = hours.split("-");
@@ -38,10 +44,13 @@ public class test {
         return "Closed";
     }
 
+    //Main function
     public static void main(String[] args){
 
+        //For our front-end to connect to
         port(8080);
 
+        //Initialize our DB
         MongoClient mongoClient = MongoClients.create("mongodb://dev-team:RPIEATS@cluster0-shard-00-00-s62mb.mongodb.net:27017,cluster0-shard-00-01-s62mb.mongodb.net:27017,cluster0-shard-00-02-s62mb.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true");
         MongoDatabase database = mongoClient.getDatabase("rpieats");
         List<Document> restaurantInfo = new ArrayList<>();
@@ -135,11 +144,8 @@ public class test {
 
         get("/order/edit/:id/:status", (request, response) -> getEditOrderInstance().handle(request,response));
 
-        //edit order status in the order just change the status field to whatever is in the parameter of the function
-        //cancel order
-        //view order/
-        //edit order status
         get("/orders/customer/:customerId",(request,response) -> getOrdersByCustomerInstance().handle(request,response));
+
         get("/orders/customer/:userId",(request,response) -> getOrdersByCustomerInstance().handle(request,response));
 
 
