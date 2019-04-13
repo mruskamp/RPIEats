@@ -36,7 +36,13 @@ public class GetOrdersByCustomer implements Route {
         if(request.params(":customerId") == null)
             return "No order";
         //Otherwise, search for it in our DB
+
+        if(request.params(":type").equals("C"))
         query.put("user", request.params(":customerId"));
+        else {
+            query.put("deliveredBy", request.params(":customerId"));
+        }
+
 
         MongoCursor<Document> cursor = collection.find(query).iterator();
         List<String> items = new ArrayList<>();

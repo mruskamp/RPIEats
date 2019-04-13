@@ -65,7 +65,10 @@ public class EditOrderStatus  implements Route {
             return "No order";
 
         //Edit our DB so that the old status is changed to the new status
-        collection.updateOne(eq("_id", request.params(":id")), new Document("$set", new Document("status", request.params(":status"))));
+        Document edited = new Document();
+        edited.put("status",request.params(":status"));
+        edited.put("deliveredBy",request.params(":editedBy"));
+        collection.updateOne(eq("_id", request.params(":id")), new Document("$set", edited));
 
         //Find that order, convert it to JsonObject and return it
         query.put("orderId", request.params(":id"));

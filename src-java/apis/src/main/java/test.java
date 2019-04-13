@@ -142,9 +142,10 @@ public class test {
 
         get("/orders/:id",(request,response) -> getOrderByIdInstance().handle(request,response));
 
-        get("/order/edit/:id/:status", (request, response) -> getEditOrderInstance().handle(request,response));
+        get("/order/edit/:id/:status/:editedBy", (request, response) -> getEditOrderInstance().handle(request,response));
 
-        get("/orders/customer/:customerId",(request,response) -> getOrdersByCustomerInstance().handle(request,response));
+        get("/orders/customer/:type/:customerId",(request,response) -> getOrdersByCustomerInstance().handle(request,response));
+
 
 
 
