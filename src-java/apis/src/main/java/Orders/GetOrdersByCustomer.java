@@ -33,10 +33,10 @@ public class GetOrdersByCustomer implements Route {
         BasicDBObject query = new BasicDBObject();
 
         //If the user's ID is not found, then there's no order.
-        if(request.params(":userId") == null)
+        if(request.params(":customerId") == null)
             return "No order";
         //Otherwise, search for it in our DB
-        query.put("user", request.params(":userId"));
+        query.put("user", request.params(":customerId"));
 
         MongoCursor<Document> cursor = collection.find(query).iterator();
         List<String> items = new ArrayList<>();
