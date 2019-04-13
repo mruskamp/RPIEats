@@ -6,6 +6,10 @@ export const getOrders = (state) => {
 	return state.orderData.orders;
 }
 
+export const getActiveOrders = (state) => {
+	return state.orderData.activeOrders;
+}
+
 export const getOrderIds = (state) => {
 	return [state.orderData.orders.map((order) => order.orderId)];
 }

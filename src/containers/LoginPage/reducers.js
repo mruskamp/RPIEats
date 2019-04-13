@@ -1,9 +1,9 @@
 
-
+import InitialState from '../../InitialState';
 
 import { LOGIN_SUCCESS, LOGIN_FAILED } from './actions';
 
-export default function session(state, action) {
+export default function session(state=InitialState.action, action) {
 	switch (action.type) {
 		case LOGIN_SUCCESS:
 			return Object.assign({},
@@ -12,7 +12,7 @@ export default function session(state, action) {
 					username: action.payload.username,
 					userType: action.payload.userType,
 					loginFailed: false,
-				})
+				});
 		case LOGIN_FAILED:
 			return Object.assign({},
 				state,

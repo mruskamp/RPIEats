@@ -9,7 +9,8 @@ function AuthenticateComponent (WrappedComponent) {
 	class InnerWrapper extends React.Component {
 		render() {
 			// ensuring we have a userType
-			if (this.props.userType !== "" || 1===1) {	
+			console.log(this.props.username)
+			if (this.props.username !== "") {	
 				return (
 					<Fragment>
 						<WrappedComponent {...this.props} /> {/*injecting userType to children*/}
@@ -21,8 +22,9 @@ function AuthenticateComponent (WrappedComponent) {
 	}
 
 	function mapStateToProps(state) {
+		// console.log("state",state);
 		return {
-			userType: state.session.userType,
+			username: state.session.username,
 		}
 	}
 

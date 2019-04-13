@@ -3,7 +3,8 @@ import { combineReducers } from 'redux';
 import {
 	IS_FETCHING_ORDERS,
 	SUCCESS_FETCHING_ORDERS,
-	ERROR_FETCHING_ORDERS
+	ERROR_FETCHING_ORDERS,
+	SUCCESS_FETCHING_ACTIVE_ORDERS,
 } from './actions';
 
 import { CHANGE_ORDER_STATUS } from '../StatusPage/actions';
@@ -48,8 +49,15 @@ function orders(state=[], action) {
 	}
 }
 
+function activeOrders(state=[], action) {
+	if (action.type === SUCCESS_FETCHING_ACTIVE_ORDERS)
+		return action.payload;
+	return state;
+}
+
 export default combineReducers({
 	orders,
+	activeOrders,
 	errorFetchingOrders,
 	isFetchingOrders
 });

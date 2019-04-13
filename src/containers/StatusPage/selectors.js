@@ -1,6 +1,12 @@
-import { getOrders } from '../OrdersPage/selectors';
+import { getOrders, getActiveOrders } from '../OrdersPage/selectors';
 
-export const getOrder = (state, orderId) => getOrders(state).find((order) => orderId === order.orderId);
+// export const getOrder = (state, orderId) => getOrders(state).find((order) => orderId === order.orderId);
+export const getOrder = (state, orderId) => {
+	let possibleOrder = getOrders(state).find((order) => orderId === order.orderId);
+	if (possibleOrder !== undefined)
+		return possibleOrder;
+	return getActiveOrders(state).find((order) => orderId === order.orderId)
+}
 
 export function getItems(state, orderId) {
 	let order = getOrder(state, orderId);

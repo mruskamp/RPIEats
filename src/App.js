@@ -14,7 +14,7 @@ import StatusPage from './containers/StatusPage';
 import ProfilePage from './containers/ProfilePage';
 import { Header, Footer } from './components/layouts';
 import { fetchRestaurants } from './containers/RestaurantsPage/actions';
-import { fetchOrders } from './containers/OrdersPage/actions';
+import { fetchOrders, fetchActiveOrders } from './containers/OrdersPage/actions';
 import { getRestaurantNames } from './containers/RestaurantsPage/selectors';
 import { getOrderIds } from './containers/OrdersPage/selectors';
 
@@ -34,10 +34,13 @@ class App extends Component {
 	componentDidMount = () => {
 		this.props.fetchRestaurants();
 		if (this.props.userType !== ""){
-			if (this.props.userType === "customer")
-				this.props.fetchOrders(this.props.username);
-			else
-				this.props.fetchOrders()
+			if (this.props.userType === "customer") {
+				this.props.fetchOrders(this.props.username, true);
+			}
+			else {
+				this.props.fetchOrders(this.props.username, false);
+				this.props.fetchActiveOrders();
+			}
 		}
 	}
 
@@ -83,7 +86,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
 	return {
 		fetchRestaurants: () => dispatch(fetchRestaurants()),
-		fetchOrders: () => dispatch(fetchOrders()),
+		fetchOrders: (username, customer) => dispatch(fetchOrders(username, customer)),
+		fetchActiveOrders: () => dispatch(fetchActiveOrders()),
 	}
 }
 

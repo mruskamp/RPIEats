@@ -11,7 +11,7 @@ import { updateOrderStatus } from './actions';
 class StatusPage extends Component {
 
 	handleStatusChange = (event) => {
-		this.props.updateOrderStatus(event.target.value)
+		this.props.updateOrderStatus(event.target.value, this.props.username);
 	}
 
 	render() {
@@ -82,8 +82,10 @@ class StatusPage extends Component {
 
 function mapStateToProps(state, ownProps) {
 	let orderId = ownProps.match.params.orderId;
+	console.log(getOrder(state, orderId));
 	return {
 		orderId,
+		username: state.session.username,
 		order: getOrder(state, orderId),
 		orderSummary: getOrderSummary(state, orderId),
 		items: getItems(state, orderId),
@@ -94,7 +96,7 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch, ownProps) {
 	let orderId = ownProps.match.params.orderId;
 	return {
-		updateOrderStatus: (status) => dispatch(updateOrderStatus(orderId, status)),
+		updateOrderStatus: (status, username) => dispatch(updateOrderStatus(orderId, status, username)),
 	}
 }
 

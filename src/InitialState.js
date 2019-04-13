@@ -75,10 +75,15 @@ export default {
 		items: [],
 		restaurantId: 'same',
 	},
-	orderData: {},
+	orderData: {
+		orders: [],
+		activeOrders: [],
+		isFetchingOrders: false,
+		errorFetchingOrders: false,
+	},
 	session: {
-		username: "jvparin",
-		userType: "deliverer",
+		username: "",
+		userType: "",
 		loginFailed: false,
 	}
 }

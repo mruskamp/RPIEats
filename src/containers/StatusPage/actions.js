@@ -5,13 +5,13 @@ export function changeOrderStatus(orderId, status) {
 	return { type: CHANGE_ORDER_STATUS, payload: { orderId, status } };
 }
 
-export function updateOrderStatus(orderId, status) {
+export function updateOrderStatus(orderId, status, username) {
 	return (dispatch) => {
 		// dispatch this so the redux store updates with the new status
 		let orderStatus = changeOrderStatus(orderId, status) 
 		dispatch(orderStatus);
 
-		fetch(`http://129.161.86.103:8080/order/edit/${orderId}/${status}`, {	// let the api know we're changing the status
+		fetch(`http://129.161.86.103:8080/order/edit/${orderId}/${status}/${username}`, {	// let the api know we're changing the status
 			method: "GET",
 			mode: "cors",
 			headers: {
