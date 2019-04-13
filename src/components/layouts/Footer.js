@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 import { AppBar, Toolbar, Grid } from '@material-ui/core';
@@ -36,16 +36,20 @@ class PrimarySearchAppBar extends React.Component {
                 <RestaurantIcon /> <br /> Restaurants
               </a>
             </Grid>
-            <Grid item xs={4} className={classes.toolbar}>
-              <a href="/orders" className={classes.linkUnstyled}>
-                <MenuIcon /> <br /> Orders
-              </a>
-            </Grid>
-            <Grid item xs={4} className={classes.toolbar}>
-              <a href="/profile" className={classes.linkUnstyled}>              
-                <AccountCircle /> <br /> Profile
-              </a>
-            </Grid>
+            {this.props.userType !== "" &&
+              <Fragment>
+                <Grid item xs={4} className={classes.toolbar}>
+                  <a href="/orders" className={classes.linkUnstyled}>
+                    <MenuIcon /> <br /> Orders
+                  </a>
+                </Grid>
+                <Grid item xs={4} className={classes.toolbar}>
+                  <a href="/profile" className={classes.linkUnstyled}>              
+                    <AccountCircle /> <br /> Profile
+                  </a>
+                </Grid>
+              </Fragment>
+            }
           </Toolbar>
         </AppBar>
       </div>
@@ -69,6 +73,7 @@ const styles = theme => ({
   toolbar: {
     display: 'flex',
     justifyContent: 'center',
+    textAlign: 'center',
   },
   linkUnstyled: {
     color: '#ffffff',

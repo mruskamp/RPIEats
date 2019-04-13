@@ -20,9 +20,11 @@ class PrimarySearchAppBar extends React.Component {
               RPI Eats
             </Typography>
           </Grid>
-          <Link to="/cart" className={classes.linkUnstyled}>
-            <ShoppingCart />
-          </Link>
+          {this.props.userType === "customer" &&
+            <Link to="/cart" className={classes.linkUnstyled}>
+              <ShoppingCart />
+            </Link>
+          }
         </Toolbar>
       </AppBar>
     );

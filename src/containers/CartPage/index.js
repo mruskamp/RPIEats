@@ -35,7 +35,7 @@ class CartPage extends Component {
 				phone: '555-555-555'
 			},
 			orderSummary: {
-				restaurant: restaurant.name,
+				vendor: restaurant.name,
 				location: restaurant.location,
 				itemDetails:
 					this.props.items.map(({ id, name, price, count }) => {

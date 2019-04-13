@@ -20,7 +20,7 @@ export function clearCart() {
 
 export function placeOrder(order) {
 	return (dispatch) => {
-		console.log(JSON.stringify(order));
+		console.log(order);
 		
 		fetch("http://129.161.86.103:8080/order/create", {
 			method: "POST",
@@ -31,9 +31,6 @@ export function placeOrder(order) {
 			body: JSON.stringify(order),
 		}).then((response) => {
 			console.log(response)
-			return response.json();
-		}).then((response) => {
-			console.log("Response: ", response);
 		}).catch((e) => {
 			console.log(e)
 			// console.log("ERROR PLACING ORDER");

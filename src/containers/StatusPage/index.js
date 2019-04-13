@@ -36,22 +36,22 @@ class StatusPage extends Component {
 					(order.status === 'no show' ? '0 minutes': 
 					(order.status === 'cancelled' ? '0 minutes': 
 					'0 minutes')))))))}</h5>
-					<FormControl
-					>
-						<Select
-							value={order.status}
-							onChange={this.handleStatusChange}
-						>
-							<MenuItem className={classes.statusMenuItem} value={'accepted'}>Accepted</MenuItem>
-							<MenuItem className={classes.statusMenuItem} value={'ordered'}>Ordered</MenuItem>
-							<MenuItem className={classes.statusMenuItem} value={'awaiting order'}>Awaiting Order</MenuItem>
-							<MenuItem className={classes.statusMenuItem} value={'in transit'}>In Transit</MenuItem>
-							<MenuItem className={classes.statusMenuItem} value={'delivered'}>Delivered</MenuItem>
-							<MenuItem className={classes.statusMenuItem} value={'no show'}>No Show</MenuItem>
-							<MenuItem className={classes.statusMenuItem} value={'cancelled'}>Cancelled</MenuItem>
-						</Select>
-					</FormControl>
-
+					{this.props.userType === "deliverer" &&
+						<FormControl>
+							<Select
+								value={order.status}
+								onChange={this.handleStatusChange}
+							>
+								<MenuItem className={classes.statusMenuItem} value={'accepted'}>Accepted</MenuItem>
+								<MenuItem className={classes.statusMenuItem} value={'ordered'}>Ordered</MenuItem>
+								<MenuItem className={classes.statusMenuItem} value={'awaiting order'}>Awaiting Order</MenuItem>
+								<MenuItem className={classes.statusMenuItem} value={'in transit'}>In Transit</MenuItem>
+								<MenuItem className={classes.statusMenuItem} value={'delivered'}>Delivered</MenuItem>
+								<MenuItem className={classes.statusMenuItem} value={'no show'}>No Show</MenuItem>
+								<MenuItem className={classes.statusMenuItem} value={'cancelled'}>Cancelled</MenuItem>
+							</Select>
+						</FormControl>
+					}
 				</div>
 				<List className={classes.itemsContainer}>
 					{items.map((item) => (

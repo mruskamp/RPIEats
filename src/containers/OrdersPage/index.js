@@ -11,6 +11,7 @@ class OrdersPage extends Component {
 
 	render() {
 		let { classes, orders } = this.props;
+		console.log(orders);
 		return (
 			<div className={classes.root}>
 				<div>
@@ -19,7 +20,6 @@ class OrdersPage extends Component {
 							<Fragment key={`${order.orderId}`} >
 								<Link to={`/order/status/${order.orderId}`} className={classes.orderText}>
 									<ListItem divider={index !== orders.length-1} >
-										<img src={order.imgURL} alt={""} height={50} width={50} />
 										<ListItemText
 											disableTypography
 											primary={order.orderSummary.vendor}
