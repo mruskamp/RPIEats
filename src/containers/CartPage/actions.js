@@ -22,7 +22,7 @@ export function placeOrder(order) {
 	return (dispatch) => {
 		console.log(order);
 		
-		fetch("http://129.161.86.103:8080/order/create", {
+		fetch("http://129.161.76.94:8080/order/create", {
 			method: "POST",
 			mode: "cors",
 			headers: {

@@ -18,9 +18,9 @@ class StatusPage extends Component {
 		let { classes, items, imgURL, order, orderSummary } = this.props;
 		return (
 			<div className={classes.root}>
-				<div className={classes.imageContainer}>
+				{/*<div className={classes.imageContainer}>
 					<img src={imgURL} alt={""} height={100} width={100} />
-				</div>
+				</div>*/}
 				<div className={classes.titleContainer}>
 					<h2>{orderSummary.vendor}</h2>
 					<h3>Order Details</h3>
@@ -82,10 +82,11 @@ class StatusPage extends Component {
 
 function mapStateToProps(state, ownProps) {
 	let orderId = ownProps.match.params.orderId;
-	console.log(getOrder(state, orderId));
+	// console.log(getOrder(state, orderId));
 	return {
 		orderId,
 		username: state.session.username,
+		userType: state.session.userType,
 		order: getOrder(state, orderId),
 		orderSummary: getOrderSummary(state, orderId),
 		items: getItems(state, orderId),

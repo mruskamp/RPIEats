@@ -19,13 +19,13 @@ function orderData(state=INITIAL_STATE.orderData, action) {
 	return ordersReducer(state, action);
 }
 
-function session(state=INITIAL_STATE.session, action) {
-	return sessionReducer(state, action);
-}
+// function session(state=INITIAL_STATE.session, action) {
+// 	return sessionReducer(state, action);
+// }
 
 export default combineReducers({
 	restaurantData,
 	cart,
 	orderData,
-	session,
+	session: sessionReducer,
 })

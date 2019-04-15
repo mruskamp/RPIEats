@@ -1,25 +1,44 @@
+import { combineReducers } from 'redux';
 
-import InitialState from '../../InitialState';
+import INITIAL_STATE from '../../InitialState';
 
 import { LOGIN_SUCCESS, LOGIN_FAILED } from './actions';
 
-export default function session(state=InitialState.action, action) {
+function username(state=INITIAL_STATE.session.username, action) {
 	switch (action.type) {
 		case LOGIN_SUCCESS:
-			return Object.assign({},
-				state,
-				{
-					username: action.payload.username,
-					userType: action.payload.userType,
-					loginFailed: false,
-				});
+			return action.payload.username;
 		case LOGIN_FAILED:
-			return Object.assign({},
-				state,
-				{
-					loginFailed: true,
-				});
+			return "";
 		default:
 			return state;
 	}
 }
+
+function userType(state=INITIAL_STATE.session.userType, action) {
+	switch (action.type) {
+		case LOGIN_SUCCESS:
+			return action.payload.userType;
+		case LOGIN_FAILED:
+			return "";
+		default:
+			return state;
+	}
+}
+
+function loginFailed(state=INITIAL_STATE.session.loginFailed, action) {
+	switch (action.type) {
+		case LOGIN_SUCCESS:
+			return false;
+		case LOGIN_FAILED:
+			return true;
+		default:
+			return state;
+	}
+}
+
+export default combineReducers({
+	username,
+	userType,
+	loginFailed,
+})

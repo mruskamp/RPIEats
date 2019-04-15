@@ -12,12 +12,13 @@ import { addItem } from '../CartPage/actions';
 class MenuPage extends Component {
 
   handleClick = (item, restaurantId) => {
-		alert("An item has been added to your cart! Please go to your cart page.");
 		this.props.addItem(item, restaurantId);
+		alert("An item has been added to your cart! Please go to your cart page.");
   };
 
 	render() {
 		let { classes, name, menu, imgURL, restaurantId } = this.props;
+		console.log(this.props.userType);
 		return (
 			<div className={classes.root}>
 				<div className={classes.imageContainer}>
@@ -53,6 +54,7 @@ function mapStateToProps(state, ownProps) {
 	let name = ownProps.match.params.restaurantName;
 	return {
 		name,
+		userType: state.session.userType,
 		restaurantId: getRestaurantId(state, name),
 		menu: getMenu(state, name),
 		imgURL: getImage(state, name),

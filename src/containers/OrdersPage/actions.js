@@ -25,10 +25,11 @@ export function fetchOrders(customerId, customer) {
 		// let redux know we're starting to fetch the orders
 		let fetchingOrders = isFetchingOrders("customer", "jvparin", true);
 		dispatch(fetchingOrders);
-		let url = customer ? `http://129.161.86.103:8080/orders/customer/C/${customerId}`
-			: `http://129.161.86.103:8080/orders/customer/D/${customerId}`
-		
+		let url = customer ? `http://129.161.76.94:8080/orders/customer/C/${customerId}`
+			: `http://129.161.76.94:8080/orders/customer/D/${customerId}`
+
 		// fetch("http://129.161.137.71:8080/orders/" + fetchingOrders.payload.userType + "/" + fetchingOrders.payload.userId).then((response) => {	// actually fetching the order data from the api
+		console.log("FETCHING ORDERS");
 		fetch(url).then((response) => {	// actually fetching the order data from the api
 			// console.log(response);
 			return response.json();
@@ -36,9 +37,10 @@ export function fetchOrders(customerId, customer) {
 			// console.log("orders",response);
 			dispatch(successFetchingOrders(response));
 			dispatch(isFetchingOrders(false));
-		}).catch(() => {				// catches if the api call errors
-			dispatch(isFetchingOrders(false));
-			dispatch(errorFetchingOrders());
+		}).catch((e) => {				// catches if the api call errors
+			console.log(e);
+			// dispatch(isFetchingOrders(false));
+			// dispatch(errorFetchingOrders());
 		});
 	}
 }
@@ -46,9 +48,12 @@ export function fetchOrders(customerId, customer) {
 export function fetchActiveOrders() {
 	return (dispatch) => {
 		// let redux know we're starting to fetch the orders
-		let url = `http://129.161.86.103:8080/orders/active`
+		let url = `http://129.161.76.94:8080/orders/active`
+
+		// return;
 		
 		// fetch("http://129.161.137.71:8080/orders/" + fetchingOrders.payload.userType + "/" + fetchingOrders.payload.userId).then((response) => {	// actually fetching the order data from the api
+		console.log("FETCHING ACTIVE ORDERS");
 		fetch(url).then((response) => {	// actually fetching the order data from the api
 			return response.json();
 		}).then((response) => {			// if the api call is a success

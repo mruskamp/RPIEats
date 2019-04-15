@@ -12,7 +12,7 @@ export function loginFailed(error) {
 
 export function login(username, password, userType) {
 	return (dispatch) => {
-		let url = "http://129.161.86.103:8080/login";
+		let url = "http://129.161.76.94:8080/login";
 
 		let data = { username, password, userType };
 

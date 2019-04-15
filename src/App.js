@@ -14,13 +14,11 @@ import StatusPage from './containers/StatusPage';
 import ProfilePage from './containers/ProfilePage';
 import { Header, Footer } from './components/layouts';
 import { fetchRestaurants } from './containers/RestaurantsPage/actions';
-import { fetchOrders, fetchActiveOrders } from './containers/OrdersPage/actions';
 import { getRestaurantNames } from './containers/RestaurantsPage/selectors';
-import { getOrderIds } from './containers/OrdersPage/selectors';
 
 import mainTheme from './theme';
 
-
+// Checking to ensure the user is logged in before seeing this page
 const AuthenticMenuPage = AuthenticateComponent(MenuPage);
 const AuthenticCartPage = AuthenticateComponent(CartPage);
 const AuthenticStatusPage = AuthenticateComponent(StatusPage);
@@ -31,17 +29,9 @@ const AuthenticOrdersPage = AuthenticateComponent(OrdersPage);
 
 class App extends Component {
 
-	componentDidMount = () => {
+	// load the restaurants on load
+	componentWillMount = () => {
 		this.props.fetchRestaurants();
-		if (this.props.userType !== ""){
-			if (this.props.userType === "customer") {
-				this.props.fetchOrders(this.props.username, true);
-			}
-			else {
-				this.props.fetchOrders(this.props.username, false);
-				this.props.fetchActiveOrders();
-			}
-		}
 	}
 
   render() {
@@ -77,7 +67,6 @@ class App extends Component {
 function mapStateToProps(state) {
 	return {
 		restaurantNames: getRestaurantNames(state),
-		orderIds: getOrderIds(state),
 		userType: state.session.userType,
 		username: state.session.username,
 	};
@@ -86,8 +75,6 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
 	return {
 		fetchRestaurants: () => dispatch(fetchRestaurants()),
-		fetchOrders: (username, customer) => dispatch(fetchOrders(username, customer)),
-		fetchActiveOrders: () => dispatch(fetchActiveOrders()),
 	}
 }
 

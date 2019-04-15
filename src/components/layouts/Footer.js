@@ -1,5 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { Link, withRouter } from 'react-router-dom';
+import { compose } from 'redux';
 
 import { AppBar, Toolbar, Grid } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
@@ -32,21 +34,21 @@ class PrimarySearchAppBar extends React.Component {
         <AppBar position="static" className={classes.appBar}>
           <Toolbar className={classes.toolbar}>
             <Grid item xs={4} className={classes.toolbar}>
-              <a href="/restaurants" className={classes.linkUnstyled}>
+              <Link to="/restaurants" className={classes.linkUnstyled}>
                 <RestaurantIcon /> <br /> Restaurants
-              </a>
+              </Link>
             </Grid>
             {this.props.userType !== "" &&
               <Fragment>
                 <Grid item xs={4} className={classes.toolbar}>
-                  <a href="/orders" className={classes.linkUnstyled}>
+                  <Link to="/orders" className={classes.linkUnstyled}>
                     <MenuIcon /> <br /> Orders
-                  </a>
+                  </Link>
                 </Grid>
                 <Grid item xs={4} className={classes.toolbar}>
-                  <a href="/profile" className={classes.linkUnstyled}>              
+                  <Link to="/profile" className={classes.linkUnstyled}>              
                     <AccountCircle /> <br /> Profile
-                  </a>
+                  </Link>
                 </Grid>
               </Fragment>
             }
@@ -81,4 +83,7 @@ const styles = theme => ({
   },
 });
 
-export default withStyles(styles)(PrimarySearchAppBar);
+export default compose(
+  withStyles(styles),
+)(withRouter(PrimarySearchAppBar));
+
