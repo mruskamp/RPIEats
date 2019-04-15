@@ -14,8 +14,7 @@ import java.util.List;
 public class GetOrdersByCustomer implements Route {
 
     //Connecting to our DB
-    MongoClient mongoClient = MongoClients.create("mongodb://dev-team:RPIEATS@cluster0-shard-00-00-s62mb.mongodb.net:27017,cluster0-shard-00-01-s62mb.mongodb.net:27017,cluster0-shard-00-02-s62mb.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true");
-    MongoDatabase database = mongoClient.getDatabase("rpieats");
+
     List<Document> orderArray = new ArrayList<>();
 
     /* Method that returns an order based on the user's ID, passed via request
@@ -28,15 +27,23 @@ public class GetOrdersByCustomer implements Route {
     }
     @Override
     public Object handle(Request request, Response response) {
+        MongoClient mongoClient = MongoClients.create("mongodb://dev-team:RPIEATS@cluster0-shard-00-00-s62mb.mongodb.net:27017,cluster0-shard-00-01-s62mb.mongodb.net:27017,cluster0-shard-00-02-s62mb.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true");
+        MongoDatabase database = mongoClient.getDatabase("rpieats");
 
         MongoCollection<Document> collection = database.getCollection("orders");
         BasicDBObject query = new BasicDBObject();
 
         //If the user's ID is not found, then there's no order.
-        if(request.params(":userId") == null)
+        if(request.params(":customerId") == null)
             return "No order";
         //Otherwise, search for it in our DB
-        query.put("user", request.params(":userId"));
+
+        if(request.params(":type").equals("C"))
+        query.put("user", request.params(":customerId"));
+        else {
+            query.put("deliveredBy", request.params(":customerId"));
+        }
+
 
         MongoCursor<Document> cursor = collection.find(query).iterator();
         List<String> items = new ArrayList<>();
@@ -50,6 +57,7 @@ public class GetOrdersByCustomer implements Route {
             }
         }finally {
             cursor.close();
+            mongoClient.close();
         }
 
         response.header("Content-Type","application/json");
