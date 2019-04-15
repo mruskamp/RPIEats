@@ -24,8 +24,7 @@ public class CreateOrder implements Route {
 
     //Connecting to our DB
     private String num = "";
-    MongoClient mongoClient = MongoClients.create("mongodb://dev-team:RPIEATS@cluster0-shard-00-00-s62mb.mongodb.net:27017,cluster0-shard-00-01-s62mb.mongodb.net:27017,cluster0-shard-00-02-s62mb.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true");
-    MongoDatabase database = mongoClient.getDatabase("rpieats");
+
     List<Document> restaurantInfo = new ArrayList<>();
     List<Document> orderInfo = new ArrayList<>();
 
@@ -39,6 +38,9 @@ public class CreateOrder implements Route {
     }
     @Override
     public Object handle(Request request, Response response) {
+
+        MongoClient mongoClient = MongoClients.create("mongodb://dev-team:RPIEATS@cluster0-shard-00-00-s62mb.mongodb.net:27017,cluster0-shard-00-01-s62mb.mongodb.net:27017,cluster0-shard-00-02-s62mb.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true");
+        MongoDatabase database = mongoClient.getDatabase("rpieats");
 
         //Parse what was passed in our request from a JsonObject to something we can work with
         JsonParser parser = new JsonParser();
@@ -97,6 +99,8 @@ public class CreateOrder implements Route {
 
         }catch (Exception e){
             System.out.println(e);
+        }finally {
+            mongoClient.close();
         }
 
         return orderId;

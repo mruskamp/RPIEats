@@ -51,8 +51,7 @@ public class test {
         port(8080);
 
         //Initialize our DB
-        MongoClient mongoClient = MongoClients.create("mongodb://dev-team:RPIEATS@cluster0-shard-00-00-s62mb.mongodb.net:27017,cluster0-shard-00-01-s62mb.mongodb.net:27017,cluster0-shard-00-02-s62mb.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true");
-        MongoDatabase database = mongoClient.getDatabase("rpieats");
+
         List<Document> restaurantInfo = new ArrayList<>();
 
         /*
@@ -87,7 +86,8 @@ public class test {
 
         //Restaurants landing page
         get("/restaurants", (request, response) -> {
-
+            MongoClient mongoClient = MongoClients.create("mongodb://dev-team:RPIEATS@cluster0-shard-00-00-s62mb.mongodb.net:27017,cluster0-shard-00-01-s62mb.mongodb.net:27017,cluster0-shard-00-02-s62mb.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true");
+            MongoDatabase database = mongoClient.getDatabase("rpieats");
             MongoCollection<Document> collection = database.getCollection("restaurants");
             MongoCursor<Document> cursor = collection.find().iterator();
             List<String> items = new ArrayList<>();
@@ -102,6 +102,7 @@ public class test {
                 }
             }finally {
                 cursor.close();
+                mongoClient.close();
             }
 
             response.header("Content-Type","application/json");
@@ -125,6 +126,9 @@ public class test {
         });
 
         post("/login", (request,response) -> {
+            MongoClient mongoClient = MongoClients.create("mongodb://dev-team:RPIEATS@cluster0-shard-00-00-s62mb.mongodb.net:27017,cluster0-shard-00-01-s62mb.mongodb.net:27017,cluster0-shard-00-02-s62mb.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true");
+            MongoDatabase database = mongoClient.getDatabase("rpieats");
+
             JsonParser parser = new JsonParser();
             JsonObject requestObj = parser.parse(request.body()).getAsJsonObject();
             MongoCollection<Document> collection = database.getCollection("users");
@@ -133,6 +137,7 @@ public class test {
 
             User userAccount = new User(requestObj.get("username").getAsString(), requestObj.get("password").getAsString(), requestObj.get("userType").getAsString());
             System.out.println(userAccount.getUsername() + " " +  userAccount.getPassword() + " " + userAccount.getAccountType());
+            mongoClient.close();
             return response;
         });
 

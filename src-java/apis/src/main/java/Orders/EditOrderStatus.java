@@ -39,8 +39,7 @@ public class EditOrderStatus  implements Route {
 
     //Connect to our DB
     private String num = "";
-    MongoClient mongoClient = MongoClients.create("mongodb://dev-team:RPIEATS@cluster0-shard-00-00-s62mb.mongodb.net:27017,cluster0-shard-00-01-s62mb.mongodb.net:27017,cluster0-shard-00-02-s62mb.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true");
-    MongoDatabase database = mongoClient.getDatabase("rpieats");
+
     List<Document> restaurantInfo = new ArrayList<>();
     List<Document> orderInfo = new ArrayList<>();
 
@@ -54,6 +53,9 @@ public class EditOrderStatus  implements Route {
     }
     @Override
     public Object handle(Request request, Response response) {
+        MongoClient mongoClient = MongoClients.create("mongodb://dev-team:RPIEATS@cluster0-shard-00-00-s62mb.mongodb.net:27017,cluster0-shard-00-01-s62mb.mongodb.net:27017,cluster0-shard-00-02-s62mb.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true");
+        MongoDatabase database = mongoClient.getDatabase("rpieats");
+
         Gson gson = new Gson();
 
         //Connect to our orders DB
@@ -77,6 +79,7 @@ public class EditOrderStatus  implements Route {
         JsonObject jsonObject = gson.toJsonTree(cursor).getAsJsonObject();
         response.header("Content-Type","application/json");
 
+        mongoClient.close();
         return jsonObject;
     }
 }

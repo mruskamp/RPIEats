@@ -21,8 +21,7 @@ public class GetActiveOrders  implements Route {
 
     //Connecting to our DB
     private String num = "";
-    MongoClient mongoClient = MongoClients.create("mongodb://dev-team:RPIEATS@cluster0-shard-00-00-s62mb.mongodb.net:27017,cluster0-shard-00-01-s62mb.mongodb.net:27017,cluster0-shard-00-02-s62mb.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true");
-    MongoDatabase database = mongoClient.getDatabase("rpieats");
+
     List<Document> orderInfo = new ArrayList<>();
 
     /* Method that returns all current orders that need to be satisfied
@@ -36,6 +35,8 @@ public class GetActiveOrders  implements Route {
     @Override
     public Object handle(Request request, Response response) {
 
+        MongoClient mongoClient = MongoClients.create("mongodb://dev-team:RPIEATS@cluster0-shard-00-00-s62mb.mongodb.net:27017,cluster0-shard-00-01-s62mb.mongodb.net:27017,cluster0-shard-00-02-s62mb.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true");
+        MongoDatabase database = mongoClient.getDatabase("rpieats");
         //Search for all orders that have an active status
         MongoCollection<Document> collection = database.getCollection("orders");
         BasicDBObject query = new BasicDBObject();
@@ -52,6 +53,7 @@ public class GetActiveOrders  implements Route {
             }
         }finally {
             cursor.close();
+            mongoClient.close();
         }
 
         response.header("Content-Type","application/json");

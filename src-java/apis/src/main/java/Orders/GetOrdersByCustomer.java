@@ -14,8 +14,7 @@ import java.util.List;
 public class GetOrdersByCustomer implements Route {
 
     //Connecting to our DB
-    MongoClient mongoClient = MongoClients.create("mongodb://dev-team:RPIEATS@cluster0-shard-00-00-s62mb.mongodb.net:27017,cluster0-shard-00-01-s62mb.mongodb.net:27017,cluster0-shard-00-02-s62mb.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true");
-    MongoDatabase database = mongoClient.getDatabase("rpieats");
+
     List<Document> orderArray = new ArrayList<>();
 
     /* Method that returns an order based on the user's ID, passed via request
@@ -28,6 +27,8 @@ public class GetOrdersByCustomer implements Route {
     }
     @Override
     public Object handle(Request request, Response response) {
+        MongoClient mongoClient = MongoClients.create("mongodb://dev-team:RPIEATS@cluster0-shard-00-00-s62mb.mongodb.net:27017,cluster0-shard-00-01-s62mb.mongodb.net:27017,cluster0-shard-00-02-s62mb.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true");
+        MongoDatabase database = mongoClient.getDatabase("rpieats");
 
         MongoCollection<Document> collection = database.getCollection("orders");
         BasicDBObject query = new BasicDBObject();
@@ -56,6 +57,7 @@ public class GetOrdersByCustomer implements Route {
             }
         }finally {
             cursor.close();
+            mongoClient.close();
         }
 
         response.header("Content-Type","application/json");
