@@ -17,7 +17,7 @@ class StatusPage extends Component {
 	}
 
 	render() {
-		let { classes, items, imgURL, order, orderSummary } = this.props;
+		let { classes, items, order, orderSummary } = this.props;
 		return (
 			<div className={classes.root}>
 				<div className={classes.titleContainer}>
