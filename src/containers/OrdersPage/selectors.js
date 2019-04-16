@@ -1,4 +1,4 @@
-// selectors for parsing store data suitable for the components
+// Functions that help store data for the minimal possible state of the Orders Page
 
 export const isFetchingOrders = (state) => state.orderData.isFetchingOrders;
 

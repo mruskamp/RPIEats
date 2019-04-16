@@ -1,5 +1,7 @@
 import { getRestaurants } from '../RestaurantsPage/selectors';
 
+// Functions that help store data for the minimal possible state of the Menu Page
+
 export const getRestaurant = (state, restaurantName) => getRestaurants(state).find((restaurant) => restaurantName === restaurant.name);
 
 export function getMenu(state, restaurantName) {

@@ -1,8 +1,8 @@
+// Functions that help store data for the minimal possible state of the Cart Page
 
 export const getItems = (state) => state.cart.items;
 
 export const getRestaurant = (state) => {
-	// let id = state.cart.restaurantId;
 	let id = state.cart.items.restaurantId;
 	for (let i=0; i<state.restaurantData.restaurants.length; i++)
 		if (id === state.restaurantData.restaurants[i].restaurantId)	return state.restaurantData.restaurants[i]

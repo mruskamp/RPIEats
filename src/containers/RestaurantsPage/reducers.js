@@ -6,7 +6,7 @@ import {
 	ERROR_FETCHING_RESTAURANTS
 } from './actions';
 
-
+// Functions that keep the state of the Restaurants Page up to date and organized accordingly
 
 function isFetchingRestaurants(state=false, action) {
 	switch(action.type) {

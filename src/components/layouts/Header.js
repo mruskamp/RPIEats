@@ -8,6 +8,7 @@ import ShoppingCart from '@material-ui/icons/ShoppingCart';
 
 import mainTheme from '../../theme';
 
+// Component for the Header of the Application
 class PrimarySearchAppBar extends React.Component {
   render() {
     const { classes } = this.props;

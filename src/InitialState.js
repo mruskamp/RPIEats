@@ -1,3 +1,24 @@
+/************ This is the actual initial state for the data ***********/
+export default {
+	restaurantData: {},
+	cart: {
+		items: [],
+		restaurantId: 'same',
+	},
+	orderData: {
+		orders: [],
+		activeOrders: [],
+		isFetchingOrders: false,
+		errorFetchingOrders: false,
+	},
+	session: {
+		username: "",
+		userType: "",
+		loginFailed: false,
+	}
+}
+
+/************ This is the temp data used to test only the front end ************/
 const tempRestaurants = [
 	{
 		"name":"Thunder Mountain Curry",
@@ -68,44 +89,3 @@ const tempOrderData = {
 	isFetchingOrders: false,
 	errorFetchingOrders: false,
 }
-
-export default {
-	restaurantData: {},
-	cart: {
-		items: [],
-		restaurantId: 'same',
-	},
-	orderData: {
-		orders: [],
-		activeOrders: [],
-		isFetchingOrders: false,
-		errorFetchingOrders: false,
-	},
-	session: {
-		username: "",
-		userType: "",
-		loginFailed: false,
-	}
-}
-
-
-
-/************ This is the actual initial state ***********/
-/************ commented out to use temp data instead ************/
-
-// export default {
-// 	restaurantData: {
-// 		isFetchingRestaurants: false,
-// 		errorFetchingRestaurants: false,
-// 		restaurants: [],
-// 	},
-// 	cart: {
-// 		items: [],
-// 		restaurantId: "same",
-// 	},
-// 	orderData: {
-// 		isFetchingOrders: false,
-// 		errorFetchingRestaurants: false,
-// 		orders: []
-// 	},
-// }

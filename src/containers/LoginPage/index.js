@@ -9,6 +9,8 @@ import { withStyles } from '@material-ui/styles';
 
 import { login } from './actions';
 
+// Component for the Login Page of the Application
+
 class LogInPage extends Component {
 
 	constructor(props){

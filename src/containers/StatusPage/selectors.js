@@ -1,6 +1,7 @@
 import { getOrders, getActiveOrders } from '../OrdersPage/selectors';
 
-// export const getOrder = (state, orderId) => getOrders(state).find((order) => orderId === order.orderId);
+// Functions that help store data for the minimal possible state of the Status Page
+
 export const getOrder = (state, orderId) => {
 	let possibleOrder = getOrders(state).find((order) => orderId === order.orderId);
 	if (possibleOrder !== undefined)

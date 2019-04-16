@@ -4,6 +4,8 @@ import { compose } from 'redux';
 
 import LoginPage from './containers/LoginPage';
 
+// Component to Authenticate Users in the Application
+
 function AuthenticateComponent (WrappedComponent) {
 
 	class InnerWrapper extends React.Component {

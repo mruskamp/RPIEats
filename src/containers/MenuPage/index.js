@@ -9,6 +9,8 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import { getMenu, getImage, getRestaurantId } from './selectors';
 import { addItem } from '../CartPage/actions';
 
+// Component for the Menu Page of the Application
+
 class MenuPage extends Component {
 
   handleClick = (item, restaurantId) => {

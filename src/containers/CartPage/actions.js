@@ -6,6 +6,8 @@ export const PLACE_ORDER_SUCCESS = "PLACE_ORDER_SUCCESS";
 export const PLACE_ORDER_ERROR = "PLACE_ORDER_ERROR";
 export const CLEAR_CART = "CLEAR_CART";
 
+// Calls made to the backend when adding an item, deleting an item, and placing an order in the Cart Page
+
 export function addItem(item, restaurantId) {
 	return { type: ADD_ITEM, payload: { item, restaurantId } };
 }
@@ -33,7 +35,6 @@ export function placeOrder(order) {
 			console.log(response)
 		}).catch((e) => {
 			console.log(e)
-			// console.log("ERROR PLACING ORDER");
 		})
 
 	}

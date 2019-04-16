@@ -11,6 +11,7 @@ import { withStyles } from '@material-ui/styles';
 import { getItems, getCartCost, getOrder, getRestaurant } from './selectors';
 import { placeOrder, addItem, removeItem, clearCart } from './actions';
 
+// Component for the Cart Page of the Application
 class CartPage extends Component {
 
 	constructor(props) {

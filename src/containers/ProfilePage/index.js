@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
 
+// Component for the Profile Page of the Application
+
 const ProfilePage = (props) => {
 
 	let { classes } = props;

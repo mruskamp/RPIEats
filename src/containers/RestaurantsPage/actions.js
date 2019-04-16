@@ -2,7 +2,7 @@ export const IS_FETCHING_RESTAURANTS = "IS_FETCHING_RESTAURANTS";
 export const SUCCESS_FETCHING_RESTAURANTS = "SUCCESS_FETCHING_RESTAURANTS";
 export const ERROR_FETCHING_RESTAURANTS = "ERROR_FETCHING_RESTAURANTS";
 
-
+// Calls made to the backend to get information for restaurants in the Restaurants Page
 
 export function successFetchingRestaurants(restaurants) {
 	return { type: SUCCESS_FETCHING_RESTAURANTS, payload: restaurants };

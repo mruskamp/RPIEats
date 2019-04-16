@@ -6,6 +6,7 @@ import {
 	CLEAR_CART,
 } from './actions';
 
+// Functions that keep the state of the Cart Page up to date and organized accordingly
 
 function restaurantId(state='', action) {
 	switch(action.type) {

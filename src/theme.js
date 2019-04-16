@@ -1,4 +1,6 @@
 
+// Main style them for the application
+
 export default {
 	palette: {
 		primary: {

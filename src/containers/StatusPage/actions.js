@@ -1,6 +1,8 @@
 
 export const CHANGE_ORDER_STATUS = "CHANGE_ORDER_STATUS";
 
+// Calls made to the backend to change and update the status of an order in the Status Page
+
 export function changeOrderStatus(orderId, status) {
 	return { type: CHANGE_ORDER_STATUS, payload: { orderId, status } };
 }
@@ -25,7 +27,6 @@ export function updateOrderStatus(orderId, status, username) {
 			dispatch(changeOrderStatus(orderId, status));
 		}).catch((e) => {			// if the call errored
 			console.log(e.response)
-			// alert("ERROR UPDATING ORDER");
 		})
 	}
 }

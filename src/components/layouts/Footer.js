@@ -11,6 +11,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 
 import mainTheme from '../../theme';
 
+// Component for the Footer of the Application
 class PrimarySearchAppBar extends React.Component {
 
   state = {

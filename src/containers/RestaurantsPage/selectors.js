@@ -1,4 +1,4 @@
-// selectors for parsing store data suitable for the components
+// Functions that help store data for the minimal possible state of the Restaurants Page
 
 export const isFetchingRestaurants = (state) => state.restaurantData.isFetchingRestaurants;
 

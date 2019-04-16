@@ -7,6 +7,8 @@ import { withStyles } from '@material-ui/styles';
 
 import { getRestaurants } from './selectors';
 
+// Component for the Restaurants Page of the Application
+
 class RestaurantsPage extends Component {
 
 	render() {

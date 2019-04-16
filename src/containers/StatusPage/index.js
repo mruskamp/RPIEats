@@ -8,6 +8,8 @@ import { withStyles } from '@material-ui/styles';
 import { getItems, getImage, getOrder, getOrderSummary } from './selectors';
 import { updateOrderStatus } from './actions';
 
+// Component for the Status Page of the Application
+
 class StatusPage extends Component {
 
 	handleStatusChange = (event) => {
@@ -18,9 +20,6 @@ class StatusPage extends Component {
 		let { classes, items, imgURL, order, orderSummary } = this.props;
 		return (
 			<div className={classes.root}>
-				{/*<div className={classes.imageContainer}>
-					<img src={imgURL} alt={""} height={100} width={100} />
-				</div>*/}
 				<div className={classes.titleContainer}>
 					<h2>{orderSummary.vendor}</h2>
 					<h3>Order Details</h3>
@@ -82,7 +81,6 @@ class StatusPage extends Component {
 
 function mapStateToProps(state, ownProps) {
 	let orderId = ownProps.match.params.orderId;
-	// console.log(getOrder(state, orderId));
 	return {
 		orderId,
 		username: state.session.username,

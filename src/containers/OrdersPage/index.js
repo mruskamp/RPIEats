@@ -8,6 +8,8 @@ import { withStyles } from '@material-ui/styles';
 import { getOrders } from './selectors';
 import { fetchOrders, fetchActiveOrders } from './actions';
 
+// Component for the Orders Page of the Application
+
 class OrdersPage extends Component {
 
 	refresh = () => {
