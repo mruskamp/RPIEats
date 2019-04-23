@@ -1,21 +1,39 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { compose } from 'redux';
+import { withRouter } from 'react-router-dom';
 
 import { List, ListItem, ListItemText, IconButton, Typography, Divider, Button, TextField } from '@material-ui/core';
 import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import { withStyles } from '@material-ui/styles';
 
-import { getItems, getCartCost, getOrder, getRestaurant } from './selectors';
-import { placeOrder, addItem, removeItem, clearCart } from './actions';
+import { addItem, removeItem, placeOrder, clearCart } from '../../data/cart/actions';
+import {
+	getCartItems,
+	getCartCost,
+	getCartRestaurantId,
+	isPlacingOrder,
+	placeOrderSuccess,
+	placeOrderError,
+} from '../../data/cart/selectors';
+import { getRestaurantById } from '../../data/restaurants/selectors';
 
 class CartPage extends Component {
 
 	constructor(props) {
 		super(props);
 		this.state = { deliverTo: '' }
+	}
+
+	shouldComponentUpdate(nextProps) {
+		if (nextProps.placeOrderSuccess) {
+			// if the order was placed successfully it re-directs to orders page
+			this.props.history.push('/orders');
+			// also clears the cart
+			this.props.clearCart();
+		}
+		return true;
 	}
 
 	handleDeliverToInput = (event) => this.setState({ deliverTo: event.target.value })
@@ -54,7 +72,6 @@ class CartPage extends Component {
 			},
 		}
 		this.props.placeOrder(order);
-		this.props.clearCart();
 	}
 
 	render() {
@@ -121,41 +138,31 @@ class CartPage extends Component {
 					className={classes.deliverToInput}
 					margin="normal"
 		        />
-				<Link
-					to="/orders"
-					onClick={(e) => {
-						if (this.state.deliverTo === '')
-							e.preventDefault();
-					}}
-					className={classes.placeOrderButtonLink}
-				>
-					<div className={classes.placeOrderButtonContainer}>
-							<Button
-								variant="contained"
-								disabled={this.state.deliverTo === ''}
-								className={classes.placeOrderButton}
-								onClick={() => this.placeOrder(this.props.order)}
-							>
-								Place Order
-							</Button>
-					</div>
-				</Link>
+				<div className={classes.placeOrderButtonContainer}>
+						<Button
+							variant="contained"
+							disabled={this.state.deliverTo === ''}
+							className={classes.placeOrderButton}
+							onClick={this.placeOrder}
+						>
+							Place Order
+						</Button>
+				</div>
 			</div>
 		);
 	}
 
 }
-CartPage.propTypes = {
-	items: PropTypes.array,
-	cartCost: PropTypes.number,
-}
 
 function mapStateToProps(state) {
 	return {
-		items: getItems(state) || [],
+		items: getCartItems(state),
 		cartCost: getCartCost(state),
-		order: getOrder(state),
-		restaurant: getRestaurant(state),
+		restaurantId: getCartRestaurantId(state),
+		restaurant: getRestaurantById(state, getCartRestaurantId(state)),
+		isPlacingOrder: isPlacingOrder(state),
+		placeOrderSuccess: placeOrderSuccess(state),
+		placeOrderError: placeOrderError(state),
 	};
 }
 
@@ -195,9 +202,6 @@ const styles = {
 		justifyContent: 'space-between',
 		alignItems: 'center',
 	},
-	placeOrderButtonLink: {
-		textDecorationLine: 'none',
-	},
 	placeOrderButtonContainer: {
 		display: 'flex',
 		alignItems: 'center',
@@ -217,6 +221,8 @@ const styles = {
 	},
 };
 
-export default withStyles(styles)(
-	connect(mapStateToProps, mapDispatchToProps)(CartPage)
-);
+export default compose(
+	withStyles(styles),
+	connect(mapStateToProps, mapDispatchToProps),
+	)(withRouter(CartPage))
+

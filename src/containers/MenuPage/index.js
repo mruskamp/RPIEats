@@ -7,7 +7,8 @@ import { withStyles } from '@material-ui/styles';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 import { getMenu, getImage, getRestaurantId } from './selectors';
-import { addItem } from '../CartPage/actions';
+// import { addItem } from '../CartPage/actions';
+import { addItem } from '../../data/cart/actions';
 
 class MenuPage extends Component {
 

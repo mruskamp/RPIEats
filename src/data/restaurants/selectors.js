@@ -11,3 +11,12 @@ export const getRestaurants = (state) => {
 export const getRestaurantNames = (state) => {
 	return [state.restaurantData.restaurants.map((restaurant) => restaurant.name)];
 }
+
+// assumes there is a restaurant by that id
+export function getRestaurantById(state, restaurantId) {
+	let restaurants = getRestaurants(state);
+	for (let i=0; i<restaurants.length; i++) {
+		if (restaurants[i].restaurantId === restaurantId)
+			return restaurants[i];
+	}
+}

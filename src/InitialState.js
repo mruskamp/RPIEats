@@ -78,7 +78,10 @@ export default {
 	},
 	cart: {
 		items: [],
-		restaurantId: 'same',
+		restaurantId: '',
+		placingOrder: false,
+		placeOrderSuccess: false,
+		placeOrderError: false,
 	},
 	orderData: {
 		orders: [],
@@ -92,8 +95,8 @@ export default {
 
 	},
 	session: {
-		username: "",
-		userType: "",
+		username: "jvparin",
+		userType: "customer",
 		loggingIn: false,
 		loginFailed: false,
 	}
