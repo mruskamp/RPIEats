@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
 
 import { List, ListItem, ListItemText, Select, MenuItem, FormControl } from '@material-ui/core';
@@ -18,9 +19,9 @@ class StatusPage extends Component {
 		let { classes, items, imgURL, order, orderSummary } = this.props;
 		return (
 			<div className={classes.root}>
-				{/*<div className={classes.imageContainer}>
+				<div className={classes.imageContainer}>
 					<img src={imgURL} alt={""} height={100} width={100} />
-				</div>*/}
+				</div>
 				<div className={classes.titleContainer}>
 					<h2>{orderSummary.vendor}</h2>
 					<h3>Order Details</h3>
@@ -42,7 +43,6 @@ class StatusPage extends Component {
 								value={order.status}
 								onChange={this.handleStatusChange}
 							>
-								<MenuItem className={classes.statusMenuItem} value={'accepted'}>Accepted</MenuItem>
 								<MenuItem className={classes.statusMenuItem} value={'ordered'}>Ordered</MenuItem>
 								<MenuItem className={classes.statusMenuItem} value={'awaiting order'}>Awaiting Order</MenuItem>
 								<MenuItem className={classes.statusMenuItem} value={'in transit'}>In Transit</MenuItem>
@@ -82,7 +82,6 @@ class StatusPage extends Component {
 
 function mapStateToProps(state, ownProps) {
 	let orderId = ownProps.match.params.orderId;
-	// console.log(getOrder(state, orderId));
 	return {
 		orderId,
 		username: state.session.username,
@@ -124,6 +123,8 @@ const styles = {
 	},
 };
 
-export default withRouter(withStyles(styles)(
-	connect(mapStateToProps, mapDispatchToProps)(StatusPage))
-);
+export default compose(
+	withStyles(styles),
+	connect(mapStateToProps, mapDispatchToProps)
+)(StatusPage)
+

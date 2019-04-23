@@ -1,10 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
 
 import { Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
 
+import { logout } from '../../data/session/actions';
+
 const ProfilePage = (props) => {
+	console.log(props);
 
 	let { classes } = props;
 	return (
@@ -14,6 +19,7 @@ const ProfilePage = (props) => {
 					<Button
 						variant="contained"
 						color="primary"
+						onClick={props.logout}
 					>
 						Logout
 					</Button>
@@ -21,7 +27,12 @@ const ProfilePage = (props) => {
 			</div>
 		</div>
 	);
+}
 
+function mapDispatchToProps(dispatch) {
+	return {
+		logout: () => dispatch(logout()),
+	}
 }
 
 const styles = {
@@ -39,4 +50,8 @@ const styles = {
 	},
 }
 
-export default withStyles(styles, { withTheme: true })(ProfilePage);
+export default compose(
+	withStyles(styles),
+	connect(null, mapDispatchToProps)
+)(ProfilePage)
+

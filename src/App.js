@@ -14,6 +14,8 @@ import StatusPage from './containers/StatusPage';
 import ProfilePage from './containers/ProfilePage';
 import { Header, Footer } from './components/layouts';
 
+import { getUsername, getUserType } from './data/session/selectors';
+
 import mainTheme from './theme';
 
 // Checking to ensure the user is logged in before seeing this page
@@ -59,8 +61,8 @@ class App extends Component {
 
 function mapStateToProps(state) {
 	return {
-		userType: state.session.userType,
-		username: state.session.username,
+		userType: getUserType(state),
+		username: getUsername(state),
 	};
 }
 

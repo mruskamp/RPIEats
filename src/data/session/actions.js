@@ -3,6 +3,7 @@ import ENDPOINT from '../endpoint';
 export const LOGGING_IN = "LOGGING_IN";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAILED = "LOGIN_FAILED";
+export const LOGOUT = "LOGOUT";
 
 export function loggingIn() {
 	return { type: LOGGING_IN };
@@ -14,6 +15,10 @@ export function loginSuccess(username, userType) {
 
 export function loginFailed() {
 	return { type: LOGIN_FAILED };
+}
+
+export function logout() {
+	return { type: LOGOUT };
 }
 
 export function login(username, password, userType) {

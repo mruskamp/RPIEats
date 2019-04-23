@@ -2,13 +2,14 @@ import { combineReducers } from 'redux';
 
 import INITIAL_STATE from '../../InitialState';
 
-import { LOGGING_IN, LOGIN_SUCCESS, LOGIN_FAILED } from './actions';
+import { LOGGING_IN, LOGIN_SUCCESS, LOGIN_FAILED, LOGOUT } from './actions';
 
 function username(state=INITIAL_STATE.session.username, action) {
 	switch (action.type) {
 		case LOGIN_SUCCESS:
 			return action.payload.username;
 		case LOGIN_FAILED:
+		case LOGOUT:
 			return "";
 		default:
 			return state;
@@ -20,6 +21,7 @@ function userType(state=INITIAL_STATE.session.userType, action) {
 		case LOGIN_SUCCESS:
 			return action.payload.userType;
 		case LOGIN_FAILED:
+		case LOGOUT:
 			return "";
 		default:
 			return state;

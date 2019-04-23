@@ -47,6 +47,10 @@ class OrdersPage extends Component {
 			return (<h2>Error Loading</h2>);
 	}
 
+	handleAcceptActiveOrder = (orderId) => {
+		this.props.acceptOrder(orderId);
+	}
+
 	render() {
 		let { classes, orders, activeOrders } = this.props;
 		return (
@@ -114,6 +118,11 @@ class OrdersPage extends Component {
 														</div>
 													}
 												/>
+												<Button
+													onClick={() => this.handleAcceptActiveOrder(order.orderId)}
+												>
+													Accept
+												</Button>
 											</ListItem>
 										</Link>
 										))}
@@ -143,6 +152,7 @@ function mapDispatchToProps(dispatch) {
 	return {
 		fetchOrders: (username, customer) => dispatch(fetchOrders(username, customer)),
 		fetchActiveOrders: () => dispatch(fetchActiveOrders()),
+		acceptOrder: (orderId) => dispatch(updateOrderStatus(orderId, 'accepted')),
 	}
 }
 
