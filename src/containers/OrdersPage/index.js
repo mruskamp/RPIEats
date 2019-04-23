@@ -6,7 +6,14 @@ import { Link } from 'react-router-dom';
 import { List, ListItem, ListItemText, Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
 
-import { getOrders } from '../../data/orders/selectors';
+import {
+	isFetchingOrders,
+	errorFetchingOrders,
+	getOrders,
+	isFetchingActiveOrders,
+	errorFetchingActiveOrders,
+	getActiveOrders,
+} from '../../data/orders/selectors';
 import {
 	fetchOrders,
 	fetchActiveOrders,
@@ -15,16 +22,29 @@ import {
 
 class OrdersPage extends Component {
 
-	refresh = () => {
-		if (this.props.userType !== ""){
-			if (this.props.userType === "customer") {
-				this.props.fetchOrders(this.props.username, true);
-			}
-			else {
-				this.props.fetchOrders(this.props.username, false);
-				this.props.fetchActiveOrders();
-			}
+	componentDidMount() {
+		// initially loads the orders on component mount
+		this.refreshOrders();
+	}
+
+	refreshOrders = () => {
+		if (!this.loadingOrders) {
+			// if not already loading, re-load the orders
+			this.props.fetchOrders(this.props.username, this.props.userType === "customer");
 		}
+
+		if (!this.loadingActiveOrders) {
+			// if not already loading, re-load the active orders
+			this.props.fetchActiveOrders();
+		}
+	}
+
+	// loading and error are bools for if the data is loading or errored loading
+	renderLoadOrErrorMessage = (loading, error) => {
+		if (loading)
+			return (<h2>Loading</h2>);
+		if (error)
+			return (<h2>Error Loading</h2>);
 	}
 
 	render() {
@@ -35,10 +55,19 @@ class OrdersPage extends Component {
 				Refresh
 			</Button>
 				<div>
-					<List className={classes.orderList} >
-						{orders.map((order, index) => (
-							<Fragment key={`${order.orderId}`} >
-								<Link to={`/order/status/${order.orderId}`} className={classes.orderText}>
+					<h1>Your Orders</h1>
+					{this.props.loadingOrders || this.props.errorLoadingOrders
+						?	/* ternary that loads message while loading or on erorr */
+						this.renderLoadOrErrorMessage(this.props.loadingOrders,
+							this.props.errorLoadingOrders)
+						:	/* if not loading and no error then show orders */
+						<List className={classes.orderList}>
+							{orders.map((order, index) => (
+								<Link
+									key={`${order.orderId}`}
+									to={`/order/status/${order.orderId}`}
+									className={classes.orderText}
+								>
 									<ListItem divider={index !== orders.length-1} >
 										<ListItemText
 											disableTypography
@@ -54,32 +83,44 @@ class OrdersPage extends Component {
 										/>
 									</ListItem>
 								</Link>
-							</Fragment>
-							))}
-						{activeOrders.length > 0 &&
+								))}
+						</List>
+					}
+					{this.props.userType === "deliverer" &&
+						<Fragment>
 							<h1>Order Pool</h1>
-						}
-						{activeOrders.map((order, index) => (
-							<Fragment key={`${order.orderId}`} >
-								<Link to={`/order/status/${order.orderId}`} className={classes.orderText}>
-									<ListItem divider={index !== orders.length-1} >
-										<ListItemText
-											disableTypography
-											primary={order.orderSummary.vendor}
-											secondary={
-												<div className={classes.subtextContainer}>
-													<p>{order.orderSummary.location}</p>
-													<p style={{ color: order.status === "cancelled" ? 'red' : ( order.status === "no show" ? 'orange' : 'green' )}} className={classes.orderStatus}>
-														Status: {order.status}
-													</p>
-												</div>
-											}
-										/>
-									</ListItem>
-								</Link>
-							</Fragment>
-							))}
-					</List>
+							{this.props.loadingActiveOrders || this.props.errorLoadingActiveOrders
+								?	/* ternary that loads message while loading or on erorr */
+								this.renderLoadOrErrorMessage(this.props.loadingActiveOrders,
+									this.props.errorLoadingActiveOrders)
+								:	/* if not loading and no error then show active orders */
+								<List className={classes.orderList} >
+									{activeOrders.map((order, index) => (
+										<Link
+											key={`${order.orderId}`}
+											to={`/order/status/${order.orderId}`}
+											className={classes.orderText}
+										>
+											<ListItem divider={index !== orders.length-1} >
+												<ListItemText
+													disableTypography
+													primary={order.orderSummary.vendor}
+													secondary={
+														<div className={classes.subtextContainer}>
+															<p>{order.orderSummary.location}</p>
+															<p style={{ color: order.status === "cancelled" ? 'red' : ( order.status === "no show" ? 'orange' : 'green' )}} className={classes.orderStatus}>
+																Status: {order.status}
+															</p>
+														</div>
+													}
+												/>
+											</ListItem>
+										</Link>
+										))}
+								</List>
+							}
+						</Fragment>
+					}
 				</div>
 			</div>
 		);
@@ -89,11 +130,12 @@ class OrdersPage extends Component {
 
 function mapStateToProps(state) {
 	return {
-		userType: state.session.userType,
-		username: state.session.username,
-		ordersFetchFailed: state.orderData.errorFetchingOrders,
+		loadingOrders: isFetchingOrders(state),
+		errorLoadingOrders: errorFetchingOrders(state),
 		orders: getOrders(state),
-		activeOrders: state.orderData.activeOrders,
+		loadingActiveOrders: isFetchingActiveOrders(state),
+		errorLoadingActiveOrders: errorFetchingActiveOrders(state),
+		activeOrders: getActiveOrders(state),
 	};
 }
 

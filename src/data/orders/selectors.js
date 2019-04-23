@@ -1,16 +1,13 @@
+
 export const isFetchingOrders = (state) => state.orderData.isFetchingOrders;
+export const errorFetchingOrders = (state) => state.orderData.errorFetchingOrders;
+export const getOrders = (state) => state.orderData.orders;
 
-export const getOrders = (state) => {
-	return state.orderData.orders;
-}
+export const isFetchingActiveOrders = (state) => state.orderData.isFetchingActiveOrders;
+export const errorFetchingActiveOrders = (state) => state.orderData.errorFetchingActiveOrders;
+export const getActiveOrders = (state) => state.orderData.activeOrders;
 
-export const getActiveOrders = (state) => {
-	return state.orderData.activeOrders;
-}
-
-export const getOrderIds = (state) => {
-	return [state.orderData.orders.map((order) => order.orderId)];
-}
+export const getOrderIds = (state) => state.orderData.orders.map((order) => order.orderId);
 
 export const getOrder = (state, orderId) => {
 	let possibleOrder = getOrders(state).find((order) => orderId === order.orderId);

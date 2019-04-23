@@ -41,9 +41,9 @@ function errorFetchingOrders(state=INITIAL_STATE.orderData.errorFetchingOrders, 
 			return true;
 		case IS_FETCHING_ORDERS:
 		case SUCCESS_FETCHING_ORDERS:
-			return false
-		default:
 			return false;
+		default:
+			return state;
 	}
 }
 

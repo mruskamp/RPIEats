@@ -34,6 +34,7 @@ export function errorFetchingActiveOrders() {
 
 export function fetchOrders(customerId, customer) {
 	return (dispatch) => {
+
 		// let redux know we're starting to fetch the orders
 		dispatch(isFetchingOrders());
 		let url = customer ? `${ENDPOINT}/orders/customer/C/${customerId}`

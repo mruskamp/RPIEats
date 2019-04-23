@@ -12,7 +12,7 @@ function AuthenticateComponent (WrappedComponent) {
 			if (this.props.username !== "") {	
 				return (
 					<Fragment>
-						<WrappedComponent {...this.props} /> {/*injecting userType to children*/}
+						<WrappedComponent {...this.props} /> {/*injecting usernme & userType to children*/}
 					</Fragment>
 					)
 			}
@@ -23,6 +23,7 @@ function AuthenticateComponent (WrappedComponent) {
 	function mapStateToProps(state) {
 		return {
 			username: state.session.username,
+			userType: state.session.userType,
 		}
 	}
 
