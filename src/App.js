@@ -13,8 +13,6 @@ import OrdersPage from './containers/OrdersPage';
 import StatusPage from './containers/StatusPage';
 import ProfilePage from './containers/ProfilePage';
 import { Header, Footer } from './components/layouts';
-import { fetchRestaurants } from './containers/RestaurantsPage/actions';
-import { getRestaurantNames } from './containers/RestaurantsPage/selectors';
 
 import mainTheme from './theme';
 
@@ -28,11 +26,6 @@ const AuthenticOrdersPage = AuthenticateComponent(OrdersPage);
 
 
 class App extends Component {
-
-	// load the restaurants on load
-	componentWillMount = () => {
-		this.props.fetchRestaurants();
-	}
 
   render() {
     return (
@@ -66,16 +59,9 @@ class App extends Component {
 
 function mapStateToProps(state) {
 	return {
-		restaurantNames: getRestaurantNames(state),
 		userType: state.session.userType,
 		username: state.session.username,
 	};
 }
 
-function mapDispatchToProps(dispatch) {
-	return {
-		fetchRestaurants: () => dispatch(fetchRestaurants()),
-	}
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps)(App);

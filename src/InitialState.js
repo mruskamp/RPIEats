@@ -70,7 +70,12 @@ const tempOrderData = {
 }
 
 export default {
-	restaurantData: {},
+	restaurantData: {
+		restaurants: [],
+		isFetchingRestaurants: false,
+		errorFetchingRestaurants: false,
+		successFetchingRestaurants: false,
+	},
 	cart: {
 		items: [],
 		restaurantId: 'same',
@@ -82,8 +87,8 @@ export default {
 		errorFetchingOrders: false,
 	},
 	session: {
-		username: "",
-		userType: "",
+		username: "jvparin",
+		userType: "customer",
 		loginFailed: false,
 	}
 }

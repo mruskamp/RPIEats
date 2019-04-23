@@ -1,16 +1,46 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 import { Link } from 'react-router-dom';
 
 import { List, ListItem, ListItemText} from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
 
-import { getRestaurants } from './selectors';
+import {
+	getRestaurants,
+	isFetchingRestaurants,
+	successFetchingRestaurants,
+	errorFetchingRestaurants,
+} from '../../data/restaurants/selectors';
+import { fetchRestaurants } from '../../data/restaurants/actions';
 
 class RestaurantsPage extends Component {
 
+	componentDidMount() {
+		if (!this.props.loadingRestaurants && !this.props.errorLoadingRestaurants) {
+			this.props.loadRestaurants();
+		}
+	}
+
+	renderErrorMessage = () => {
+		return (<h2>Error Loading Restaurants</h2>);
+	}
+
+	renderLoadingMessage = () => {
+		return (<h2>Loading Restaurants</h2>);
+	}
+
 	render() {
 		let { classes, restaurants } = this.props;
+
+		// indicate to user restaurants are loading
+		if (this.props.loadingRestaurants)
+			return this.renderLoadingMessage()
+
+		// show message if there was an error loading the restaurants
+		if (this.props.errorLoadingRestaurants)
+			return this.renderErrorMessage();
+
 		return (
 			<div className={classes.root}>
 				<div>
@@ -48,7 +78,16 @@ class RestaurantsPage extends Component {
 
 function mapStateToProps(state) {
 	return {
+		loadingRestaurants: isFetchingRestaurants(state),
+		errorLoadingRestaurants: errorFetchingRestaurants(state),
+		successLoadingRestaurants: successFetchingRestaurants(state),
 		restaurants: getRestaurants(state),
+	};
+}
+
+function mapDispatchToProps(dispatch) {
+	return {
+		loadRestaurants: () => dispatch(fetchRestaurants()),
 	};
 }
 
@@ -72,6 +111,7 @@ const styles = {
 	}
 };
 
-export default withStyles(styles)(
-	connect(mapStateToProps)(RestaurantsPage)
-);
+export default compose(
+	withStyles(styles),
+	connect(mapStateToProps, mapDispatchToProps)
+)(RestaurantsPage);

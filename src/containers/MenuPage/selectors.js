@@ -1,4 +1,4 @@
-import { getRestaurants } from '../RestaurantsPage/selectors';
+import { getRestaurants } from '../../data/restaurants/selectors';
 
 export const getRestaurant = (state, restaurantName) => getRestaurants(state).find((restaurant) => restaurantName === restaurant.name);
 
