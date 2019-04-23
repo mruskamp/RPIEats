@@ -92,8 +92,9 @@ export default {
 
 	},
 	session: {
-		username: "jvparin",
-		userType: "deliverer",
+		username: "",
+		userType: "",
+		loggingIn: false,
 		loginFailed: false,
 	}
 }

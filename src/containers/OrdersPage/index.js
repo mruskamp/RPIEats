@@ -51,7 +51,7 @@ class OrdersPage extends Component {
 		let { classes, orders, activeOrders } = this.props;
 		return (
 			<div className={classes.root}>
-			<Button onClick={this.refresh} >
+			<Button onClick={this.refreshOrders} >
 				Refresh
 			</Button>
 				<div>

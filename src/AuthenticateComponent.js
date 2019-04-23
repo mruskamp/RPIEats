@@ -4,6 +4,8 @@ import { compose } from 'redux';
 
 import LoginPage from './containers/LoginPage';
 
+import { getUsername, getUserType } from './data/session/selectors';
+
 function AuthenticateComponent (WrappedComponent) {
 
 	class InnerWrapper extends React.Component {
@@ -22,8 +24,8 @@ function AuthenticateComponent (WrappedComponent) {
 
 	function mapStateToProps(state) {
 		return {
-			username: state.session.username,
-			userType: state.session.userType,
+			username: getUsername(state),
+			userType: getUserType(state),
 		}
 	}
 

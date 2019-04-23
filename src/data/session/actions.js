@@ -1,19 +1,26 @@
+import ENDPOINT from '../endpoint';
 
+export const LOGGING_IN = "LOGGING_IN";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAILED = "LOGIN_FAILED";
+
+export function loggingIn() {
+	return { type: LOGGING_IN };
+}
 
 export function loginSuccess(username, userType) {
 	return { type: LOGIN_SUCCESS, payload: { username, userType } };
 }
 
-export function loginFailed(error) {
-	return { type: LOGIN_FAILED, payload: error };
+export function loginFailed() {
+	return { type: LOGIN_FAILED };
 }
 
 export function login(username, password, userType) {
 	return (dispatch) => {
-		let url = "http://129.161.76.94:8080/login";
+		dispatch(loggingIn());
 
+		let url = `${ENDPOINT}/login`;
 		let data = { username, password, userType };
 
 		fetch(url, {
@@ -25,12 +32,11 @@ export function login(username, password, userType) {
 			body: JSON.stringify(data),
 		}).then((response) => {		// if the call is a success
 			if (response.status === 401)
-				dispatch(loginFailed(response))
+				dispatch(loginFailed())
 			else
 				dispatch(loginSuccess(username, userType));
 		}).catch((e) => {			// if the call errored
-			console.log(e)
-			dispatch(loginFailed(e))
+			dispatch(loginFailed())
 		})
 	}	
 }

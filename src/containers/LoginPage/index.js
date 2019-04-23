@@ -7,7 +7,8 @@ import { Paper, Input, Button, Radio, RadioGroup, FormControl, FormControlLabel,
 import TagFacesIcon from '@material-ui/icons/TagFaces';
 import { withStyles } from '@material-ui/styles';
 
-import { login } from './actions';
+import { login } from '../../data/session/actions';
+import { getUsername, isLoggingIn, loginFailed } from '../../data/session/selectors';
 
 class LogInPage extends Component {
 
@@ -17,14 +18,14 @@ class LogInPage extends Component {
 	}
 
 	componentDidMount() {
+		// if they are already logged in then redirect them to the restaurants page
 		if (this.props.username !== "")
 			this.props.history.push('/restaurants');
 	}
 
+	// handlers for entering login information to store in the state
 	handleUsernameInput = ({ target }) => this.setState({ username: target.value });
-
 	handlePasswordInput = ({ target }) => this.setState({ password: target.value });
-
 	handleUserTypeChange = (event) => this.setState({ userType: event.target.value });
 
 	handleLoginSubmit = (event) => {
@@ -46,56 +47,59 @@ class LogInPage extends Component {
 				</div>
 		        <Paper className={classes.loginPaper}>
 		        	<div className={classes.loginFieldsContainer}>
-								<Input
-									className={classes.loginFields}
-									type="text"
-									placeholder="Username"
-									value={username}
-									onChange={this.handleUsernameInput}
+						<Input
+							className={classes.loginFields}
+							type="text"
+							placeholder="Username"
+							value={username}
+							onChange={this.handleUsernameInput}
+						/>
+						<Input
+							className={classes.loginFields}
+							type="password"
+							placeholder="Password"
+							value={password}
+							onChange={this.handlePasswordInput}
+						/>
+						<FormControl component="fieldset" className={classes.loginFields}>
+							<FormLabel component="legend">Are you a...</FormLabel>
+							<RadioGroup
+								aria-label="position"
+								name="position"
+								value={this.state.userType}
+								onChange={this.handleUserTypeChange}
+								row
+							>
+								<FormControlLabel
+									value="customer"
+									control={<Radio color="primary" />}
+									label="Customer"
+									labelPlacement="end"
 								/>
-								<Input
-									className={classes.loginFields}
-									type="password"
-									placeholder="Password"
-									value={password}
-									onChange={this.handlePasswordInput}
+								<FormControlLabel
+									value="deliverer"
+									control={<Radio color="primary" />}
+									label="Deliverer"
+									labelPlacement="end"
 								/>
-								<FormControl component="fieldset" className={classes.loginFields}>
-									<FormLabel component="legend">Are you a...</FormLabel>
-									<RadioGroup
-										aria-label="position"
-										name="position"
-										value={this.state.userType}
-										onChange={this.handleUserTypeChange}
-										row
-									>
-										<FormControlLabel
-											value="customer"
-											control={<Radio color="primary" />}
-											label="Customer"
-											labelPlacement="end"
-										/>
-										<FormControlLabel
-											value="deliverer"
-											control={<Radio color="primary" />}
-											label="Deliverer"
-											labelPlacement="end"
-										/>
-									</RadioGroup>
-								</FormControl>
+							</RadioGroup>
+						</FormControl>
 		        	</div>
-		        	{this.props.loginFailed &&
+		        	{this.props.loginFailed &&	/* display error on failed login */
 		        		<Typography>Wrong username or password</Typography>
 		        	}
-							<div className={classes.loginButtonContainer}>
-								<Button
-										color="primary"
-									variant="contained"
-									onClick={this.handleLoginSubmit}
-								>
-									Login
-								</Button>
-							</div>
+		        	{this.props.loggingIn &&
+		        		<Typography>Loading</Typography>
+		        	}
+					<div className={classes.loginButtonContainer}>
+						<Button
+								color="primary"
+							variant="contained"
+							onClick={this.handleLoginSubmit}
+						>
+							Login
+						</Button>
+					</div>
 		        </Paper>
 			</div>
 		);
@@ -104,8 +108,9 @@ class LogInPage extends Component {
 
 function mapStateToProps(state) {
 	return {
-		username: state.session.username,
-		loginFailed: state.session.loginFailed,
+		username: getUsername(state),
+		loggingIn: isLoggingIn(state),
+		loginFailed: loginFailed(state),
 	};
 }
 
