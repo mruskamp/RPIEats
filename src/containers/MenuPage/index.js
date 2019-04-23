@@ -6,29 +6,29 @@ import { List, ListItem, ListItemText, IconButton, Tooltip} from '@material-ui/c
 import { withStyles } from '@material-ui/styles';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 
-import { getMenu, getImage, getRestaurantId } from './selectors';
-// import { addItem } from '../CartPage/actions';
+import { getRestaurantByName } from '../../data/restaurants/selectors';
+import { getUserType } from '../../data/session/selectors';
 import { addItem } from '../../data/cart/actions';
 
 class MenuPage extends Component {
 
   handleClick = (item, restaurantId) => {
 		this.props.addItem(item, restaurantId);
-		alert("An item has been added to your cart! Please go to your cart page.");
+		alert("An item has been added to your cart!");
   };
 
 	render() {
-		let { classes, name, menu, imgURL, restaurantId } = this.props;
-		console.log(this.props.userType);
+		let { classes, name } = this.props;
+		let { menu, imgURL, restaurantId } = this.props.restaurant;
 		return (
 			<div className={classes.root}>
 				<div className={classes.imageContainer}>
 					<img src={imgURL} alt={""} height={100} width={100} />
 				</div>
-				<div className={classes.titleContainer}>
+				<div>
 					<h3>{name}</h3>
 				</div>
-				<List className={classes.menuContainer}>
+				<List>
 					{menu.map((item) => (
 						<ListItem key={item.name}>
 							<ListItemText
@@ -55,10 +55,8 @@ function mapStateToProps(state, ownProps) {
 	let name = ownProps.match.params.restaurantName;
 	return {
 		name,
-		userType: state.session.userType,
-		restaurantId: getRestaurantId(state, name),
-		menu: getMenu(state, name),
-		imgURL: getImage(state, name),
+		userType: getUserType(state),
+		restaurant: getRestaurantByName(name),
 	};
 }
 
@@ -78,12 +76,6 @@ const styles = {
 		paddingTop: 10,
 		justifyContent: 'center',
 		alignItem: 'center',
-	},
-	titleContainer: {
-
-	},
-	menuContainer: {
-
 	},
 };
 

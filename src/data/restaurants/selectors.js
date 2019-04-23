@@ -20,3 +20,12 @@ export function getRestaurantById(state, restaurantId) {
 			return restaurants[i];
 	}
 }
+
+// assumes there is a restaurant by that name
+export function getRestaurantByName(state, name) {
+	let restaurants = getRestaurants(state);
+	for (let i=0; i<restaurants.length; i++) {
+		if (restaurants[i].name === name)
+			return restaurants[i];
+	}
+}
