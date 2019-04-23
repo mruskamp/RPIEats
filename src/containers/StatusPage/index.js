@@ -5,8 +5,8 @@ import { withRouter } from 'react-router-dom';
 import { List, ListItem, ListItemText, Select, MenuItem, FormControl } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
 
-import { getItems, getImage, getOrder, getOrderSummary } from './selectors';
-import { updateOrderStatus } from './actions';
+import { getItems, getImage, getOrder, getOrderSummary } from '../../data/orders/selectors';
+import { updateOrderStatus } from '../../data/orders/actions';
 
 class StatusPage extends Component {
 

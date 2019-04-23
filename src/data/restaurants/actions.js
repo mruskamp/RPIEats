@@ -21,7 +21,7 @@ export function fetchRestaurants() {
 		// let redux know we're starting to fetch the restaurants
 		dispatch(isFetchingRestaruants());
 
-		fetch(ENDPOINT).then((response) => {	// actually fetching the restaurant data from the api
+		fetch(`${ENDPOINT}/restaurants`).then((response) => {	// actually fetching the restaurant data from the api
 			return response.json();
 		}).then((response) => {			// if the api call is a success
 			dispatch(successFetchingRestaurants(response));

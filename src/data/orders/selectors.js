@@ -1,6 +1,17 @@
-import { getOrders, getActiveOrders } from '../OrdersPage/selectors';
+export const isFetchingOrders = (state) => state.orderData.isFetchingOrders;
 
-// export const getOrder = (state, orderId) => getOrders(state).find((order) => orderId === order.orderId);
+export const getOrders = (state) => {
+	return state.orderData.orders;
+}
+
+export const getActiveOrders = (state) => {
+	return state.orderData.activeOrders;
+}
+
+export const getOrderIds = (state) => {
+	return [state.orderData.orders.map((order) => order.orderId)];
+}
+
 export const getOrder = (state, orderId) => {
 	let possibleOrder = getOrders(state).find((order) => orderId === order.orderId);
 	if (possibleOrder !== undefined)
@@ -24,8 +35,4 @@ export function getImage(state, restaurantName) {
 	if (order) {
 		return order.imgURL;
 	} else	return null
-}
-
-export function getOrderId(state, orderId) {
-	return getOrder(state, orderId).orderId;
 }

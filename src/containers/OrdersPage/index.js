@@ -1,12 +1,17 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 import { Link } from 'react-router-dom';
 
 import { List, ListItem, ListItemText, Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
 
-import { getOrders } from './selectors';
-import { fetchOrders, fetchActiveOrders } from './actions';
+import { getOrders } from '../../data/orders/selectors';
+import {
+	fetchOrders,
+	fetchActiveOrders,
+	updateOrderStatus,
+} from '../../data/orders/actions'
 
 class OrdersPage extends Component {
 
@@ -122,6 +127,7 @@ const styles = {
 	}
 };
 
-export default withStyles(styles)(
-	connect(mapStateToProps, mapDispatchToProps)(OrdersPage)
-);
+export default compose(
+	withStyles(styles),
+	connect(mapStateToProps, mapDispatchToProps)
+)(OrdersPage)

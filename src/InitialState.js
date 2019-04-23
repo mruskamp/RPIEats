@@ -82,9 +82,14 @@ export default {
 	},
 	orderData: {
 		orders: [],
-		activeOrders: [],
 		isFetchingOrders: false,
 		errorFetchingOrders: false,
+		successFetchingOrders: false,
+		activeOrders: [],
+		isFetchingActiveOrders: false,
+		errorFetchingActiveOrders: false,
+		successFetchingActiveOrders: false,
+
 	},
 	session: {
 		username: "jvparin",
