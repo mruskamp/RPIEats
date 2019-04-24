@@ -25,7 +25,7 @@ const AuthenticStatusPage = AuthenticateComponent(StatusPage);
 const AuthenticProfilePage = AuthenticateComponent(ProfilePage);
 const AuthenticOrdersPage = AuthenticateComponent(OrdersPage);
 
-
+// Main Component of the Application that binds everything together
 
 class App extends Component {
 

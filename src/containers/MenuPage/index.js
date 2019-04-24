@@ -10,6 +10,8 @@ import { getRestaurantByName } from '../../data/restaurants/selectors';
 import { getUserType } from '../../data/session/selectors';
 import { addItem } from '../../data/cart/actions';
 
+// Component for the Menu Page of the Application
+
 class MenuPage extends Component {
 
   handleClick = (item, restaurantId) => {

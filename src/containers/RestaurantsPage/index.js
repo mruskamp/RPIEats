@@ -14,6 +14,8 @@ import {
 } from '../../data/restaurants/selectors';
 import { fetchRestaurants } from '../../data/restaurants/actions';
 
+// Component for the Restaurants Page of the Application
+
 class RestaurantsPage extends Component {
 
 	componentDidMount() {

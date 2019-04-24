@@ -1,4 +1,5 @@
 /* Initial State data for loading the app in the first place */
+
 export default {
 	restaurantData: {
 		restaurants: [],

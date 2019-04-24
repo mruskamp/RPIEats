@@ -9,6 +9,8 @@ export function loggingIn() {
 	return { type: LOGGING_IN };
 }
 
+// Calls made to the backend when logging in with user credentials in the Login Page
+
 export function loginSuccess(username, userType) {
 	return { type: LOGIN_SUCCESS, payload: { username, userType } };
 }

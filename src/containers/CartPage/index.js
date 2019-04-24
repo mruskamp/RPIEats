@@ -19,6 +19,7 @@ import {
 } from '../../data/cart/selectors';
 import { getRestaurantById } from '../../data/restaurants/selectors';
 
+// Component for the Cart Page of the Application
 class CartPage extends Component {
 
 	constructor(props) {

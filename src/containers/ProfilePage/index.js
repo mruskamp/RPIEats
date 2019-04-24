@@ -7,6 +7,7 @@ import { Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
 
 import { logout } from '../../data/session/actions';
+// Component for the Profile Page of the Application
 
 const ProfilePage = (props) => {
 	console.log(props);

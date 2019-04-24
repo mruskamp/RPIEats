@@ -8,6 +8,8 @@ import { withStyles } from '@material-ui/styles';
 import { getItems, getImage, getOrder, getOrderSummary } from '../../data/orders/selectors';
 import { updateOrderStatus } from '../../data/orders/actions';
 
+// Component for the Status Page of the Application
+
 class StatusPage extends Component {
 
 	handleStatusChange = (event) => {

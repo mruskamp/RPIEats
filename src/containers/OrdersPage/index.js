@@ -20,6 +20,8 @@ import {
 	updateOrderStatus,
 } from '../../data/orders/actions'
 
+// Component for the Orders Page of the Application
+
 class OrdersPage extends Component {
 
 	componentDidMount() {
@@ -167,6 +169,7 @@ const styles = {
 	},
 	orderText: {
 		textDecorationLine: 'none',
+		width: '90%',
 	},
 	orderStatus: {
 		textTransform: 'capitalize',

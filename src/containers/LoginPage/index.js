@@ -10,6 +10,8 @@ import { withStyles } from '@material-ui/styles';
 import { login } from '../../data/session/actions';
 import { getUsername, isLoggingIn, loginFailed } from '../../data/session/selectors';
 
+// Component for the Login Page of the Application
+
 class LogInPage extends Component {
 
 	constructor(props){

@@ -5,6 +5,7 @@ import { compose } from 'redux';
 import LoginPage from './containers/LoginPage';
 
 import { getUsername, getUserType } from './data/session/selectors';
+// Component to Authenticate Users in the Application
 
 function AuthenticateComponent (WrappedComponent) {
 

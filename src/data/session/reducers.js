@@ -4,6 +4,8 @@ import INITIAL_STATE from '../../InitialState';
 
 import { LOGGING_IN, LOGIN_SUCCESS, LOGIN_FAILED, LOGOUT } from './actions';
 
+// Functions that keep the state of the Login Page up to date and organized accordingly
+
 function username(state=INITIAL_STATE.session.username, action) {
 	switch (action.type) {
 		case LOGIN_SUCCESS:

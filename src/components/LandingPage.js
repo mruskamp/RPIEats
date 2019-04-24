@@ -5,6 +5,7 @@ import { Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
 import logo from '../RPIEats_Logo.png';
 
+// Component for the Landing Page of the Application
 const LandingPage = (props) => {
 
 	let { classes } = props;
