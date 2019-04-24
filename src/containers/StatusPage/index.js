@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
 
 import { List, ListItem, ListItemText, Select, MenuItem, FormControl } from '@material-ui/core';
@@ -16,7 +15,7 @@ class StatusPage extends Component {
 	}
 
 	render() {
-		let { classes, items, imgURL, order, orderSummary } = this.props;
+		let { classes, items, order, orderSummary } = this.props;
 		return (
 			<div className={classes.root}>
 				<div className={classes.titleContainer}>
