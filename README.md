@@ -31,4 +31,4 @@ To build the website run `npm run build`. This will build the app for production
     
 
 # Instructions for Server Deployment
-To deploy the Java Spark backend server to a cloud application platform like Heroku, please refer to this Heroku-Spark [tutorial] http://sparkjava.com/tutorials/heroku for more information.
+To deploy the Java Spark backend server to a cloud application platform like Heroku, please refer to this Heroku-Spark [tutorial](http://sparkjava.com/tutorials/heroku) for more information.
