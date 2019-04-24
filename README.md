@@ -10,7 +10,7 @@
 3. Inside your local repository run `npm install` to download and install the necessary packages to run the website. 
     
 
-4. Edit the server endpoint in `src/data/endpoint.js` to the proper origin. This will adjust the endpoint for sending and receiving data to the server. Refer to Server Development/Deployment for more information<br>
+4. Edit the server endpoint in `src/data/endpoint.js` to the proper origin. This will adjust the endpoint for sending and receiving data to the server. Refer to Server Development/Deployment for more information.<br>
     
 
 5. To run the website locally in development mode, run `npm start`. Open [http://localhost:3000](http://localhost:3000) to view it in the browser. The page will hot reload when editing the source code.<br>
