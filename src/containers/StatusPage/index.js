@@ -19,9 +19,6 @@ class StatusPage extends Component {
 		let { classes, items, imgURL, order, orderSummary } = this.props;
 		return (
 			<div className={classes.root}>
-				<div className={classes.imageContainer}>
-					<img src={imgURL} alt={""} height={100} width={100} />
-				</div>
 				<div className={classes.titleContainer}>
 					<h2>{orderSummary.vendor}</h2>
 					<h3>Order Details</h3>
@@ -96,7 +93,7 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch, ownProps) {
 	let orderId = ownProps.match.params.orderId;
 	return {
-		updateOrderStatus: (status, username) => dispatch(updateOrderStatus(orderId, status, username)),
+		updateOrderStatus: (status, username) => dispatch(updateOrderStatus(orderId, status, username, "")),
 	}
 }
 
@@ -105,11 +102,6 @@ const styles = {
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'center',
-	},
-	imageContainer: {
-		paddingTop: 10,
-		justifyContent: 'center',
-		alignItem: 'center',
 	},
 	titleContainer: {
 		textTransform: 'capitalize',
@@ -123,8 +115,7 @@ const styles = {
 	},
 };
 
-export default compose(
-	withStyles(styles),
-	connect(mapStateToProps, mapDispatchToProps)
-)(StatusPage)
+export default withRouter(withStyles(styles)(
+	connect(mapStateToProps, mapDispatchToProps)(StatusPage)));
+
 

@@ -55,9 +55,6 @@ class OrdersPage extends Component {
 		let { classes, orders, activeOrders } = this.props;
 		return (
 			<div className={classes.root}>
-			<Button onClick={this.refreshOrders} >
-				Refresh
-			</Button>
 				<div>
 					<h1>Your Orders</h1>
 					{this.props.loadingOrders || this.props.errorLoadingOrders
@@ -100,31 +97,34 @@ class OrdersPage extends Component {
 								:	/* if not loading and no error then show active orders */
 								<List className={classes.orderList} >
 									{activeOrders.map((order, index) => (
-										<Link
-											key={`${order.orderId}`}
-											to={`/order/status/${order.orderId}`}
-											className={classes.orderText}
-										>
-											<ListItem divider={index !== orders.length-1} >
-												<ListItemText
-													disableTypography
-													primary={order.orderSummary.vendor}
-													secondary={
-														<div className={classes.subtextContainer}>
-															<p>{order.orderSummary.location}</p>
-															<p style={{ color: order.status === "cancelled" ? 'red' : ( order.status === "no show" ? 'orange' : 'green' )}} className={classes.orderStatus}>
-																Status: {order.status}
-															</p>
-														</div>
-													}
-												/>
+											<ListItem
+												divider={index !== orders.length-1}
+												key={`${order.orderId}`}
+											>
+												<Link
+													to={`/order/status/${order.orderId}`}
+													className={classes.orderText}
+												>
+													<ListItemText
+														disableTypography
+														primary={order.orderSummary.vendor}
+														secondary={
+															<div className={classes.subtextContainer}>
+																<p>{order.orderSummary.location}</p>
+																<p style={{ color: order.status === "cancelled" ? 'red' : ( order.status === "no show" ? 'orange' : 'green' )}} className={classes.orderStatus}>
+																	Status: {order.status}
+																</p>
+															</div>
+														}
+													/>
+												</Link>
 												<Button
 													onClick={() => this.handleAcceptActiveOrder(order.orderId)}
+													variant="contained"
 												>
 													Accept
 												</Button>
 											</ListItem>
-										</Link>
 										))}
 								</List>
 							}
@@ -148,11 +148,11 @@ function mapStateToProps(state) {
 	};
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch, ownProps) {
 	return {
 		fetchOrders: (username, customer) => dispatch(fetchOrders(username, customer)),
 		fetchActiveOrders: () => dispatch(fetchActiveOrders()),
-		acceptOrder: (orderId) => dispatch(updateOrderStatus(orderId, 'accepted')),
+		acceptOrder: (orderId) => dispatch(updateOrderStatus(orderId, 'accepted', ownProps.username, ownProps.userType)),
 	}
 }
 

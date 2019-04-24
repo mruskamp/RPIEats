@@ -56,7 +56,7 @@ function mapStateToProps(state, ownProps) {
 	return {
 		name,
 		userType: getUserType(state),
-		restaurant: getRestaurantByName(name),
+		restaurant: getRestaurantByName(state, name),
 	};
 }
 

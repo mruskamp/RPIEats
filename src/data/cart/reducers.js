@@ -15,7 +15,7 @@ import {
 function restaurantId(state=INITIAL_STATE.cart.restaurantId, action) {
 	switch (action.type) {
 		case ADD_ITEM:
-			if (state === '')	return action.payload.restaurant;
+			if (state === '')	return action.payload.restaurantId;
 			return state;
 		case PLACE_ORDER_SUCCESS:
 		case CLEAR_CART:

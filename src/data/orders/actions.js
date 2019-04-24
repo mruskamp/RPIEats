@@ -67,7 +67,7 @@ export function fetchActiveOrders() {
 	}
 }
 
-export function updateOrderStatus(orderId, status, username) {
+export function updateOrderStatus(orderId, status, username, userType) {
 	return (dispatch) => {
 		// dispatch this so the redux store updates with the new status
 
@@ -81,7 +81,7 @@ export function updateOrderStatus(orderId, status, username) {
 			return response.json();
 		}).then((response) => {
 			// on successfully changing the status we reload the orders
-			dispatch(fetchOrders());
+			dispatch(fetchOrders(username, userType === "customer"));
 			dispatch(fetchActiveOrders());
 		}).catch((e) => {			// if the call errored
 			// alert("ERROR UPDATING ORDER");
