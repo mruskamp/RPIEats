@@ -22,7 +22,7 @@ import static com.mongodb.client.model.Filters.*;
 import static spark.Spark.*;
 
 //This class serves as our main class, where RPIEats is ran
-public class test {
+public class Server {
 
     /* Method that gets the status of a given restaurant, meaning if they're open or closed
      * @ Parameters: Document that represents the restaurant
